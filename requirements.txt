@@ -1,0 +1,4 @@
+selenium==3.141.0
+black==19.10b0
+python-twitter==3.5
+ipython==7.10.1
