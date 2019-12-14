@@ -4,7 +4,7 @@ import os
 
 absolute_path = os.path.abspath(".")
 config = ConfigParser()
-config.read("config.ini")
+config.read(os.path.join(absolute_path, "config.ini"))
 
 APP_KEY = config.get("default", "APP_KEY")
 APP_SECRET = config.get("default", "APP_SECRET")
