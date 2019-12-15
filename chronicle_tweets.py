@@ -13,7 +13,6 @@ This Tweet is available!
 I was tired of looking at retweets that quoted tweets that had been deleted.
 """
 import os
-import time
 from typing import List
 
 from config import LIST_OF_USERS_TO_FOLLOW, LIST_OF_STATUS_IDS_REPLIED_TO, dir_name
@@ -29,7 +28,6 @@ def collect_quoted_tweets(quoted_tweets: List[Tweet]):
         tweet_locator = tweet.quoted_tweet_locator
         tweet_element = driver.get_element_by_css(locator=tweet_locator)
         scroll_to_element(driver=driver, element=tweet_element)
-        time.sleep(1)
         screen_capture_element(
             element=tweet_element, file_name=tweet.screen_capture_file_name_quoted_tweet
         )

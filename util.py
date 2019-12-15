@@ -64,4 +64,4 @@ def save_status_id_of_replied_to_tweet(tweet: Tweet):
         msg=f"Adding {tweet.id_str} to {LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME}"
     )
     with open(LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME, "a+") as f:
-        f.write(tweet.id_str + "\r")
+        f.write(tweet.id_str + "\n")
