@@ -12,25 +12,36 @@ This Tweet is available!
 
 I was tired of looking at retweets that quoted tweets that had been deleted.
 """
-import os
 from typing import List
 
-from config import LIST_OF_USERS_TO_FOLLOW, LIST_OF_STATUS_IDS_REPLIED_TO, dir_name
-from wrapped_driver import WrappedWebDriver, screen_capture_element, scroll_to_element
+from config import (
+    LIST_OF_USERS_TO_FOLLOW,
+    LIST_OF_STATUS_IDS_REPLIED_TO,
+)
+from wrapped_driver import WrappedWebDriver, scroll_to_element
 from util import LOGGER, twitter_api, Tweet, save_status_id_of_replied_to_tweet
 
 
 def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     """Loop through list of quoted tweets and screen cap them"""
     driver = WrappedWebDriver(browser="headless")
+
     for tweet in quoted_tweets:
         driver.open(url=tweet.quoted_tweet_url)
-        tweet_locator = tweet.quoted_tweet_locator
-        tweet_element = driver.get_element_by_css(locator=tweet_locator)
-        scroll_to_element(driver=driver, element=tweet_element)
-        screen_capture_element(
-            element=tweet_element, file_name=tweet.screen_capture_file_name_quoted_tweet
+        quoted_tweet_element = driver.get_element_by_css(
+            locator=tweet.quoted_tweet_locator
         )
+        scroll_to_element(driver=driver, element=quoted_tweet_element)
+        LOGGER.info(
+            msg=f"Saving screen shot: {tweet.screen_capture_file_path_quoted_tweet}"
+        )
+        if not quoted_tweet_element.screenshot(
+            filename=tweet.screen_capture_file_path_quoted_tweet
+        ):
+            raise Exception(
+                f"Failed to save {tweet.screen_capture_file_path_quoted_tweet}"
+            )
+
     driver.quit_driver()
 
 
@@ -42,12 +53,9 @@ def post_collected_tweets(quoted_tweets: List[Tweet]):
             retweet_user=user_tweet.user,
             urls_in_quoted_tweet=user_tweet.urls_from_quoted_tweet,
         )
-        screen_shot_path = os.path.join(
-            dir_name, f"screen_shots/{user_tweet.screen_capture_file_name_quoted_tweet}"
-        )
         response = twitter_api.PostUpdate(
             status=status_message,
-            media=screen_shot_path,
+            media=user_tweet.screen_capture_file_path_quoted_tweet,
             in_reply_to_status_id=user_tweet.id,
         )
         LOGGER.info(response)

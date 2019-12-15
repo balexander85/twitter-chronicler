@@ -2,9 +2,9 @@ from configparser import ConfigParser
 from typing import List
 import os
 
-dir_name = os.path.dirname(__file__)
+PROJECT_DIR_PATH = os.path.dirname(__file__)
 config = ConfigParser()
-config.read(os.path.join(dir_name, "config.ini"))
+config.read(os.path.join(PROJECT_DIR_PATH, "config.ini"))
 
 APP_KEY = config.get("default", "APP_KEY")
 APP_SECRET = config.get("default", "APP_SECRET")
@@ -14,10 +14,10 @@ OAUTH_TOKEN_SECRET = config.get("default", "OAUTH_TOKEN_SECRET")
 CHROME_DRIVER_PATH = config.get("default", "CHROME_DRIVER_PATH")
 
 LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME = os.path.join(
-    dir_name, "list_of_status_ids_replied_to.txt"
+    PROJECT_DIR_PATH, "list_of_status_ids_replied_to.txt"
 )
 LIST_OF_USERS_TO_FOLLOW_FILE_NAME = os.path.join(
-    dir_name, "list_of_users_to_follow.txt"
+    PROJECT_DIR_PATH, "list_of_users_to_follow.txt"
 )
 
 with open(LIST_OF_USERS_TO_FOLLOW_FILE_NAME, "r") as follower_file:

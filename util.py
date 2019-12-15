@@ -1,4 +1,5 @@
 import logging
+import os
 from sys import stdout
 from typing import List
 
@@ -8,9 +9,10 @@ from twitter import Status
 from config import (
     APP_KEY,
     APP_SECRET,
+    LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME,
+    PROJECT_DIR_PATH,
     OAUTH_TOKEN,
     OAUTH_TOKEN_SECRET,
-    LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME,
 )
 
 logging.basicConfig(
@@ -53,6 +55,12 @@ class Tweet:
     @property
     def screen_capture_file_name_quoted_tweet(self) -> str:
         return f"tweet_capture_{self.quoted_tweet_id}.png"
+
+    @property
+    def screen_capture_file_path_quoted_tweet(self) -> str:
+        return os.path.join(
+            PROJECT_DIR_PATH, "screen_shots", self.screen_capture_file_name_quoted_tweet
+        )
 
     @property
     def urls_from_quoted_tweet(self) -> List[str]:

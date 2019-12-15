@@ -2,9 +2,6 @@
 
 Module for all webdriver classes and methods
 """
-import os
-import time
-
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
@@ -12,12 +9,13 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from config import CHROME_DRIVER_PATH, dir_name
+from config import CHROME_DRIVER_PATH
 from util import LOGGER
 
 chrome_driver_path = CHROME_DRIVER_PATH
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--disable-features=VizDisplayCompositor")
+chrome_options.add_argument("--start-maximized")
 
 
 class WrappedWebDriver:
@@ -68,11 +66,3 @@ def scroll_to_element(driver: WrappedWebDriver, element: WebElement):
     # raw_driver.execute_script("arguments[0].scrollIntoView();", element)
     actions = ActionChains(raw_driver)
     actions.move_to_element(element).perform()
-
-
-def screen_capture_element(element: WebElement, file_name: str):
-    time.sleep(3)
-    file_path = os.path.join(dir_name, f"screen_shots/{file_name}")
-    LOGGER.info(msg=f"Saving screen shot: {file_path}")
-    with open(file=file_path, mode="wb") as f:
-        f.write(element.screenshot_as_png)
