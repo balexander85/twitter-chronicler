@@ -12,10 +12,11 @@ This Tweet is available!
 
 I was tired of looking at retweets that quoted tweets that had been deleted.
 """
+import os
 import time
 from typing import List
 
-from config import LIST_OF_USERS_TO_FOLLOW, LIST_OF_STATUS_IDS_REPLIED_TO
+from config import LIST_OF_USERS_TO_FOLLOW, LIST_OF_STATUS_IDS_REPLIED_TO, dir_name
 from wrapped_driver import WrappedWebDriver, screen_capture_element, scroll_to_element
 from util import LOGGER, twitter_api, Tweet, save_status_id_of_replied_to_tweet
 
@@ -43,9 +44,12 @@ def post_collected_tweets(quoted_tweets: List[Tweet]):
             retweet_user=user_tweet.user,
             urls_in_quoted_tweet=user_tweet.urls_from_quoted_tweet,
         )
+        screen_shot_path = os.path.join(
+            dir_name, f"screen_shots/{user_tweet.screen_capture_file_name_quoted_tweet}"
+        )
         response = twitter_api.PostUpdate(
             status=status_message,
-            media=f"screen_shots/{user_tweet.screen_capture_file_name_quoted_tweet}",
+            media=screen_shot_path,
             in_reply_to_status_id=user_tweet.id,
         )
         LOGGER.info(response)

@@ -2,6 +2,8 @@
 
 Module for all webdriver classes and methods
 """
+import os
+
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
@@ -9,9 +11,8 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from config import CHROME_DRIVER_PATH
+from config import CHROME_DRIVER_PATH, dir_name
 from util import LOGGER
-
 
 chrome_driver_path = CHROME_DRIVER_PATH
 chrome_options = webdriver.ChromeOptions()
@@ -60,5 +61,6 @@ def scroll_to_element(driver: WrappedWebDriver, element: WebElement):
 
 def screen_capture_element(element: WebElement, file_name: str):
     LOGGER.info(msg=f"Saving screen shot: {file_name}")
-    with open(file=f"screen_shots/{file_name}", mode="wb") as f:
+    file_path = os.path.join(dir_name, f"screen_shots/{file_name}")
+    with open(file=file_path, mode="wb") as f:
         f.write(element.screenshot_as_png)
