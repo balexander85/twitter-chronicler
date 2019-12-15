@@ -79,17 +79,25 @@ def get_status_message(retweet_user: str, urls_in_quoted_tweet: List[str]) -> st
     return message
 
 
+def get_user_quoted_retweets(twitter_user) -> List[Tweet]:
+    user_tweets = twitter_api.GetUserTimeline(screen_name=twitter_user, count=10)
+    return [
+        Tweet(t)
+        for t in user_tweets
+        if t.quoted_status and t.id_str not in LIST_OF_STATUS_IDS_REPLIED_TO
+    ]
+
+
+def main(twitter_user):
+    user_quoted_retweets = get_user_quoted_retweets(twitter_user=twitter_user)
+    if user_quoted_retweets:
+        collect_quoted_tweets(user_quoted_retweets)
+        post_collected_tweets(user_quoted_retweets)
+    else:
+        LOGGER.info(msg=f"No new retweets for user: {twitter_user}")
+
+
 if __name__ == "__main__":
 
-    for twitter_user in LIST_OF_USERS_TO_FOLLOW:
-        user_tweets = twitter_api.GetUserTimeline(screen_name=twitter_user, count=10)
-        user_quoted_retweets: List[Tweet] = [
-            Tweet(t)
-            for t in user_tweets
-            if t.quoted_status and t.id_str not in LIST_OF_STATUS_IDS_REPLIED_TO
-        ]
-        if user_quoted_retweets:
-            collect_quoted_tweets(user_quoted_retweets)
-            post_collected_tweets(user_quoted_retweets)
-        else:
-            LOGGER.info(msg=f"No new retweets for user: {twitter_user}")
+    for user in LIST_OF_USERS_TO_FOLLOW:
+        main(twitter_user=user)

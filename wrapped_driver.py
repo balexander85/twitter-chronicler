@@ -41,9 +41,13 @@ class WrappedWebDriver:
         return self.driver.find_element_by_id(element_id)
 
     def get_element_by_css(self, locator: str) -> WebElement:
-        self.wait_for_element_to_be_present(by=By.CSS_SELECTOR, locator=locator)
+        self.wait_for_element_to_be_present_by_css(locator=locator)
         self.wait_for_element_to_be_visible(by=By.CSS_SELECTOR, locator=locator)
         return self.driver.find_element_by_css_selector(css_selector=locator)
+
+    def wait_for_element_to_be_present_by_css(self, locator) -> bool:
+        """Wait for element to be present"""
+        return self.wait_for_element_to_be_present(by=By.CSS_SELECTOR, locator=locator)
 
     def wait_for_element_to_be_present(self, by, locator) -> bool:
         """Wait for element to be present"""
