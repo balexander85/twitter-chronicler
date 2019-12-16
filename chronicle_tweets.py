@@ -22,9 +22,8 @@ from wrapped_driver import WrappedWebDriver, scroll_to_element
 from util import LOGGER, twitter_api, Tweet, save_status_id_of_replied_to_tweet
 
 
-def collect_quoted_tweets(quoted_tweets: List[Tweet]):
+def collect_quoted_tweets(driver: WrappedWebDriver, quoted_tweets: List[Tweet]):
     """Loop through list of quoted tweets and screen cap them"""
-    driver = WrappedWebDriver(browser="headless")
 
     for tweet in quoted_tweets:
         driver.open(url=tweet.quoted_tweet_url)
@@ -41,8 +40,6 @@ def collect_quoted_tweets(quoted_tweets: List[Tweet]):
             raise Exception(
                 f"Failed to save {tweet.screen_capture_file_path_quoted_tweet}"
             )
-
-    driver.quit_driver()
 
 
 def post_collected_tweets(quoted_tweets: List[Tweet]):
@@ -91,8 +88,10 @@ def get_user_quoted_retweets(twitter_user) -> List[Tweet]:
 def main(twitter_user):
     user_quoted_retweets = get_user_quoted_retweets(twitter_user=twitter_user)
     if user_quoted_retweets:
-        collect_quoted_tweets(user_quoted_retweets)
+        webdriver = WrappedWebDriver(browser="headless")
+        collect_quoted_tweets(driver=webdriver, quoted_tweets=user_quoted_retweets)
         post_collected_tweets(user_quoted_retweets)
+        webdriver.quit_driver()
     else:
         LOGGER.info(msg=f"No new retweets for user: {twitter_user}")
 
