@@ -85,18 +85,17 @@ def get_user_quoted_retweets(twitter_user) -> List[Tweet]:
     ]
 
 
-def main(twitter_user):
-    user_quoted_retweets = get_user_quoted_retweets(twitter_user=twitter_user)
+if __name__ == "__main__":
+
+    user_quoted_retweets = [
+        tweets
+        for user in LIST_OF_USERS_TO_FOLLOW
+        for tweets in get_user_quoted_retweets(twitter_user=user)
+    ]
     if user_quoted_retweets:
         webdriver = WrappedWebDriver(browser="headless")
         collect_quoted_tweets(driver=webdriver, quoted_tweets=user_quoted_retweets)
-        post_collected_tweets(user_quoted_retweets)
         webdriver.quit_driver()
+        post_collected_tweets(user_quoted_retweets)
     else:
-        LOGGER.info(msg=f"No new retweets for user: {twitter_user}")
-
-
-if __name__ == "__main__":
-
-    for user in LIST_OF_USERS_TO_FOLLOW:
-        main(twitter_user=user)
+        LOGGER.info(msg=f"No new retweets for users: {LIST_OF_USERS_TO_FOLLOW}")
