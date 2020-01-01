@@ -20,6 +20,8 @@ chrome_options.add_argument("--start-maximized")
 
 
 class WrappedWebDriver:
+    """Class used to wrap selenium webdriver"""
+
     def __init__(self, browser: str = "chrome"):
         if browser == "chrome":
             self.driver = webdriver.Chrome(executable_path=chrome_driver_path)

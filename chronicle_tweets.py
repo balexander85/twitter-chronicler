@@ -76,7 +76,7 @@ def get_status_message(retweet_user: str, urls_in_quoted_tweet: List[str]) -> st
     return message
 
 
-def get_user_quoted_retweets(twitter_user) -> List[Tweet]:
+def get_user_quoted_retweets(twitter_user: str) -> List[Tweet]:
     user_tweets = twitter_api.GetUserTimeline(screen_name=twitter_user, count=10)
     return [
         Tweet(t)
