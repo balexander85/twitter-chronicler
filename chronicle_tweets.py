@@ -19,7 +19,13 @@ from config import (
     LIST_OF_STATUS_IDS_REPLIED_TO,
 )
 from wrapped_driver import WrappedWebDriver, scroll_to_element
-from util import LOGGER, twitter_api, Tweet, save_status_id_of_replied_to_tweet
+from util import (
+    LOGGER,
+    get_user_quoted_retweets,
+    twitter_api,
+    Tweet,
+    save_status_id_of_replied_to_tweet,
+)
 
 
 def collect_quoted_tweets(driver: WrappedWebDriver, quoted_tweets: List[Tweet]):
@@ -76,22 +82,14 @@ def get_status_message(retweet_user: str, urls_in_quoted_tweet: List[str]) -> st
     return message
 
 
-def get_user_quoted_retweets(twitter_user: str) -> List[Tweet]:
-    LOGGER.info(f"Getting tweets for user: {twitter_user}") 
-    user_tweets = twitter_api.GetUserTimeline(screen_name=twitter_user, count=10)
-    return [
-        Tweet(t)
-        for t in user_tweets
-        if t.quoted_status and t.id_str not in LIST_OF_STATUS_IDS_REPLIED_TO
-    ]
-
-
 if __name__ == "__main__":
 
     user_quoted_retweets = [
         tweets
         for user in LIST_OF_USERS_TO_FOLLOW
-        for tweets in get_user_quoted_retweets(twitter_user=user)
+        for tweets in get_user_quoted_retweets(
+            twitter_user=user, excluded_ids=LIST_OF_STATUS_IDS_REPLIED_TO
+        )
     ]
     if user_quoted_retweets:
         webdriver = WrappedWebDriver(browser="headless")
