@@ -5,7 +5,6 @@ from twitter import Api as twitterApi
 from twitter import Status, TwitterError
 from wrapped_driver import WrappedWebDriver, scroll_to_element
 
-from . import LOGGER
 from config import (
     APP_KEY,
     APP_SECRET,
@@ -14,6 +13,7 @@ from config import (
     OAUTH_TOKEN,
     OAUTH_TOKEN_SECRET,
 )
+from console_logger import LOGGER
 
 
 twitter_api = twitterApi(

@@ -14,11 +14,11 @@ Note:
     I was tired of looking at tweets that quoted tweets
     where the quoted tweets had been deleted.
 """
-from . import LOGGER
 from config import (
     LIST_OF_USERS_TO_FOLLOW,
     LIST_OF_STATUS_IDS_REPLIED_TO,
 )
+from console_logger import LOGGER
 from util import (
     get_users_recent_quoted_retweets,
     collect_quoted_tweets,
