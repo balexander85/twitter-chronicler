@@ -5,6 +5,7 @@ from typing import List
 
 from twitter import Api as twitterApi
 from twitter import Status, TwitterError
+from wrapped_driver import WrappedWebDriver, scroll_to_element
 
 from config import (
     APP_KEY,
@@ -101,6 +102,43 @@ class Tweet:
         return [url_obj.url for url_obj in self.quoted_status.urls]
 
 
+def collect_quoted_tweets(driver: WrappedWebDriver, quoted_tweets: List[Tweet]):
+    """Loop through list of quoted tweets and screen cap them"""
+
+    for tweet in quoted_tweets:
+        driver.open(url=tweet.quoted_tweet_url)
+        quoted_tweet_element = driver.get_element_by_css(
+            locator=tweet.quoted_tweet_locator
+        )
+        scroll_to_element(driver=driver, element=quoted_tweet_element)
+        LOGGER.info(
+            msg=f"Saving screen shot: {tweet.screen_capture_file_path_quoted_tweet}"
+        )
+        if not quoted_tweet_element.screenshot(
+            filename=tweet.screen_capture_file_path_quoted_tweet
+        ):
+            raise Exception(
+                f"Failed to save {tweet.screen_capture_file_path_quoted_tweet}"
+            )
+
+
+def get_status_message(retweet_user: str, urls_in_quoted_tweet: List[str]) -> str:
+    if urls_in_quoted_tweet:
+        url_string_list = ", ".join(urls_in_quoted_tweet)
+        message = (
+            f"@{retweet_user} This Tweet is available! \n"
+            f"For the blocked and the record!\n"
+            f"URL(s) from tweet: {url_string_list}"
+        )
+    else:
+        message = (
+            f"@{retweet_user} This Tweet is available! \n"
+            f"For the blocked and the record!"
+        )
+    LOGGER.info(msg=message)
+    return message
+
+
 def get_all_users_tweets(twitter_user: str) -> List[Tweet]:
     """Helper method to collect ALL of a user's tweets"""
     LOGGER.info(f"Getting tweets for user: {twitter_user}")
@@ -173,3 +211,20 @@ def save_status_id_of_replied_to_tweet(tweet: Tweet):
     )
     with open(LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME, "a+") as f:
         f.write(tweet.id_str + "\n")
+
+
+def post_collected_tweets(quoted_tweets: List[Tweet]):
+    """Post"""
+    for user_tweet in quoted_tweets:
+        LOGGER.info(msg=user_tweet)
+        status_message = get_status_message(
+            retweet_user=user_tweet.user,
+            urls_in_quoted_tweet=user_tweet.urls_from_quoted_tweet,
+        )
+        response = twitter_api.PostUpdate(
+            status=status_message,
+            media=user_tweet.screen_capture_file_path_quoted_tweet,
+            in_reply_to_status_id=user_tweet.id,
+        )
+        LOGGER.info(response)
+        save_status_id_of_replied_to_tweet(tweet=user_tweet)

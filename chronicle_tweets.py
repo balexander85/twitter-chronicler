@@ -10,77 +10,21 @@ Containing some helpful objects
 
 This Tweet is available!
 
-I was tired of looking at retweets that quoted tweets that had been deleted.
+Note:
+    I was tired of looking at tweets that quoted tweets
+    where the quoted tweets had been deleted.
 """
-from typing import List
-
 from config import (
     LIST_OF_USERS_TO_FOLLOW,
     LIST_OF_STATUS_IDS_REPLIED_TO,
 )
-from wrapped_driver import WrappedWebDriver, scroll_to_element
+from wrapped_driver import WrappedWebDriver
 from util import (
     LOGGER,
     get_users_recent_quoted_retweets,
-    twitter_api,
-    Tweet,
-    save_status_id_of_replied_to_tweet,
+    collect_quoted_tweets,
+    post_collected_tweets,
 )
-
-
-def collect_quoted_tweets(driver: WrappedWebDriver, quoted_tweets: List[Tweet]):
-    """Loop through list of quoted tweets and screen cap them"""
-
-    for tweet in quoted_tweets:
-        driver.open(url=tweet.quoted_tweet_url)
-        quoted_tweet_element = driver.get_element_by_css(
-            locator=tweet.quoted_tweet_locator
-        )
-        scroll_to_element(driver=driver, element=quoted_tweet_element)
-        LOGGER.info(
-            msg=f"Saving screen shot: {tweet.screen_capture_file_path_quoted_tweet}"
-        )
-        if not quoted_tweet_element.screenshot(
-            filename=tweet.screen_capture_file_path_quoted_tweet
-        ):
-            raise Exception(
-                f"Failed to save {tweet.screen_capture_file_path_quoted_tweet}"
-            )
-
-
-def post_collected_tweets(quoted_tweets: List[Tweet]):
-    """Post"""
-    for user_tweet in quoted_tweets:
-        LOGGER.info(msg=user_tweet)
-        status_message = get_status_message(
-            retweet_user=user_tweet.user,
-            urls_in_quoted_tweet=user_tweet.urls_from_quoted_tweet,
-        )
-        response = twitter_api.PostUpdate(
-            status=status_message,
-            media=user_tweet.screen_capture_file_path_quoted_tweet,
-            in_reply_to_status_id=user_tweet.id,
-        )
-        LOGGER.info(response)
-        save_status_id_of_replied_to_tweet(tweet=user_tweet)
-
-
-def get_status_message(retweet_user: str, urls_in_quoted_tweet: List[str]) -> str:
-    if urls_in_quoted_tweet:
-        url_string_list = ", ".join(urls_in_quoted_tweet)
-        message = (
-            f"@{retweet_user} This Tweet is available! \n"
-            f"For the blocked and the record!\n"
-            f"URL(s) from tweet: {url_string_list}"
-        )
-    else:
-        message = (
-            f"@{retweet_user} This Tweet is available! \n"
-            f"For the blocked and the record!"
-        )
-    LOGGER.info(msg=message)
-    return message
-
 
 if __name__ == "__main__":
 
