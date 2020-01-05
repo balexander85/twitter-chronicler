@@ -21,7 +21,7 @@ from config import (
 from wrapped_driver import WrappedWebDriver, scroll_to_element
 from util import (
     LOGGER,
-    get_user_quoted_retweets,
+    get_users_recent_quoted_retweets,
     twitter_api,
     Tweet,
     save_status_id_of_replied_to_tweet,
@@ -87,7 +87,7 @@ if __name__ == "__main__":
     user_quoted_retweets = [
         tweets
         for user in LIST_OF_USERS_TO_FOLLOW
-        for tweets in get_user_quoted_retweets(
+        for tweets in get_users_recent_quoted_retweets(
             twitter_user=user, excluded_ids=LIST_OF_STATUS_IDS_REPLIED_TO
         )
     ]

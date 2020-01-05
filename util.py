@@ -4,7 +4,7 @@ from sys import stdout
 from typing import List
 
 from twitter import Api as twitterApi
-from twitter import Status
+from twitter import Status, TwitterError
 
 from config import (
     APP_KEY,
@@ -101,7 +101,35 @@ class Tweet:
         return [url_obj.url for url_obj in self.quoted_status.urls]
 
 
-def get_user_quoted_retweets(twitter_user: str, excluded_ids: List[str]) -> List[Tweet]:
+def get_all_users_tweets(twitter_user: str) -> List[Tweet]:
+    """Helper method to collect ALL of a user's tweets"""
+    LOGGER.info(f"Getting tweets for user: {twitter_user}")
+    initial_tweets = [
+        Tweet(t)
+        for t in twitter_api.GetUserTimeline(screen_name=twitter_user, count=200)
+    ]
+    last_tweet_id = initial_tweets[-1].id
+    user_tweet_count = twitter_api.GetUser(screen_name=twitter_user).statuses_count
+    if int(user_tweet_count) > 1000:
+        raise Exception("Whatever the hourly rate limit would be raise error for now")
+
+    for _ in range(int(user_tweet_count / 200)):
+        new_tweets = [
+            Tweet(t)
+            for t in twitter_api.GetUserTimeline(
+                screen_name=twitter_user, max_id=last_tweet_id, count=200
+            )
+        ]
+        initial_tweets.extend(new_tweets)
+        last_tweet_id = new_tweets[-1].id
+
+    LOGGER.info(f"Found {len(initial_tweets)} tweets for user {twitter_user}")
+    return initial_tweets
+
+
+def get_users_recent_quoted_retweets(
+    twitter_user: str, excluded_ids: List[str]
+) -> List[Tweet]:
     LOGGER.info(f"Getting tweets for user: {twitter_user}")
     user_tweets = twitter_api.GetUserTimeline(screen_name=twitter_user, count=10)
     return [
@@ -109,6 +137,34 @@ def get_user_quoted_retweets(twitter_user: str, excluded_ids: List[str]) -> List
         for t in user_tweets
         if t.quoted_status and t.id_str not in excluded_ids
     ]
+
+
+def find_deleted_tweets(twitter_user: str) -> List[dict]:
+    """Get list of tweets that were deleted"""
+    bad_ids = []
+    list_of_users_to_ignore = ["aaronjmate", "lhfang"]
+    tweets = get_all_users_tweets(twitter_user)
+    replied_to_statuses = [
+        t
+        for t in tweets
+        if t.replied_to_status_bool
+        and t.replied_to_user_screen_name not in list_of_users_to_ignore
+    ]
+    for t in replied_to_statuses:
+        try:
+            responded_to_tweet = Tweet(twitter_api.GetStatus(t.replied_to_status_id))
+            if responded_to_tweet.quoted_tweet_id:
+                quoted_tweet_status = Tweet(
+                    twitter_api.GetStatus(responded_to_tweet.quoted_tweet_id)
+                )
+                LOGGER.info(quoted_tweet_status)
+        except TwitterError as e:
+            LOGGER.error(f"{e}, {t.replied_to_user_screen_name}, {t.id}")
+            bad_ids.append(
+                {"user": t.replied_to_user_screen_name, "tweet_id": t.id, "error": e,}
+            )
+
+    return bad_ids
 
 
 def save_status_id_of_replied_to_tweet(tweet: Tweet):
