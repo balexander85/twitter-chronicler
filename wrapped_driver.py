@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 from config import CHROME_DRIVER_PATH
-from console_logger import LOGGER
+from _logger import LOGGER
 
 chrome_driver_path = CHROME_DRIVER_PATH
 chrome_options = webdriver.ChromeOptions()

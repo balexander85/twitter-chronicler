@@ -13,7 +13,7 @@ from config import (
     OAUTH_TOKEN,
     OAUTH_TOKEN_SECRET,
 )
-from console_logger import LOGGER
+from _logger import LOGGER
 
 
 twitter_api = twitterApi(

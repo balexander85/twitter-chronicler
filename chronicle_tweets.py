@@ -18,7 +18,7 @@ from config import (
     LIST_OF_USERS_TO_FOLLOW,
     LIST_OF_STATUS_IDS_REPLIED_TO,
 )
-from console_logger import LOGGER
+from _logger import LOGGER
 from util import (
     get_users_recent_quoted_retweets,
     collect_quoted_tweets,
