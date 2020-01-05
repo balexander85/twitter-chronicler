@@ -1,12 +1,11 @@
-import logging
 import os
-from sys import stdout
 from typing import List
 
 from twitter import Api as twitterApi
 from twitter import Status, TwitterError
 from wrapped_driver import WrappedWebDriver, scroll_to_element
 
+from . import LOGGER
 from config import (
     APP_KEY,
     APP_SECRET,
@@ -15,13 +14,6 @@ from config import (
     OAUTH_TOKEN,
     OAUTH_TOKEN_SECRET,
 )
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s: %(message)s",
-    stream=stdout,
-)
-LOGGER = logging.getLogger(__name__)
 
 
 twitter_api = twitterApi(

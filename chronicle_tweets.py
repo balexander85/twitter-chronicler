@@ -14,17 +14,17 @@ Note:
     I was tired of looking at tweets that quoted tweets
     where the quoted tweets had been deleted.
 """
+from . import LOGGER
 from config import (
     LIST_OF_USERS_TO_FOLLOW,
     LIST_OF_STATUS_IDS_REPLIED_TO,
 )
-from wrapped_driver import WrappedWebDriver
 from util import (
-    LOGGER,
     get_users_recent_quoted_retweets,
     collect_quoted_tweets,
     post_collected_tweets,
 )
+from wrapped_driver import WrappedWebDriver
 
 if __name__ == "__main__":
 
