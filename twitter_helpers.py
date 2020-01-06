@@ -217,7 +217,7 @@ def post_collected_tweets(quoted_tweets: List[Tweet]):
 
 def post_for_the_record(tweet: Tweet):
     """Post message and screen cap of the quoted tweet"""
-    LOGGER.info(msg=f"@{tweet.user} {tweet.tweet_text}")
+    LOGGER.info(msg=f"Tweet replied to: @{tweet.user} {tweet.tweet_text}")
     response = twitter_api.PostUpdate(
         status=tweet.for_the_record_message,
         media=tweet.screen_capture_file_path_quoted_tweet,
