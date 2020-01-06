@@ -210,13 +210,18 @@ def save_status_id_of_replied_to_tweet(tweet: Tweet):
 
 
 def post_collected_tweets(quoted_tweets: List[Tweet]):
-    """Post"""
+    """For each quoted tweet post for the record and for the blocked"""
     for user_tweet in quoted_tweets:
-        LOGGER.info(msg=user_tweet)
-        response = twitter_api.PostUpdate(
-            status=user_tweet.for_the_record_message,
-            media=user_tweet.screen_capture_file_path_quoted_tweet,
-            in_reply_to_status_id=user_tweet.id,
-        )
-        LOGGER.info(response)
-        save_status_id_of_replied_to_tweet(tweet=user_tweet)
+        post_for_the_record(tweet=user_tweet)
+
+
+def post_for_the_record(tweet: Tweet):
+    """Post message and screen cap of the quoted tweet"""
+    LOGGER.info(msg=tweet)
+    response = twitter_api.PostUpdate(
+        status=tweet.for_the_record_message,
+        media=tweet.screen_capture_file_path_quoted_tweet,
+        in_reply_to_status_id=tweet.id,
+    )
+    LOGGER.info(response)
+    save_status_id_of_replied_to_tweet(tweet=tweet)
