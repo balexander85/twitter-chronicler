@@ -109,6 +109,9 @@ def collect_quoted_tweets(driver: WrappedWebDriver, quoted_tweets: List[Tweet]):
         if not quoted_tweet_element.screenshot(
             filename=tweet.screen_capture_file_path_quoted_tweet
         ):
+            LOGGER.error(
+                f"Failed to save {tweet.screen_capture_file_path_quoted_tweet}"
+            )
             raise Exception(
                 f"Failed to save {tweet.screen_capture_file_path_quoted_tweet}"
             )

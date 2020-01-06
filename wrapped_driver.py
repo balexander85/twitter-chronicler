@@ -69,6 +69,7 @@ class WrappedWebDriver:
 
 def scroll_to_element(driver: WrappedWebDriver, element: WebElement):
     """Helper method to scroll down to element"""
+    LOGGER.debug(f"Scrolling to {element}")
     raw_driver = driver.driver
     # raw_driver.execute_script("arguments[0].scrollIntoView();", element)
     actions = ActionChains(raw_driver)
