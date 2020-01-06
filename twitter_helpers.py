@@ -93,6 +93,24 @@ class Tweet:
     def urls_from_quoted_tweet(self) -> List[str]:
         return [url_obj.url for url_obj in self.quoted_status.urls]
 
+    @property
+    def for_the_record_message(self) -> str:
+        """Message to be tweeted with screen cap of quoted tweet"""
+        if self.urls_from_quoted_tweet:
+            url_string_list = ", ".join(self.urls_from_quoted_tweet)
+            message = (
+                f"@{self.user} This Tweet is available! \n"
+                f"For the blocked and the record!\n"
+                f"URL(s) from tweet: {url_string_list}"
+            )
+        else:
+            message = (
+                f"@{self.user} This Tweet is available! \n"
+                f"For the blocked and the record!"
+            )
+        LOGGER.info(msg=message)
+        return message
+
 
 def collect_quoted_tweets(driver: WrappedWebDriver, quoted_tweets: List[Tweet]):
     """Loop through list of quoted tweets and screen cap them"""
@@ -115,23 +133,6 @@ def collect_quoted_tweets(driver: WrappedWebDriver, quoted_tweets: List[Tweet]):
             raise Exception(
                 f"Failed to save {tweet.screen_capture_file_path_quoted_tweet}"
             )
-
-
-def get_status_message(retweet_user: str, urls_in_quoted_tweet: List[str]) -> str:
-    if urls_in_quoted_tweet:
-        url_string_list = ", ".join(urls_in_quoted_tweet)
-        message = (
-            f"@{retweet_user} This Tweet is available! \n"
-            f"For the blocked and the record!\n"
-            f"URL(s) from tweet: {url_string_list}"
-        )
-    else:
-        message = (
-            f"@{retweet_user} This Tweet is available! \n"
-            f"For the blocked and the record!"
-        )
-    LOGGER.info(msg=message)
-    return message
 
 
 def get_all_users_tweets(twitter_user: str) -> List[Tweet]:
@@ -212,12 +213,8 @@ def post_collected_tweets(quoted_tweets: List[Tweet]):
     """Post"""
     for user_tweet in quoted_tweets:
         LOGGER.info(msg=user_tweet)
-        status_message = get_status_message(
-            retweet_user=user_tweet.user,
-            urls_in_quoted_tweet=user_tweet.urls_from_quoted_tweet,
-        )
         response = twitter_api.PostUpdate(
-            status=status_message,
+            status=user_tweet.for_the_record_message,
             media=user_tweet.screen_capture_file_path_quoted_tweet,
             in_reply_to_status_id=user_tweet.id,
         )
