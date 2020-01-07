@@ -221,14 +221,15 @@ def post_collected_tweets(quoted_tweets: List[Tweet]):
 def post_for_the_record(tweet: Tweet):
     """Post message and screen cap of the quoted tweet"""
     LOGGER.info(msg=f"Tweet replied to: @{tweet.user} {tweet.tweet_text}")
-    response: dict = twitter_api.PostUpdate(
+    response = twitter_api.PostUpdate(
         status=tweet.for_the_record_message,
         media=tweet.screen_capture_file_path_quoted_tweet,
         in_reply_to_status_id=tweet.id,
     )
-    LOGGER.info(
-        f"id: {response.get('id')} "
-        f"in_reply_to_status_id: {response.get('in_reply_to_status_id')} "
-        f"in_reply_to_screen_name: {response.get('in_reply_to_screen_name')}"
-    )
+    # LOGGER.info(
+    #     f"id: {response.get('id')} "
+    #     f"in_reply_to_status_id: {response.get('in_reply_to_status_id')} "
+    #     f"in_reply_to_screen_name: {response.get('in_reply_to_screen_name')}"
+    # )
+    LOGGER.info(f"response type: {type(response)} response: {response}")
     save_status_id_of_replied_to_tweet(tweet=tweet)
