@@ -61,7 +61,7 @@ class Tweet:
     @property
     def quoted_tweet_url(self) -> str:
         tweet_url = f"https://twitter.com/{self.user}/status/{self.quoted_tweet_id}"
-        LOGGER.info(msg=f"{tweet_url} : {self}")
+        LOGGER.info(msg=f"Quoted Tweet URL: {tweet_url}")
         return tweet_url
 
     @property
@@ -204,21 +204,25 @@ def find_deleted_tweets(twitter_user: str) -> List[dict]:
     return bad_ids
 
 
-def save_status_id_of_replied_to_tweet(tweet: Tweet):
+def save_status_id_of_replied_to_tweet(tweet_id: str):
+    """Save id of the replied to tweet
+
+    Save id to file so that tweet will not be replied to more than once.
+    """
     LOGGER.info(
-        msg=f"Adding {tweet.id_str} to {LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME}"
+        msg=f"Adding {tweet_id} to {LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME}"
     )
     with open(LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME, "a+") as f:
-        f.write(tweet.id_str + "\n")
+        f.write(tweet_id + "\n")
 
 
 def post_collected_tweets(quoted_tweets: List[Tweet]):
     """For each quoted tweet post for the record and for the blocked"""
     for user_tweet in quoted_tweets:
-        post_for_the_record(tweet=user_tweet)
+        post_reply_to_user_tweet(tweet=user_tweet)
 
 
-def post_for_the_record(tweet: Tweet):
+def post_reply_to_user_tweet(tweet: Tweet):
     """Post message and screen cap of the quoted tweet"""
     LOGGER.info(msg=f"Tweet replied to: @{tweet.user} {tweet.tweet_text}")
     response: Status = twitter_api.PostUpdate(
@@ -231,4 +235,4 @@ def post_for_the_record(tweet: Tweet):
         f"in_reply_to_status_id: {response.in_reply_to_status_id} "
         f"in_reply_to_screen_name: {response.in_reply_to_screen_name}"
     )
-    save_status_id_of_replied_to_tweet(tweet=tweet)
+    save_status_id_of_replied_to_tweet(tweet_id=tweet.id_str)
