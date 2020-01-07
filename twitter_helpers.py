@@ -165,7 +165,7 @@ def get_users_recent_quoted_retweets(
     twitter_user: str, excluded_ids: List[str]
 ) -> List[Tweet]:
     """Get tweets for given user that has recently quoted tweet in retweet"""
-    LOGGER.info(f"Getting last 10 tweets for user: {twitter_user}")
+    LOGGER.debug(f"Getting last 10 tweets for user: {twitter_user}")
     user_tweets = twitter_api.GetUserTimeline(screen_name=twitter_user, count=10)
     user_tweets_quoting_tweets = [
         Tweet(t)

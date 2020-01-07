@@ -27,6 +27,7 @@ from twitter_helpers import (
 from wrapped_driver import WrappedWebDriver
 
 if __name__ == "__main__":
+    LOGGER.info("Start of script")
 
     user_quoted_retweets = [
         tweets
