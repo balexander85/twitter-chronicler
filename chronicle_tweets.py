@@ -41,4 +41,7 @@ if __name__ == "__main__":
         webdriver.quit_driver()
         post_collected_tweets(user_quoted_retweets)
     else:
-        LOGGER.info(msg=f"No new retweets for users: {LIST_OF_USERS_TO_FOLLOW}")
+        list_of_users_to_follow = "\n".join(
+            [f"{i}) {x}" for i, x in enumerate(LIST_OF_USERS_TO_FOLLOW, 1)]
+        )
+        LOGGER.info(msg=f"No new retweets for users: {list_of_users_to_follow}")
