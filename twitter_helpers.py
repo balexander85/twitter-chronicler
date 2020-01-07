@@ -96,18 +96,15 @@ class Tweet:
     @property
     def for_the_record_message(self) -> str:
         """Message to be tweeted with screen cap of quoted tweet"""
+        message = (
+            f"@{self.user} "
+            f"This Tweet is available! \n"
+            f"For the blocked and the record!"
+        )
         if self.urls_from_quoted_tweet:
             url_string_list = ", ".join(self.urls_from_quoted_tweet)
-            message = (
-                f"@{self.user} This Tweet is available! \n"
-                f"For the blocked and the record!\n"
-                f"URL(s) from tweet: {url_string_list}"
-            )
-        else:
-            message = (
-                f"@{self.user} This Tweet is available! \n"
-                f"For the blocked and the record!"
-            )
+            message += f"\nURL(s) from tweet: {url_string_list}"
+
         LOGGER.info(msg=message)
         return message
 
