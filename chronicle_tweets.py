@@ -40,8 +40,5 @@ if __name__ == "__main__":
         collect_quoted_tweets(driver=webdriver, quoted_tweets=user_quoted_retweets)
         webdriver.quit_driver()
         post_collected_tweets(user_quoted_retweets)
-    else:
-        list_of_users_to_follow = "\n".join(
-            [f"{i}) {x}" for i, x in enumerate(LIST_OF_USERS_TO_FOLLOW, 1)]
-        )
-        LOGGER.info(msg=f"No new retweets for users: {list_of_users_to_follow}")
+
+    LOGGER.info("End of script run")

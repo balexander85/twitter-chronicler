@@ -164,13 +164,19 @@ def get_all_users_tweets(twitter_user: str) -> List[Tweet]:
 def get_users_recent_quoted_retweets(
     twitter_user: str, excluded_ids: List[str]
 ) -> List[Tweet]:
-    LOGGER.info(f"Getting tweets for user: {twitter_user}")
+    """Get tweets for given user that has recently quoted tweet in retweet"""
+    LOGGER.info(f"Getting last 10 tweets for user: {twitter_user}")
     user_tweets = twitter_api.GetUserTimeline(screen_name=twitter_user, count=10)
-    return [
+    user_tweets_quoting_tweets = [
         Tweet(t)
         for t in user_tweets
         if t.quoted_status and t.id_str not in excluded_ids
     ]
+
+    if not user_tweets_quoting_tweets:
+        LOGGER.info(msg=f"No recent retweets for user: {twitter_user}")
+
+    return user_tweets_quoting_tweets
 
 
 def find_deleted_tweets(twitter_user: str) -> List[dict]:
