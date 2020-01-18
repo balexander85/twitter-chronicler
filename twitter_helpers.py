@@ -32,13 +32,27 @@ class Tweet:
         self.id: int = self.raw_tweet.id
         self.id_str: str = self.raw_tweet.id_str
         self.tweet_text: str = self.raw_tweet.text
-        self.tweet_locator: str = f"div[data-tweet-id='{self.id}']"
         self.user: str = self.raw_tweet.user.screen_name
 
     def __repr__(self):
         tweet = f"@{self.user}: {self.tweet_text}"
         LOGGER.debug(f"Processing '{tweet}'")
         return tweet
+
+    @property
+    def for_the_record_message(self) -> str:
+        """Message to be tweeted with screen cap of quoted tweet"""
+        message = (
+            f"@{self.user} "
+            f"This Tweet is available! \n"
+            f"For the blocked and the record!"
+        )
+        if self.urls_from_quoted_tweet:
+            url_string_list = ", ".join(self.urls_from_quoted_tweet)
+            message += f"\nURL(s) from tweet: {url_string_list}"
+
+        LOGGER.info(msg=message)
+        return message
 
     @property
     def quoted_status(self) -> Status:
@@ -90,23 +104,12 @@ class Tweet:
         )
 
     @property
-    def urls_from_quoted_tweet(self) -> List[str]:
-        return [url_obj.url for url_obj in self.quoted_status.urls]
+    def tweet_locator(self) -> str:
+        return f"div[data-tweet-id='{self.id}']"
 
     @property
-    def for_the_record_message(self) -> str:
-        """Message to be tweeted with screen cap of quoted tweet"""
-        message = (
-            f"@{self.user} "
-            f"This Tweet is available! \n"
-            f"For the blocked and the record!"
-        )
-        if self.urls_from_quoted_tweet:
-            url_string_list = ", ".join(self.urls_from_quoted_tweet)
-            message += f"\nURL(s) from tweet: {url_string_list}"
-
-        LOGGER.info(msg=message)
-        return message
+    def urls_from_quoted_tweet(self) -> List[str]:
+        return [url_obj.url for url_obj in self.quoted_status.urls]
 
 
 def collect_quoted_tweets(driver: WrappedWebDriver, quoted_tweets: List[Tweet]):
@@ -130,6 +133,11 @@ def collect_quoted_tweets(driver: WrappedWebDriver, quoted_tweets: List[Tweet]):
             raise Exception(
                 f"Failed to save {tweet.screen_capture_file_path_quoted_tweet}"
             )
+
+
+def get_tweet(tweet_id: int) -> Tweet:
+    """Get tweet from api and return Tweet object"""
+    return Tweet(twitter_api.GetStatus(status_id=tweet_id))
 
 
 def get_all_users_tweets(twitter_user: str) -> List[Tweet]:
@@ -209,9 +217,7 @@ def save_status_id_of_replied_to_tweet(tweet_id: str):
 
     Save id to file so that tweet will not be replied to more than once.
     """
-    LOGGER.info(
-        msg=f"Adding {tweet_id} to {LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME}"
-    )
+    LOGGER.info(msg=f"Adding {tweet_id} to {LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME}")
     with open(LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME, "a+") as f:
         f.write(tweet_id + "\n")
 
@@ -224,7 +230,7 @@ def post_collected_tweets(quoted_tweets: List[Tweet]):
 
 def post_reply_to_user_tweet(tweet: Tweet):
     """Post message and screen cap of the quoted tweet"""
-    LOGGER.info(msg=f"Tweet replied to: @{tweet.user} {tweet.tweet_text}")
+    LOGGER.info(msg=f"Replying to '@{tweet.user}: {tweet.tweet_text}'")
     response: Status = twitter_api.PostUpdate(
         status=tweet.for_the_record_message,
         media=tweet.screen_capture_file_path_quoted_tweet,
