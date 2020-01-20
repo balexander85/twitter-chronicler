@@ -14,32 +14,18 @@ Note:
     I was tired of looking at tweets that quoted tweets
     where the quoted tweets had been deleted.
 """
-from config import (
-    LIST_OF_USERS_TO_FOLLOW,
-    LIST_OF_STATUS_IDS_REPLIED_TO,
-)
+from config import LIST_OF_USERS_TO_FOLLOW
 from _logger import LOGGER
 from twitter_helpers import (
-    get_users_recent_quoted_retweets,
-    collect_quoted_tweets,
-    post_collected_tweets,
+    find_quoted_tweets,
+    collect_and_post_tweets,
 )
-from wrapped_driver import WrappedWebDriver
+
 
 if __name__ == "__main__":
     LOGGER.info("Start of script")
 
-    user_quoted_retweets = [
-        tweets
-        for user in LIST_OF_USERS_TO_FOLLOW
-        for tweets in get_users_recent_quoted_retweets(
-            twitter_user=user, excluded_ids=LIST_OF_STATUS_IDS_REPLIED_TO
-        )
-    ]
-    if user_quoted_retweets:
-        webdriver = WrappedWebDriver(browser="headless")
-        collect_quoted_tweets(driver=webdriver, quoted_tweets=user_quoted_retweets)
-        webdriver.quit_driver()
-        post_collected_tweets(user_quoted_retweets)
+    user_quoted_retweets = find_quoted_tweets(users_to_follow=LIST_OF_USERS_TO_FOLLOW)
+    collect_and_post_tweets(user_quoted_retweets)
 
     LOGGER.info("End of script run")

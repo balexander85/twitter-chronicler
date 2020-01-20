@@ -3,8 +3,13 @@ from unittest.mock import patch
 import pytest
 from twitter import Status
 
+from config import (
+    LIST_OF_USERS_TO_FOLLOW,
+    LIST_OF_STATUS_IDS_REPLIED_TO,
+)
 from twitter_helpers import (
     get_tweet,
+    get_recent_quoted_retweets_for_user,
     get_recent_tweets_for_user,
     post_collected_tweets,
     post_reply_to_user_tweet,
@@ -95,6 +100,17 @@ class TestTweet:
         user_tweets = get_recent_tweets_for_user(twitter_user=user_name, count=1)
         assert len(user_tweets) == 1
         assert type(user_tweets) == list
+
+    @patch("twitter_helpers.get_recent_tweets_for_user")
+    def test_get_recent_quoted_retweets_for_user_excluded(self, mock_get, test_tweet):
+        """Mock get_recent_tweets_for_user without making real call to Twitter API"""
+        mock_get.return_value = [test_tweet("quoted_tweet")]
+        user_name = "_b_axe"
+        tweets = get_recent_quoted_retweets_for_user(
+            twitter_user=user_name, excluded_ids=["1201197107169898498"]
+        )
+        assert len(tweets) == 0
+        assert type(tweets) == list
 
     @patch("twitter.api.Api.PostUpdate")
     def test_post_reply_to_user_tweet(self, mock_get, test_tweet):

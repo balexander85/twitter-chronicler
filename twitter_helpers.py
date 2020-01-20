@@ -1,5 +1,5 @@
 import os
-from typing import List
+from typing import Iterator, List, Union
 
 from twitter import Api as twitterApi
 from twitter import Status, TwitterError
@@ -9,9 +9,12 @@ from config import (
     APP_KEY,
     APP_SECRET,
     LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME,
+    LIST_OF_STATUS_IDS_REPLIED_TO,
     PROJECT_DIR_PATH,
     OAUTH_TOKEN,
     OAUTH_TOKEN_SECRET,
+    TWITTER_API_USER,
+    TWITTER_URL,
 )
 from _logger import LOGGER
 
@@ -31,11 +34,11 @@ class Tweet:
         self.raw_tweet: Status = tweet
         self.id: int = self.raw_tweet.id
         self.id_str: str = self.raw_tweet.id_str
-        self.tweet_text: str = self.raw_tweet.text
+        self.text: str = self.raw_tweet.text
         self.user: str = self.raw_tweet.user.screen_name
 
     def __repr__(self):
-        tweet = f"@{self.user}: {self.tweet_text}"
+        tweet = f"@{self.user}: {self.text}"
         LOGGER.debug(f"Processing '{tweet}'")
         return tweet
 
@@ -74,9 +77,16 @@ class Tweet:
 
     @property
     def quoted_tweet_url(self) -> str:
-        tweet_url = f"https://twitter.com/{self.user}/status/{self.quoted_tweet_id}"
+        tweet_url = (
+            f"{TWITTER_URL}/{self.quoted_tweet_user}/status/{self.quoted_tweet_id}"
+        )
         LOGGER.info(msg=f"Quoted Tweet URL: {tweet_url}")
         return tweet_url
+
+    @property
+    def quoted_tweet_user(self) -> str:
+        """Returns the user name of the quoted tweet"""
+        return self.quoted_status.user.screen_name if self.quoted_status else None
 
     @property
     def replied_to_status_bool(self) -> bool:
@@ -112,11 +122,22 @@ class Tweet:
         return [url_obj.url for url_obj in self.quoted_status.urls]
 
 
+def collect_and_post_tweets(tweets):
+
+    if tweets:
+        webdriver = WrappedWebDriver(browser="headless")
+        collect_quoted_tweets(driver=webdriver, quoted_tweets=tweets)
+        webdriver.quit_driver()
+        post_collected_tweets(tweets)
+
+
 def collect_quoted_tweets(driver: WrappedWebDriver, quoted_tweets: List[Tweet]):
     """Loop through list of quoted tweets and screen cap them"""
 
     for tweet in quoted_tweets:
+        LOGGER.info(f"Opening...tweet quoted by {tweet.user} {tweet.quoted_tweet_url}")
         driver.open(url=tweet.quoted_tweet_url)
+        LOGGER.info(f"Getting locator...{tweet.quoted_tweet_locator}")
         quoted_tweet_element = driver.get_element_by_css(
             locator=tweet.quoted_tweet_locator
         )
@@ -135,9 +156,28 @@ def collect_quoted_tweets(driver: WrappedWebDriver, quoted_tweets: List[Tweet]):
             )
 
 
-def get_tweet(tweet_id: int) -> Tweet:
+def find_quoted_tweets(users_to_follow: List[str]) -> List[Tweet]:
+    return [
+        tweets
+        for user in users_to_follow
+        for tweets in get_recent_quoted_retweets_for_user(
+            twitter_user=user, excluded_ids=LIST_OF_STATUS_IDS_REPLIED_TO
+        )
+    ]
+
+
+def get_status(status_id: Union[int, str]) -> Status:
     """Get tweet from api and return Tweet object"""
-    return Tweet(twitter_api.GetStatus(status_id=tweet_id))
+    LOGGER.info(f"Fetching tweet with id {status_id}")
+    response = twitter_api.GetStatus(status_id=status_id)
+    return response
+
+
+def get_tweet(tweet_id: Union[int, str]) -> Tweet:
+    """Get tweet from api and return Tweet object"""
+    LOGGER.info(f"Fetching tweet with id {tweet_id}")
+    response = get_status(status_id=tweet_id)
+    return Tweet(response)
 
 
 def get_all_users_tweets(twitter_user: str) -> List[Tweet]:
@@ -166,17 +206,41 @@ def get_all_users_tweets(twitter_user: str) -> List[Tweet]:
     return initial_tweets
 
 
-def get_users_recent_quoted_retweets(
+def get_recent_tweets_for_user(twitter_user: str, count: int = 10) -> List[Status]:
+    """Using Twitter API get recent tweets using user screen name"""
+    LOGGER.info(f"Getting last {count} tweets for user: {twitter_user}")
+    return twitter_api.GetUserTimeline(screen_name=twitter_user, count=count)
+
+
+def get_recent_quoted_retweets_for_user(
     twitter_user: str, excluded_ids: List[str]
 ) -> List[Tweet]:
     """Get tweets for given user that has recently quoted tweet in retweet"""
-    LOGGER.debug(f"Getting last 10 tweets for user: {twitter_user}")
-    user_tweets = twitter_api.GetUserTimeline(screen_name=twitter_user, count=10)
-    user_tweets_quoting_tweets = [
-        Tweet(t)
-        for t in user_tweets
-        if t.quoted_status and t.id_str not in excluded_ids
-    ]
+    user_tweets: List[Status] = get_recent_tweets_for_user(twitter_user=twitter_user)
+    user_tweets_quoting_tweets = []
+    for t in user_tweets:
+        if t.quoted_status:
+            tweet = Tweet(t)
+            if tweet.quoted_tweet_user == TWITTER_API_USER.get("screen_name"):
+                LOGGER.info(
+                    f"Skipping tweet({tweet.quoted_tweet_id}) "
+                    f"from @{tweet.user}'s tweet({tweet.id}) quotes the bot user"
+                )
+            elif tweet.id_str in excluded_ids:
+                LOGGER.info(
+                    f"Skipping tweet({tweet.quoted_tweet_id}) from @{tweet.user}'s "
+                    f"tweet({tweet.id}) because tweet is in excluded_ids list"
+                )
+            else:
+                LOGGER.info(
+                    f"Adding tweet({tweet.quoted_tweet_id}) from "
+                    f"@{tweet.user}'s tweet({tweet.id}) to list of tweets to collect"
+                )
+                user_tweets_quoting_tweets.append(tweet)
+        else:
+            LOGGER.debug(
+                f"Skipping tweet({t.id}) from @{t.user.screen_name} non-retweet"
+            )
 
     if not user_tweets_quoting_tweets:
         LOGGER.info(msg=f"No recent retweets for user: {twitter_user}")
@@ -225,20 +289,22 @@ def save_status_id_of_replied_to_tweet(tweet_id: str):
 def post_collected_tweets(quoted_tweets: List[Tweet]):
     """For each quoted tweet post for the record and for the blocked"""
     for user_tweet in quoted_tweets:
-        post_reply_to_user_tweet(tweet=user_tweet)
+        response = post_reply_to_user_tweet(tweet=user_tweet)
+        save_status_id_of_replied_to_tweet(tweet_id=str(response.in_reply_to_status_id))
 
 
-def post_reply_to_user_tweet(tweet: Tweet):
+def post_reply_to_user_tweet(tweet: Tweet) -> Status:
     """Post message and screen cap of the quoted tweet"""
-    LOGGER.info(msg=f"Replying to '@{tweet.user}: {tweet.tweet_text}'")
+    LOGGER.info(msg=f"Replying to '@{tweet.user}: {tweet.text}'")
     response: Status = twitter_api.PostUpdate(
         status=tweet.for_the_record_message,
         media=tweet.screen_capture_file_path_quoted_tweet,
         in_reply_to_status_id=tweet.id,
     )
     LOGGER.info(
-        f"id: {response.id} "
+        f"tweet.id: {tweet.id} "
+        f"response.id: {response.id} "
         f"in_reply_to_status_id: {response.in_reply_to_status_id} "
         f"in_reply_to_screen_name: {response.in_reply_to_screen_name}"
     )
-    save_status_id_of_replied_to_tweet(tweet_id=tweet.id_str)
+    return response
