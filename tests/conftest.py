@@ -1,18 +1,11 @@
 import pytest
 
-from .test_data.twitter_data import quoted_tweet, basic_tweet, mock_status
+from tests.test_data.generate_test_data import test_tweet
 
 
-@pytest.fixture(scope="session", name="quoted_tweet")
-def get_test_quoted_status():
-    return quoted_tweet
+@pytest.fixture(name="test_tweet")
+def get_test_status():
+    def _get_status(key_name):
+        return test_tweet.get(key_name)
 
-
-@pytest.fixture(scope="session", name="basic_tweet")
-def get_test_basic_status():
-    return basic_tweet
-
-
-@pytest.fixture(scope="session", name="mock_status")
-def get_mock_status():
-    return mock_status
+    return _get_status
