@@ -54,7 +54,7 @@ class Tweet:
             url_string_list = ", ".join(self.urls_from_quoted_tweet)
             message += f"\nURL(s) from tweet: {url_string_list}"
 
-        LOGGER.info(msg=message)
+        LOGGER.debug(msg=message)
         return message
 
     @property
@@ -80,7 +80,7 @@ class Tweet:
         tweet_url = (
             f"{TWITTER_URL}/{self.quoted_tweet_user}/status/{self.quoted_tweet_id}"
         )
-        LOGGER.info(msg=f"Quoted Tweet URL: {tweet_url}")
+        LOGGER.debug(msg=f"Quoted Tweet URL: {tweet_url}")
         return tweet_url
 
     @property
@@ -137,7 +137,7 @@ def collect_quoted_tweets(driver: WrappedWebDriver, quoted_tweets: List[Tweet]):
     for tweet in quoted_tweets:
         LOGGER.info(f"Opening...tweet quoted by {tweet.user} {tweet.quoted_tweet_url}")
         driver.open(url=tweet.quoted_tweet_url)
-        LOGGER.info(f"Getting locator...{tweet.quoted_tweet_locator}")
+        LOGGER.debug(f"Getting locator...{tweet.quoted_tweet_locator}")
         quoted_tweet_element = driver.get_element_by_css(
             locator=tweet.quoted_tweet_locator
         )
@@ -208,7 +208,7 @@ def get_all_users_tweets(twitter_user: str) -> List[Tweet]:
 
 def get_recent_tweets_for_user(twitter_user: str, count: int = 10) -> List[Status]:
     """Using Twitter API get recent tweets using user screen name"""
-    LOGGER.info(f"Getting last {count} tweets for user: {twitter_user}")
+    LOGGER.debug(f"Getting last {count} tweets for user: {twitter_user}")
     return twitter_api.GetUserTimeline(screen_name=twitter_user, count=count)
 
 
@@ -222,17 +222,17 @@ def get_recent_quoted_retweets_for_user(
         if t.quoted_status:
             tweet = Tweet(t)
             if tweet.quoted_tweet_user == TWITTER_API_USER.get("screen_name"):
-                LOGGER.info(
+                LOGGER.debug(
                     f"Skipping tweet({tweet.quoted_tweet_id}) "
                     f"from @{tweet.user}'s tweet({tweet.id}) quotes the bot user"
                 )
             elif tweet.id_str in excluded_ids:
-                LOGGER.info(
+                LOGGER.debug(
                     f"Skipping tweet({tweet.quoted_tweet_id}) from @{tweet.user}'s "
                     f"tweet({tweet.id}) because tweet is in excluded_ids list"
                 )
             else:
-                LOGGER.info(
+                LOGGER.debug(
                     f"Adding tweet({tweet.quoted_tweet_id}) from "
                     f"@{tweet.user}'s tweet({tweet.id}) to list of tweets to collect"
                 )
@@ -243,7 +243,7 @@ def get_recent_quoted_retweets_for_user(
             )
 
     if not user_tweets_quoting_tweets:
-        LOGGER.info(msg=f"No recent retweets for user: {twitter_user}")
+        LOGGER.debug(msg=f"No recent retweets for user: {twitter_user}")
 
     return user_tweets_quoting_tweets
 
@@ -295,13 +295,13 @@ def post_collected_tweets(quoted_tweets: List[Tweet]):
 
 def post_reply_to_user_tweet(tweet: Tweet) -> Status:
     """Post message and screen cap of the quoted tweet"""
-    LOGGER.info(msg=f"Replying to '@{tweet.user}: {tweet.text}'")
+    LOGGER.info(msg=f"Replying to '@{tweet.user}: tweet({tweet.id})'")
     response: Status = twitter_api.PostUpdate(
         status=tweet.for_the_record_message,
         media=tweet.screen_capture_file_path_quoted_tweet,
         in_reply_to_status_id=tweet.id,
     )
-    LOGGER.info(
+    LOGGER.debug(
         f"tweet.id: {tweet.id} "
         f"response.id: {response.id} "
         f"in_reply_to_status_id: {response.in_reply_to_status_id} "
