@@ -1,5 +1,5 @@
 import os
-from typing import Iterator, List, Union
+from typing import List, Optional, Union
 
 from twitter import Api as twitterApi
 from twitter import Status, TwitterError
@@ -28,7 +28,7 @@ twitter_api = twitterApi(
 
 
 class Tweet:
-    """Class representing a Status (tweet)"""
+    """Wrapper class representing a Status (tweet)"""
 
     def __init__(self, tweet: Status):
         self.raw_tweet: Status = tweet
@@ -43,48 +43,54 @@ class Tweet:
         return tweet
 
     @property
-    def for_the_record_message(self) -> str:
+    def for_the_record_message(self) -> Optional[str]:
         """Message to be tweeted with screen cap of quoted tweet"""
-        message = (
-            f"@{self.user} "
-            f"This Tweet is available! \n"
-            f"For the blocked and the record!"
-        )
-        if self.urls_from_quoted_tweet:
-            url_string_list = ", ".join(self.urls_from_quoted_tweet)
-            message += f"\nURL(s) from tweet: {url_string_list}"
+        if self.quoted_status:
+            message = (
+                f"@{self.user} "
+                f"This Tweet is available! \n"
+                f"For the blocked and the record!"
+            )
+            if self.urls_from_quoted_tweet:
+                url_string_list = ", ".join(self.urls_from_quoted_tweet)
+                message += f"\nURL(s) from tweet: {url_string_list}"
 
-        LOGGER.debug(msg=message)
-        return message
+            LOGGER.debug(msg=message)
+            return message
+
+        return None
 
     @property
-    def quoted_status(self) -> Status:
+    def quoted_status(self) -> Optional[Status]:
         """Return True if tweet quotes another"""
         return self.raw_tweet.quoted_status
 
     @property
-    def quoted_tweet_id(self) -> str:
+    def quoted_tweet_id(self) -> Optional[str]:
         """Return id of the quoted tweet"""
-        if self.quoted_status:
-            return self.quoted_status.id
-        else:
-            LOGGER.error(f"Tweet has no quoted status associated. {self}")
+        return self.quoted_status.id if self.quoted_status else None
 
     @property
-    def quoted_tweet_locator(self) -> str:
+    def quoted_tweet_locator(self) -> Optional[str]:
         """Return locator for the div of the quoted tweet"""
-        return f"div[data-tweet-id='{self.quoted_tweet_id}']"
-
-    @property
-    def quoted_tweet_url(self) -> str:
-        tweet_url = (
-            f"{TWITTER_URL}/{self.quoted_tweet_user}/status/{self.quoted_tweet_id}"
+        return (
+            f"div[data-tweet-id='{self.quoted_tweet_id}']"
+            if self.quoted_status
+            else None
         )
-        LOGGER.debug(msg=f"Quoted Tweet URL: {tweet_url}")
-        return tweet_url
 
     @property
-    def quoted_tweet_user(self) -> str:
+    def quoted_tweet_url(self) -> Optional[str]:
+        if self.quoted_status:
+            tweet_url = (
+                f"{TWITTER_URL}/{self.quoted_tweet_user}/status/{self.quoted_tweet_id}"
+            )
+            LOGGER.debug(msg=f"Quoted Tweet URL: {tweet_url}")
+            return tweet_url
+        return None
+
+    @property
+    def quoted_tweet_user(self) -> Optional[str]:
         """Returns the user name of the quoted tweet"""
         return self.quoted_status.user.screen_name if self.quoted_status else None
 
@@ -104,13 +110,21 @@ class Tweet:
         return self.raw_tweet.in_reply_to_screen_name
 
     @property
-    def screen_capture_file_name_quoted_tweet(self) -> str:
-        return f"tweet_capture_{self.quoted_tweet_id}.png"
+    def screen_capture_file_name_quoted_tweet(self) -> Optional[str]:
+        return (
+            f"tweet_capture_{self.quoted_tweet_id}.png" if self.quoted_status else None
+        )
 
     @property
-    def screen_capture_file_path_quoted_tweet(self) -> str:
-        return os.path.join(
-            PROJECT_DIR_PATH, "screen_shots", self.screen_capture_file_name_quoted_tweet
+    def screen_capture_file_path_quoted_tweet(self) -> Optional[str]:
+        return (
+            os.path.join(
+                PROJECT_DIR_PATH,
+                "screen_shots",
+                self.screen_capture_file_name_quoted_tweet,
+            )
+            if self.screen_capture_file_name_quoted_tweet
+            else None
         )
 
     @property
@@ -118,8 +132,12 @@ class Tweet:
         return f"div[data-tweet-id='{self.id}']"
 
     @property
-    def urls_from_quoted_tweet(self) -> List[str]:
-        return [url_obj.url for url_obj in self.quoted_status.urls]
+    def urls_from_quoted_tweet(self) -> Optional[List[str]]:
+        return (
+            [url_obj.url for url_obj in self.quoted_status.urls]
+            if self.quoted_status
+            else None
+        )
 
 
 def collect_and_post_tweets(tweets):
@@ -281,7 +299,7 @@ def save_status_id_of_replied_to_tweet(tweet_id: str):
 
     Save id to file so that tweet will not be replied to more than once.
     """
-    LOGGER.info(msg=f"Adding {tweet_id} to {LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME}")
+    LOGGER.debug(msg=f"Adding {tweet_id} to {LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME}")
     with open(LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME, "a+") as f:
         f.write(tweet_id + "\n")
 
