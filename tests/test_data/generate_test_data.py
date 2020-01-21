@@ -3,13 +3,39 @@ from typing import List, Union
 
 from twitter import Status, Url, User
 
-from config import TEST_JSON_FILE_NAME
+from config import TEST_JSON_FILE_NAME, TEMP_JSON_FILE_NAME
 
-# from twitter_helpers import twitter_api
-# tweet = twitter_api.GetStatus(status_id=1206058311864528896)
 
-with open(TEST_JSON_FILE_NAME, "r") as f:
-    json_file = json.load(f)
+def save_user_test_data(file_name, user_name, count):
+    """Make call with twitter api to get test data"""
+    from twitter_helpers import twitter_api
+
+    tweets = twitter_api.GetUserTimeline(screen_name=user_name, count=count)
+    clean_tweets = [s.AsDict() for s in tweets]
+    with open(file_name, "w") as f:
+        for t in clean_tweets:
+            json.dump(t, f)
+
+
+def save_tweet_test_data(file_name, status):
+    """Make call with twitter api to get test data"""
+    from twitter_helpers import twitter_api
+
+    tweet = twitter_api.GetStatus(status_id=status)
+    with open(file_name, "w") as f:
+        json.dump(tweet.AsDict(), f)
+
+
+def fetch_test_data(data_name):
+    with open(TEST_JSON_FILE_NAME, "r") as f:
+        json_file = json.load(f)
+
+    if type(json_file.get(data_name)) is list:
+        return generate_mock_tweet(
+            raw_status=[Status(**s) for s in json_file.get(data_name)]
+        )
+    else:
+        return generate_mock_tweet(raw_status=Status(**json_file.get(data_name)))
 
 
 def convert_dicts_in_status_to_obj(status: Status) -> Status:
@@ -49,14 +75,7 @@ def generate_mock_tweet(
     return updated_status
 
 
-test_tweet = {
-    "basic_tweet": generate_mock_tweet(
-        raw_status=Status(**json_file.get("basic_tweet"))
-    ),
-    "quoted_tweet": generate_mock_tweet(
-        raw_status=Status(**json_file.get("quoted_tweet"))
-    ),
-    "mock_status": generate_mock_tweet(
-        raw_status=[Status(**s) for s in json_file.get("mocked_status")]
-    ),
-}
+if __name__ == "__main__":
+    # uncomment when ready to save test data
+    # save_tweet_test_data(TEMP_JSON_FILE_NAME, 1218672858513190913)
+    pass

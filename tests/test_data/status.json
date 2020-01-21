@@ -222,5 +222,1651 @@
         }
       ]
     }
-  ]
+  ],
+  "mixed_statuses": [
+    {
+      "created_at": "Mon Jan 20 15:36:35 +0000 2020",
+      "hashtags": [
+        {
+          "text": "IEndorseBernie"
+        }
+      ],
+      "id": 1219282581855899648,
+      "id_str": "1219282581855899648",
+      "lang": "en",
+      "retweet_count": 82,
+      "retweeted_status": {
+        "created_at": "Mon Jan 20 15:19:01 +0000 2020",
+        "favorite_count": 281,
+        "hashtags": [
+          {
+            "text": "IEndorseBernie"
+          }
+        ],
+        "id": 1219278162573635586,
+        "id_str": "1219278162573635586",
+        "lang": "en",
+        "retweet_count": 82,
+        "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+        "text": "#IEndorseBernie because we don't have time for half measures on:\n\n\u2705Mitigating climate disaster with just a few year\u2026 https://t.co/5wCYthqSeK",
+        "truncated": true,
+        "urls": [
+          {
+            "expanded_url": "https://twitter.com/i/web/status/1219278162573635586",
+            "url": "https://t.co/5wCYthqSeK"
+          }
+        ],
+        "user": {
+          "created_at": "Tue Mar 18 23:21:08 +0000 2014",
+          "description": "sometimes i write things. i'm not cool \nhttps://t.co/1ZOorTxooo",
+          "favourites_count": 355047,
+          "followers_count": 64826,
+          "following": true,
+          "friends_count": 3962,
+          "id": 2396910715,
+          "id_str": "2396910715",
+          "listed_count": 1178,
+          "location": "tied to a rock",
+          "name": "beth, purity test enthusiast",
+          "profile_background_color": "4A913C",
+          "profile_background_image_url": "http://abs.twimg.com/images/themes/theme9/bg.gif",
+          "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme9/bg.gif",
+          "profile_background_tile": true,
+          "profile_banner_url": "https://pbs.twimg.com/profile_banners/2396910715/1577645602",
+          "profile_image_url": "http://pbs.twimg.com/profile_images/1208406711461126146/ATAuUg3R_normal.jpg",
+          "profile_image_url_https": "https://pbs.twimg.com/profile_images/1208406711461126146/ATAuUg3R_normal.jpg",
+          "profile_link_color": "1B95E0",
+          "profile_sidebar_border_color": "FFFFFF",
+          "profile_sidebar_fill_color": "252429",
+          "profile_text_color": "666666",
+          "profile_use_background_image": true,
+          "screen_name": "bourgeoisalien",
+          "statuses_count": 164906,
+          "url": "https://t.co/vd2FaW2382"
+        },
+        "user_mentions": []
+      },
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "RT @bourgeoisalien: #IEndorseBernie because we don't have time for half measures on:\n\n\u2705Mitigating climate disaster with just a few years le\u2026",
+      "urls": [],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 2396910715,
+          "id_str": "2396910715",
+          "name": "beth, purity test enthusiast",
+          "screen_name": "bourgeoisalien"
+        }
+      ]
+    },
+    {
+      "created_at": "Sat Jan 18 23:13:45 +0000 2020",
+      "hashtags": [],
+      "id": 1218672858513190913,
+      "id_str": "1218672858513190913",
+      "in_reply_to_screen_name": "jvgraz",
+      "in_reply_to_status_id": 1218661044802899968,
+      "in_reply_to_user_id": 16959075,
+      "lang": "und",
+      "quoted_status": {
+        "created_at": "Sat Jan 18 22:28:13 +0000 2020",
+        "favorite_count": 1,
+        "hashtags": [],
+        "id": 1218661398621847554,
+        "id_str": "1218661398621847554",
+        "in_reply_to_screen_name": "jvgraz",
+        "in_reply_to_status_id": 1218661044802899968,
+        "in_reply_to_user_id": 16959075,
+        "lang": "en",
+        "media": [
+          {
+            "display_url": "pic.twitter.com/RGMBoA8Gse",
+            "expanded_url": "https://twitter.com/FTBandFTR/status/1218661398621847554/photo/1",
+            "id": 1218661397212663808,
+            "media_url": "http://pbs.twimg.com/media/EOmOFYJXkAA6xem.png",
+            "media_url_https": "https://pbs.twimg.com/media/EOmOFYJXkAA6xem.png",
+            "sizes": {
+              "medium": {
+                "w": 640,
+                "h": 233,
+                "resize": "fit"
+              },
+              "thumb": {
+                "w": 150,
+                "h": 150,
+                "resize": "crop"
+              },
+              "large": {
+                "w": 640,
+                "h": 233,
+                "resize": "fit"
+              },
+              "small": {
+                "w": 640,
+                "h": 233,
+                "resize": "fit"
+              }
+            },
+            "type": "photo",
+            "url": "https://t.co/RGMBoA8Gse"
+          }
+        ],
+        "source": "<a href=\"http://dadgumsalsa.com\" rel=\"nofollow\">DadGumPiBot</a>",
+        "text": "@jvgraz This Tweet is available! \nFor the blocked and the record! https://t.co/RGMBoA8Gse",
+        "urls": [],
+        "user": {
+          "created_at": "Thu Mar 16 01:37:58 +0000 2017",
+          "default_profile": true,
+          "description": "If someone wants off the list that\u2019s okay. I will remove them ASAP. This account auto screen caps tweets that are quoted by select users I @_b_axe follow.",
+          "favourites_count": 14,
+          "followers_count": 35,
+          "friends_count": 13,
+          "id": 842188154698399746,
+          "id_str": "842188154698399746",
+          "location": "Austin, TX",
+          "name": "For the blocked and For the record",
+          "profile_background_color": "F5F8FA",
+          "profile_image_url": "http://pbs.twimg.com/profile_images/1195922003615727617/hhgc1XSp_normal.jpg",
+          "profile_image_url_https": "https://pbs.twimg.com/profile_images/1195922003615727617/hhgc1XSp_normal.jpg",
+          "profile_link_color": "1DA1F2",
+          "profile_sidebar_border_color": "C0DEED",
+          "profile_sidebar_fill_color": "DDEEF6",
+          "profile_text_color": "333333",
+          "profile_use_background_image": true,
+          "screen_name": "FTBandFTR",
+          "statuses_count": 2821
+        },
+        "user_mentions": [
+          {
+            "id": 16959075,
+            "id_str": "16959075",
+            "name": "Plain Ol' Johnny Graz",
+            "screen_name": "jvgraz"
+          }
+        ]
+      },
+      "quoted_status_id": 1218661398621847554,
+      "quoted_status_id_str": "1218661398621847554",
+      "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+      "text": "@jvgraz https://t.co/DlScqMkpXx",
+      "urls": [
+        {
+          "expanded_url": "https://twitter.com/FTBandFTR/status/1218661398621847554?s=20",
+          "url": "https://t.co/DlScqMkpXx"
+        }
+      ],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 16959075,
+          "id_str": "16959075",
+          "name": "Plain Ol' Johnny Graz",
+          "screen_name": "jvgraz"
+        }
+      ]
+    },
+    {
+      "created_at": "Sat Jan 18 16:03:31 +0000 2020",
+      "favorite_count": 1,
+      "hashtags": [],
+      "id": 1218564585936039936,
+      "id_str": "1218564585936039936",
+      "in_reply_to_screen_name": "ManEnchantment",
+      "in_reply_to_status_id": 1218563029412921344,
+      "in_reply_to_user_id": 949737660188258304,
+      "lang": "en",
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "@ManEnchantment That\u2019s the thing, I\u2019d only feel confident wagering if Bernard Sanders gets nominated. Assuming he\u2019s\u2026 https://t.co/Itg3xEmLhU",
+      "truncated": true,
+      "urls": [
+        {
+          "expanded_url": "https://twitter.com/i/web/status/1218564585936039936",
+          "url": "https://t.co/Itg3xEmLhU"
+        }
+      ],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 949737660188258304,
+          "id_str": "949737660188258304",
+          "name": "Man of Enchantment",
+          "screen_name": "ManEnchantment"
+        }
+      ]
+    },
+    {
+      "created_at": "Sat Jan 18 15:51:15 +0000 2020",
+      "hashtags": [],
+      "id": 1218561499226165248,
+      "id_str": "1218561499226165248",
+      "in_reply_to_screen_name": "ManEnchantment",
+      "in_reply_to_status_id": 1218543868813070342,
+      "in_reply_to_user_id": 949737660188258304,
+      "lang": "en",
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "@ManEnchantment Tempting! Would you still have same wager if it was just Sanders?",
+      "urls": [],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 949737660188258304,
+          "id_str": "949737660188258304",
+          "name": "Man of Enchantment",
+          "screen_name": "ManEnchantment"
+        }
+      ]
+    },
+    {
+      "created_at": "Sat Jan 18 14:19:11 +0000 2020",
+      "favorite_count": 1,
+      "hashtags": [],
+      "id": 1218538326698971138,
+      "id_str": "1218538326698971138",
+      "in_reply_to_screen_name": "_b_axe",
+      "in_reply_to_status_id": 1218537369940451329,
+      "in_reply_to_user_id": 348789414,
+      "lang": "en",
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "@ManEnchantment I didn\u2019t mean to be sarcastic but was wondering if you were just feeling they\u2019d lose the general el\u2026 https://t.co/uQxFOpvvdD",
+      "truncated": true,
+      "urls": [
+        {
+          "expanded_url": "https://twitter.com/i/web/status/1218538326698971138",
+          "url": "https://t.co/uQxFOpvvdD"
+        }
+      ],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 949737660188258304,
+          "id_str": "949737660188258304",
+          "name": "Man of Enchantment",
+          "screen_name": "ManEnchantment"
+        }
+      ]
+    },
+    {
+      "created_at": "Sat Jan 18 14:15:22 +0000 2020",
+      "favorite_count": 1,
+      "hashtags": [],
+      "id": 1218537369940451329,
+      "id_str": "1218537369940451329",
+      "in_reply_to_screen_name": "ManEnchantment",
+      "in_reply_to_status_id": 1218535970036838400,
+      "in_reply_to_user_id": 949737660188258304,
+      "lang": "en",
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "@ManEnchantment \ud83e\uddd0 and is this from your infinite wisdom? I believe Warren and others would lose but I think Bernard\u2026 https://t.co/9VAlP7xT5v",
+      "truncated": true,
+      "urls": [
+        {
+          "expanded_url": "https://twitter.com/i/web/status/1218537369940451329",
+          "url": "https://t.co/9VAlP7xT5v"
+        }
+      ],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 949737660188258304,
+          "id_str": "949737660188258304",
+          "name": "Man of Enchantment",
+          "screen_name": "ManEnchantment"
+        }
+      ]
+    },
+    {
+      "created_at": "Sat Jan 18 13:52:24 +0000 2020",
+      "hashtags": [],
+      "id": 1218531590143344640,
+      "id_str": "1218531590143344640",
+      "in_reply_to_screen_name": "ManEnchantment",
+      "in_reply_to_status_id": 1218449805212442625,
+      "in_reply_to_user_id": 949737660188258304,
+      "lang": "en",
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "@ManEnchantment Lose what?",
+      "urls": [],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 949737660188258304,
+          "id_str": "949737660188258304",
+          "name": "Man of Enchantment",
+          "screen_name": "ManEnchantment"
+        }
+      ]
+    },
+    {
+      "created_at": "Fri Jan 17 19:09:59 +0000 2020",
+      "hashtags": [],
+      "id": 1218249121582153728,
+      "id_str": "1218249121582153728",
+      "lang": "en",
+      "retweet_count": 22,
+      "retweeted_status": {
+        "created_at": "Fri Jan 17 19:06:01 +0000 2020",
+        "favorite_count": 88,
+        "hashtags": [],
+        "id": 1218248123308564482,
+        "id_str": "1218248123308564482",
+        "lang": "en",
+        "retweet_count": 22,
+        "source": "<a href=\"https://buffer.com\" rel=\"nofollow\">Buffer</a>",
+        "text": "Austin, like most Southern cities, suffers badly from the lack of public transit - and we need federal support to r\u2026 https://t.co/YpwhWRfvwX",
+        "truncated": true,
+        "urls": [
+          {
+            "expanded_url": "https://twitter.com/i/web/status/1218248123308564482",
+            "url": "https://t.co/YpwhWRfvwX"
+          }
+        ],
+        "user": {
+          "created_at": "Sun Aug 11 05:40:59 +0000 2019",
+          "default_profile": true,
+          "description": "Farmer, community organizer, and democratic socialist building the political revolution in Texas. Running for US Congress in TX-25 \ud83c\udf39",
+          "favourites_count": 2319,
+          "followers_count": 6933,
+          "friends_count": 712,
+          "geo_enabled": true,
+          "id": 1160425858487726080,
+          "id_str": "1160425858487726080",
+          "listed_count": 72,
+          "location": "Austin, TX",
+          "name": "Heidi Sloan",
+          "profile_background_color": "F5F8FA",
+          "profile_banner_url": "https://pbs.twimg.com/profile_banners/1160425858487726080/1578971170",
+          "profile_image_url": "http://pbs.twimg.com/profile_images/1160426482428252161/8x2QlMpQ_normal.jpg",
+          "profile_image_url_https": "https://pbs.twimg.com/profile_images/1160426482428252161/8x2QlMpQ_normal.jpg",
+          "profile_link_color": "1DA1F2",
+          "profile_sidebar_border_color": "C0DEED",
+          "profile_sidebar_fill_color": "DDEEF6",
+          "profile_text_color": "333333",
+          "profile_use_background_image": true,
+          "screen_name": "HeidiSloanForTX",
+          "statuses_count": 1098,
+          "url": "https://t.co/Fm39YmTfGM",
+          "verified": true
+        },
+        "user_mentions": []
+      },
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "RT @HeidiSloanForTX: Austin, like most Southern cities, suffers badly from the lack of public transit - and we need federal support to real\u2026",
+      "urls": [],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 1160425858487726080,
+          "id_str": "1160425858487726080",
+          "name": "Heidi Sloan",
+          "screen_name": "HeidiSloanForTX"
+        }
+      ]
+    },
+    {
+      "created_at": "Wed Jan 15 23:39:55 +0000 2020",
+      "hashtags": [],
+      "id": 1217592276001574912,
+      "id_str": "1217592276001574912",
+      "lang": "en",
+      "retweet_count": 2164,
+      "retweeted_status": {
+        "created_at": "Fri Jan 10 03:04:44 +0000 2020",
+        "favorite_count": 21780,
+        "hashtags": [],
+        "id": 1215469493851283456,
+        "id_str": "1215469493851283456",
+        "lang": "en",
+        "retweet_count": 2164,
+        "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+        "text": "OK Here goes nothing. I'm officially supporting @BernieSanders for president. Have a great night! \nhttps://t.co/Ix7DnSvofc",
+        "urls": [
+          {
+            "expanded_url": "https://medium.com/@thetimheidecker/wow-im-endorsing-bernie-sanders-8ffc8ff07b87",
+            "url": "https://t.co/Ix7DnSvofc"
+          }
+        ],
+        "user": {
+          "created_at": "Fri Jun 13 15:45:29 +0000 2008",
+          "description": "Mister America coming Oct 9th https://t.co/7Trkvx78KM",
+          "favourites_count": 6529,
+          "followers_count": 512014,
+          "friends_count": 390,
+          "geo_enabled": true,
+          "id": 15108422,
+          "id_str": "15108422",
+          "listed_count": 4226,
+          "location": "Los Angeles",
+          "name": "Tim Heidecker",
+          "profile_background_color": "9AE4E8",
+          "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+          "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+          "profile_banner_url": "https://pbs.twimg.com/profile_banners/15108422/1575308354",
+          "profile_image_url": "http://pbs.twimg.com/profile_images/1201556441099694080/fOR9akin_normal.jpg",
+          "profile_image_url_https": "https://pbs.twimg.com/profile_images/1201556441099694080/fOR9akin_normal.jpg",
+          "profile_link_color": "91D2FA",
+          "profile_sidebar_border_color": "BDDCAD",
+          "profile_sidebar_fill_color": "DDFFCC",
+          "profile_text_color": "333333",
+          "profile_use_background_image": true,
+          "screen_name": "timheidecker",
+          "statuses_count": 31368,
+          "url": "https://t.co/MTojsYfP3H",
+          "verified": true
+        },
+        "user_mentions": [
+          {
+            "id": 216776631,
+            "id_str": "216776631",
+            "name": "Bernie Sanders",
+            "screen_name": "BernieSanders"
+          }
+        ]
+      },
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "RT @timheidecker: OK Here goes nothing. I'm officially supporting @BernieSanders for president. Have a great night! \nhttps://t.co/Ix7DnSvofc",
+      "urls": [
+        {
+          "expanded_url": "https://medium.com/@thetimheidecker/wow-im-endorsing-bernie-sanders-8ffc8ff07b87",
+          "url": "https://t.co/Ix7DnSvofc"
+        }
+      ],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 15108422,
+          "id_str": "15108422",
+          "name": "Tim Heidecker",
+          "screen_name": "timheidecker"
+        },
+        {
+          "id": 216776631,
+          "id_str": "216776631",
+          "name": "Bernie Sanders",
+          "screen_name": "BernieSanders"
+        }
+      ]
+    },
+    {
+      "created_at": "Wed Jan 15 23:26:18 +0000 2020",
+      "favorite_count": 1,
+      "hashtags": [],
+      "id": 1217588852220743680,
+      "id_str": "1217588852220743680",
+      "in_reply_to_screen_name": "KXAN_News",
+      "in_reply_to_status_id": 1217587265658028033,
+      "in_reply_to_user_id": 15169032,
+      "lang": "en",
+      "quoted_status": {
+        "created_at": "Wed Jan 15 23:20:00 +0000 2020",
+        "favorite_count": 11,
+        "hashtags": [],
+        "id": 1217587265658028033,
+        "id_str": "1217587265658028033",
+        "lang": "en",
+        "retweet_count": 7,
+        "source": "<a href=\"http://www.socialnewsdesk.com\" rel=\"nofollow\">SocialNewsDesk</a>",
+        "text": "Can you guess the top Texas city? CLUE: It's near Austin.\n\nhttps://t.co/DudMjrdMqv",
+        "urls": [
+          {
+            "expanded_url": "https://www.kxan.com/news/health/austin-ranks-among-cities-with-highest-std-rates-in-u-s-statistics-show/?utm_medium=social&utm_source=twitter_KXAN_News",
+            "url": "https://t.co/DudMjrdMqv"
+          }
+        ],
+        "user": {
+          "created_at": "Thu Jun 19 13:12:26 +0000 2008",
+          "description": "In-depth and investigative updates from the KXAN newsdesk all day and night.",
+          "favourites_count": 3023,
+          "followers_count": 188739,
+          "friends_count": 2543,
+          "geo_enabled": true,
+          "id": 15169032,
+          "id_str": "15169032",
+          "listed_count": 2516,
+          "location": "Austin, Texas",
+          "name": "KXAN News",
+          "profile_background_color": "021527",
+          "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+          "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+          "profile_banner_url": "https://pbs.twimg.com/profile_banners/15169032/1567201384",
+          "profile_image_url": "http://pbs.twimg.com/profile_images/1167553339481083908/j5CjidPr_normal.jpg",
+          "profile_image_url_https": "https://pbs.twimg.com/profile_images/1167553339481083908/j5CjidPr_normal.jpg",
+          "profile_link_color": "2B5CA9",
+          "profile_sidebar_border_color": "FFFFFF",
+          "profile_sidebar_fill_color": "CDCDCD",
+          "profile_text_color": "000000",
+          "screen_name": "KXAN_News",
+          "statuses_count": 140316,
+          "url": "http://t.co/1wJUIh53jP",
+          "verified": true
+        },
+        "user_mentions": []
+      },
+      "quoted_status_id": 1217587265658028033,
+      "quoted_status_id_str": "1217587265658028033",
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "@KXAN_News \u201cKilleen ranks in at number 8, with 1,644 STD cases per 100,000 people.\u201d I guess Fort Hood peeps have so\u2026 https://t.co/1033rpyL2A",
+      "truncated": true,
+      "urls": [
+        {
+          "expanded_url": "https://twitter.com/i/web/status/1217588852220743680",
+          "url": "https://t.co/1033rpyL2A"
+        }
+      ],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 15169032,
+          "id_str": "15169032",
+          "name": "KXAN News",
+          "screen_name": "KXAN_News"
+        }
+      ]
+    },
+    {
+      "created_at": "Wed Jan 15 18:15:42 +0000 2020",
+      "hashtags": [],
+      "id": 1217510687469199360,
+      "id_str": "1217510687469199360",
+      "lang": "en",
+      "retweet_count": 1943,
+      "retweeted_status": {
+        "created_at": "Wed Jan 15 17:50:15 +0000 2020",
+        "favorite_count": 11870,
+        "hashtags": [],
+        "id": 1217504281726767104,
+        "id_str": "1217504281726767104",
+        "lang": "en",
+        "retweet_count": 1943,
+        "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+        "text": "Bernie is a nice old man who just wants to end the wars and give people healthcare and college so of course there w\u2026 https://t.co/cO8gtKi7NQ",
+        "truncated": true,
+        "urls": [
+          {
+            "expanded_url": "https://twitter.com/i/web/status/1217504281726767104",
+            "url": "https://t.co/cO8gtKi7NQ"
+          }
+        ],
+        "user": {
+          "created_at": "Wed May 12 16:05:25 +0000 2010",
+          "description": "\ud83c\udf39 Host of The Kyle Kulinski Show | Over half a billion YouTube views | Populist Left \ud83c\udf39",
+          "favourites_count": 586,
+          "followers_count": 250355,
+          "friends_count": 1058,
+          "id": 143104075,
+          "id_str": "143104075",
+          "listed_count": 1844,
+          "location": "New York",
+          "name": "Secular Talk",
+          "profile_background_color": "000000",
+          "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+          "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+          "profile_banner_url": "https://pbs.twimg.com/profile_banners/143104075/1523328595",
+          "profile_image_url": "http://pbs.twimg.com/profile_images/1190650004756668416/zEr42qts_normal.jpg",
+          "profile_image_url_https": "https://pbs.twimg.com/profile_images/1190650004756668416/zEr42qts_normal.jpg",
+          "profile_link_color": "1B95E0",
+          "profile_sidebar_border_color": "000000",
+          "profile_sidebar_fill_color": "000000",
+          "profile_text_color": "000000",
+          "screen_name": "KyleKulinski",
+          "statuses_count": 67458,
+          "url": "https://t.co/keUcaj4zrh",
+          "verified": true
+        },
+        "user_mentions": []
+      },
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "RT @KyleKulinski: Bernie is a nice old man who just wants to end the wars and give people healthcare and college so of course there will be\u2026",
+      "urls": [],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 143104075,
+          "id_str": "143104075",
+          "name": "Secular Talk",
+          "screen_name": "KyleKulinski"
+        }
+      ]
+    },
+    {
+      "created_at": "Wed Jan 15 14:26:43 +0000 2020",
+      "hashtags": [],
+      "id": 1217453059846131713,
+      "id_str": "1217453059846131713",
+      "in_reply_to_screen_name": "KXAN_News",
+      "in_reply_to_status_id": 1217451739097583622,
+      "in_reply_to_user_id": 15169032,
+      "lang": "en",
+      "quoted_status": {
+        "created_at": "Wed Jan 15 14:21:28 +0000 2020",
+        "favorite_count": 2,
+        "hashtags": [],
+        "id": 1217451739097583622,
+        "id_str": "1217451739097583622",
+        "lang": "en",
+        "retweet_count": 1,
+        "source": "<a href=\"http://www.socialnewsdesk.com\" rel=\"nofollow\">SocialNewsDesk</a>",
+        "text": "Police say a black Smith &amp; Wesson .380 was found in the man's carry-on https://t.co/j6bdljNB0D",
+        "urls": [
+          {
+            "expanded_url": "https://www.kxan.com/news/crime/man-arrested-after-police-say-gun-was-found-in-his-luggage-at-austin-airport/?utm_medium=social&utm_source=twitter_KXAN_News",
+            "url": "https://t.co/j6bdljNB0D"
+          }
+        ],
+        "user": {
+          "created_at": "Thu Jun 19 13:12:26 +0000 2008",
+          "description": "In-depth and investigative updates from the KXAN newsdesk all day and night.",
+          "favourites_count": 3023,
+          "followers_count": 188739,
+          "friends_count": 2543,
+          "geo_enabled": true,
+          "id": 15169032,
+          "id_str": "15169032",
+          "listed_count": 2516,
+          "location": "Austin, Texas",
+          "name": "KXAN News",
+          "profile_background_color": "021527",
+          "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+          "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+          "profile_banner_url": "https://pbs.twimg.com/profile_banners/15169032/1567201384",
+          "profile_image_url": "http://pbs.twimg.com/profile_images/1167553339481083908/j5CjidPr_normal.jpg",
+          "profile_image_url_https": "https://pbs.twimg.com/profile_images/1167553339481083908/j5CjidPr_normal.jpg",
+          "profile_link_color": "2B5CA9",
+          "profile_sidebar_border_color": "FFFFFF",
+          "profile_sidebar_fill_color": "CDCDCD",
+          "profile_text_color": "000000",
+          "screen_name": "KXAN_News",
+          "statuses_count": 140316,
+          "url": "http://t.co/1wJUIh53jP",
+          "verified": true
+        },
+        "user_mentions": []
+      },
+      "quoted_status_id": 1217451739097583622,
+      "quoted_status_id_str": "1217451739097583622",
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "@KXAN_News In 2018, 93 firearms, 76 of which were loaded, were found at security checkpoints at ABIA.  https://t.co/OvQME5PwPw",
+      "urls": [
+        {
+          "expanded_url": "https://twitter.com/kxan_news/status/1217451739097583622?s=21",
+          "url": "https://t.co/OvQME5PwPw"
+        }
+      ],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 15169032,
+          "id_str": "15169032",
+          "name": "KXAN News",
+          "screen_name": "KXAN_News"
+        }
+      ]
+    },
+    {
+      "created_at": "Sun Jan 12 21:02:47 +0000 2020",
+      "hashtags": [],
+      "id": 1216465569140158464,
+      "id_str": "1216465569140158464",
+      "lang": "en",
+      "quoted_status_id": 1216435180220620807,
+      "quoted_status_id_str": "1216435180220620807",
+      "retweet_count": 154668,
+      "retweeted_status": {
+        "created_at": "Sun Jan 12 19:09:48 +0000 2020",
+        "favorite_count": 944970,
+        "hashtags": [],
+        "id": 1216437138625003522,
+        "id_str": "1216437138625003522",
+        "lang": "en",
+        "quoted_status": {
+          "created_at": "Sun Jan 12 19:02:01 +0000 2020",
+          "favorite_count": 145263,
+          "hashtags": [],
+          "id": 1216435180220620807,
+          "id_str": "1216435180220620807",
+          "lang": "en",
+          "retweet_count": 25345,
+          "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+          "text": "Wow! Crazy Bernie Sanders is surging in the polls, looking very good against his opponents in the Do Nothing Party.\u2026 https://t.co/sKGiaRcC8E",
+          "truncated": true,
+          "urls": [
+            {
+              "expanded_url": "https://twitter.com/i/web/status/1216435180220620807",
+              "url": "https://t.co/sKGiaRcC8E"
+            }
+          ],
+          "user": {
+            "created_at": "Wed Mar 18 13:46:38 +0000 2009",
+            "description": "45th President of the United States of America\ud83c\uddfa\ud83c\uddf8",
+            "favourites_count": 7,
+            "followers_count": 71298583,
+            "friends_count": 47,
+            "geo_enabled": true,
+            "id": 25073877,
+            "id_str": "25073877",
+            "listed_count": 113534,
+            "location": "Washington, DC",
+            "name": "Donald J. Trump",
+            "profile_background_color": "6D5C18",
+            "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+            "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+            "profile_background_tile": true,
+            "profile_banner_url": "https://pbs.twimg.com/profile_banners/25073877/1560920145",
+            "profile_image_url": "http://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_normal.jpg",
+            "profile_image_url_https": "https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_normal.jpg",
+            "profile_link_color": "1B95E0",
+            "profile_sidebar_border_color": "BDDCAD",
+            "profile_sidebar_fill_color": "C5CEC0",
+            "profile_text_color": "333333",
+            "profile_use_background_image": true,
+            "screen_name": "realDonaldTrump",
+            "statuses_count": 47985,
+            "url": "https://t.co/OMxB0x7xC5",
+            "verified": true
+          },
+          "user_mentions": []
+        },
+        "quoted_status_id": 1216435180220620807,
+        "quoted_status_id_str": "1216435180220620807",
+        "retweet_count": 154668,
+        "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+        "text": "It means you\u2019re going to lose. https://t.co/CVBKoKq8DT",
+        "urls": [
+          {
+            "expanded_url": "https://twitter.com/realdonaldtrump/status/1216435180220620807",
+            "url": "https://t.co/CVBKoKq8DT"
+          }
+        ],
+        "user": {
+          "created_at": "Wed Nov 17 17:53:52 +0000 2010",
+          "description": "U.S. Senator from Vermont and candidate for President of the United States.",
+          "favourites_count": 979,
+          "followers_count": 10329689,
+          "friends_count": 1445,
+          "geo_enabled": true,
+          "id": 216776631,
+          "id_str": "216776631",
+          "listed_count": 20818,
+          "location": "Vermont",
+          "name": "Bernie Sanders",
+          "profile_background_color": "EA5047",
+          "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+          "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+          "profile_banner_url": "https://pbs.twimg.com/profile_banners/216776631/1574466140",
+          "profile_image_url": "http://pbs.twimg.com/profile_images/1097820307388334080/9ddg5F6v_normal.png",
+          "profile_image_url_https": "https://pbs.twimg.com/profile_images/1097820307388334080/9ddg5F6v_normal.png",
+          "profile_link_color": "3B94D9",
+          "profile_sidebar_border_color": "EEEEEE",
+          "profile_sidebar_fill_color": "EFEFEF",
+          "profile_text_color": "050005",
+          "screen_name": "BernieSanders",
+          "statuses_count": 16608,
+          "url": "https://t.co/jpg8Sp1GhR",
+          "verified": true
+        },
+        "user_mentions": []
+      },
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "RT @BernieSanders: It means you\u2019re going to lose.",
+      "urls": [],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 216776631,
+          "id_str": "216776631",
+          "name": "Bernie Sanders",
+          "screen_name": "BernieSanders"
+        }
+      ]
+    },
+    {
+      "created_at": "Fri Jan 10 18:53:43 +0000 2020",
+      "hashtags": [],
+      "id": 1215708312249028609,
+      "id_str": "1215708312249028609",
+      "lang": "en",
+      "quoted_status": {
+        "created_at": "Fri Jan 10 18:51:47 +0000 2020",
+        "hashtags": [],
+        "id": 1215707826783498242,
+        "id_str": "1215707826783498242",
+        "in_reply_to_screen_name": "JoaquinCastrotx",
+        "in_reply_to_status_id": 1215700696768634881,
+        "in_reply_to_user_id": 231510077,
+        "lang": "en",
+        "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+        "text": "@JoaquinCastrotx Thank you \ud83d\ude4f\ud83c\udffb! If you haven\u2019t already would you please sign this petition to stop pipeline from bei\u2026 https://t.co/JDSDKX1m2W",
+        "truncated": true,
+        "urls": [
+          {
+            "expanded_url": "https://twitter.com/i/web/status/1215707826783498242",
+            "url": "https://t.co/JDSDKX1m2W"
+          }
+        ],
+        "user": {
+          "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+          "description": "Chea! I like pups and stuff! #Bernie2020",
+          "favourites_count": 2716,
+          "followers_count": 113,
+          "following": true,
+          "friends_count": 198,
+          "id": 348789414,
+          "id_str": "348789414",
+          "listed_count": 3,
+          "location": "Austin, TX",
+          "name": "Brian",
+          "profile_background_color": "000000",
+          "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+          "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+          "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+          "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+          "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+          "profile_link_color": "1B95E0",
+          "profile_sidebar_border_color": "000000",
+          "profile_sidebar_fill_color": "000000",
+          "profile_text_color": "000000",
+          "screen_name": "_b_axe",
+          "statuses_count": 2375,
+          "url": "https://t.co/4fmloLEuSV"
+        },
+        "user_mentions": [
+          {
+            "id": 231510077,
+            "id_str": "231510077",
+            "name": "Joaquin Castro",
+            "screen_name": "JoaquinCastrotx"
+          }
+        ]
+      },
+      "quoted_status_id": 1215707826783498242,
+      "quoted_status_id_str": "1215707826783498242",
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "Still 3,226 signatures remaining! https://t.co/gLLe2tzund",
+      "urls": [
+        {
+          "expanded_url": "https://twitter.com/_b_axe/status/1215707826783498242",
+          "url": "https://t.co/gLLe2tzund"
+        }
+      ],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": []
+    },
+    {
+      "created_at": "Fri Jan 10 18:51:47 +0000 2020",
+      "hashtags": [],
+      "id": 1215707826783498242,
+      "id_str": "1215707826783498242",
+      "in_reply_to_screen_name": "JoaquinCastrotx",
+      "in_reply_to_status_id": 1215700696768634881,
+      "in_reply_to_user_id": 231510077,
+      "lang": "en",
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "@JoaquinCastrotx Thank you \ud83d\ude4f\ud83c\udffb! If you haven\u2019t already would you please sign this petition to stop pipeline from bei\u2026 https://t.co/JDSDKX1m2W",
+      "truncated": true,
+      "urls": [
+        {
+          "expanded_url": "https://twitter.com/i/web/status/1215707826783498242",
+          "url": "https://t.co/JDSDKX1m2W"
+        }
+      ],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 231510077,
+          "id_str": "231510077",
+          "name": "Joaquin Castro",
+          "screen_name": "JoaquinCastrotx"
+        }
+      ]
+    },
+    {
+      "created_at": "Tue Jan 07 20:27:02 +0000 2020",
+      "hashtags": [],
+      "id": 1214644634984558595,
+      "id_str": "1214644634984558595",
+      "in_reply_to_screen_name": "lhfang",
+      "in_reply_to_status_id": 1214643280429797376,
+      "in_reply_to_user_id": 7900962,
+      "lang": "en",
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "@lhfang Hey is there anyway you can unblock my bot @FTBandFTR so that it can resume screen capturing tweets that you quote with retweets?",
+      "urls": [],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 7900962,
+          "id_str": "7900962",
+          "name": "Lee Fang",
+          "screen_name": "lhfang"
+        },
+        {
+          "id": 842188154698399746,
+          "id_str": "842188154698399746",
+          "name": "For the blocked and For the record",
+          "screen_name": "FTBandFTR"
+        }
+      ]
+    },
+    {
+      "created_at": "Fri Jan 03 16:00:27 +0000 2020",
+      "hashtags": [],
+      "id": 1213127994077786118,
+      "id_str": "1213127994077786118",
+      "in_reply_to_screen_name": "jvgraz",
+      "in_reply_to_status_id": 1213127050782863360,
+      "in_reply_to_user_id": 16959075,
+      "lang": "en",
+      "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+      "text": "@jvgraz @FTBandFTR What's broken?",
+      "urls": [],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": [
+        {
+          "id": 16959075,
+          "id_str": "16959075",
+          "name": "Plain Ol' Johnny Graz",
+          "screen_name": "jvgraz"
+        },
+        {
+          "id": 842188154698399746,
+          "id_str": "842188154698399746",
+          "name": "For the blocked and For the record",
+          "screen_name": "FTBandFTR"
+        }
+      ]
+    },
+    {
+      "created_at": "Fri Jan 03 14:59:01 +0000 2020",
+      "favorite_count": 1,
+      "hashtags": [
+        {
+          "text": "NotMeUs"
+        }
+      ],
+      "id": 1213112535110619137,
+      "id_str": "1213112535110619137",
+      "in_reply_to_screen_name": "_b_axe",
+      "in_reply_to_status_id": 1213112442324242432,
+      "in_reply_to_user_id": 348789414,
+      "lang": "und",
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "#NotMeUs",
+      "urls": [],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": []
+    },
+    {
+      "created_at": "Fri Jan 03 14:58:39 +0000 2020",
+      "favorite_count": 1,
+      "hashtags": [],
+      "id": 1213112442324242432,
+      "id_str": "1213112442324242432",
+      "in_reply_to_screen_name": "_b_axe",
+      "in_reply_to_status_id": 1213112441485348865,
+      "in_reply_to_user_id": 348789414,
+      "lang": "en",
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "I don\u2019t think he\u2019s perfect but I\u2019m not sure there\u2019s a policy he supports that I oppose. Not necessarily in order bu\u2026 https://t.co/d4SfoCYxI2",
+      "truncated": true,
+      "urls": [
+        {
+          "expanded_url": "https://twitter.com/i/web/status/1213112442324242432",
+          "url": "https://t.co/d4SfoCYxI2"
+        }
+      ],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": []
+    },
+    {
+      "created_at": "Fri Jan 03 14:58:39 +0000 2020",
+      "hashtags": [],
+      "id": 1213112441485348865,
+      "id_str": "1213112441485348865",
+      "in_reply_to_screen_name": "_b_axe",
+      "in_reply_to_status_id": 1213112440197656576,
+      "in_reply_to_user_id": 348789414,
+      "lang": "en",
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "A candidate that not only was against US aggression but also was willing to accept responsibility for its aggressio\u2026 https://t.co/F8ep5MeTwc",
+      "truncated": true,
+      "urls": [
+        {
+          "expanded_url": "https://twitter.com/i/web/status/1213112441485348865",
+          "url": "https://t.co/F8ep5MeTwc"
+        }
+      ],
+      "user": {
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020",
+        "favourites_count": 2716,
+        "followers_count": 113,
+        "following": true,
+        "friends_count": 198,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2375,
+        "url": "https://t.co/4fmloLEuSV"
+      },
+      "user_mentions": []
+    }
+  ],
+  "quote_bot_status": {
+    "created_at": "Sat Jan 18 23:13:45 +0000 2020",
+    "hashtags": [],
+    "id": 1218672858513190913,
+    "id_str": "1218672858513190913",
+    "in_reply_to_screen_name": "jvgraz",
+    "in_reply_to_status_id": 1218661044802899968,
+    "in_reply_to_user_id": 16959075,
+    "lang": "und",
+    "quoted_status": {
+      "created_at": "Sat Jan 18 22:28:13 +0000 2020",
+      "favorite_count": 1,
+      "hashtags": [],
+      "id": 1218661398621847554,
+      "id_str": "1218661398621847554",
+      "in_reply_to_screen_name": "jvgraz",
+      "in_reply_to_status_id": 1218661044802899968,
+      "in_reply_to_user_id": 16959075,
+      "lang": "en",
+      "media": [
+        {
+          "display_url": "pic.twitter.com/RGMBoA8Gse",
+          "expanded_url": "https://twitter.com/FTBandFTR/status/1218661398621847554/photo/1",
+          "id": 1218661397212663808,
+          "media_url": "http://pbs.twimg.com/media/EOmOFYJXkAA6xem.png",
+          "media_url_https": "https://pbs.twimg.com/media/EOmOFYJXkAA6xem.png",
+          "sizes": {
+            "medium": {
+              "w": 640,
+              "h": 233,
+              "resize": "fit"
+            },
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "large": {
+              "w": 640,
+              "h": 233,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 640,
+              "h": 233,
+              "resize": "fit"
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/RGMBoA8Gse"
+        }
+      ],
+      "source": "<a href=\"http://dadgumsalsa.com\" rel=\"nofollow\">DadGumPiBot</a>",
+      "text": "@jvgraz This Tweet is available! \nFor the blocked and the record! https://t.co/RGMBoA8Gse",
+      "urls": [],
+      "user": {
+        "created_at": "Thu Mar 16 01:37:58 +0000 2017",
+        "default_profile": true,
+        "description": "If someone wants off the list that\u2019s okay. I will remove them ASAP. This account auto screen caps tweets that are quoted by select users I @_b_axe follow.",
+        "favourites_count": 14,
+        "followers_count": 35,
+        "friends_count": 13,
+        "id": 842188154698399746,
+        "id_str": "842188154698399746",
+        "location": "Austin, TX",
+        "name": "For the blocked and For the record",
+        "profile_background_color": "F5F8FA",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1195922003615727617/hhgc1XSp_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1195922003615727617/hhgc1XSp_normal.jpg",
+        "profile_link_color": "1DA1F2",
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "screen_name": "FTBandFTR",
+        "statuses_count": 2827
+      },
+      "user_mentions": [
+        {
+          "id": 16959075,
+          "id_str": "16959075",
+          "name": "Plain Ol' Johnny Graz",
+          "screen_name": "jvgraz"
+        }
+      ]
+    },
+    "quoted_status_id": 1218661398621847554,
+    "quoted_status_id_str": "1218661398621847554",
+    "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+    "text": "@jvgraz https://t.co/DlScqMkpXx",
+    "urls": [
+      {
+        "expanded_url": "https://twitter.com/FTBandFTR/status/1218661398621847554?s=20",
+        "url": "https://t.co/DlScqMkpXx"
+      }
+    ],
+    "user": {
+      "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+      "description": "Chea! I like pups and stuff! #Bernie2020",
+      "favourites_count": 2716,
+      "followers_count": 113,
+      "following": true,
+      "friends_count": 198,
+      "id": 348789414,
+      "id_str": "348789414",
+      "listed_count": 3,
+      "location": "Austin, TX",
+      "name": "Brian",
+      "profile_background_color": "000000",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+      "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+      "profile_link_color": "1B95E0",
+      "profile_sidebar_border_color": "000000",
+      "profile_sidebar_fill_color": "000000",
+      "profile_text_color": "000000",
+      "screen_name": "_b_axe",
+      "statuses_count": 2375,
+      "url": "https://t.co/4fmloLEuSV"
+    },
+    "user_mentions": [
+      {
+        "id": 16959075,
+        "id_str": "16959075",
+        "name": "Plain Ol' Johnny Graz",
+        "screen_name": "jvgraz"
+      }
+    ]
+  }
 }

@@ -43,5 +43,8 @@ with open(LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME, "r") as f:
 
 # Test config
 TEST_JSON_FILE_NAME: str = os.path.join(PROJECT_DIR_PATH, "tests/test_data/status.json")
+TEMP_JSON_FILE_NAME: str = os.path.join(
+    PROJECT_DIR_PATH, "tests/test_data/temp_status.json"
+)
 TWITTER_API_USER = {"screen_name": "FTBandFTR"}
 TWITTER_URL = "https://twitter.com"

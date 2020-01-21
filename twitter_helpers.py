@@ -143,15 +143,13 @@ class Tweet:
 def collect_and_post_tweets(tweets):
 
     if tweets:
-        webdriver = WrappedWebDriver(browser="headless")
-        collect_quoted_tweets(driver=webdriver, quoted_tweets=tweets)
-        webdriver.quit_driver()
+        collect_quoted_tweets(quoted_tweets=tweets)
         post_collected_tweets(tweets)
 
 
-def collect_quoted_tweets(driver: WrappedWebDriver, quoted_tweets: List[Tweet]):
+def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     """Loop through list of quoted tweets and screen cap them"""
-
+    driver = WrappedWebDriver(browser="headless")
     for tweet in quoted_tweets:
         LOGGER.info(f"Opening...tweet quoted by {tweet.user} {tweet.quoted_tweet_url}")
         driver.open(url=tweet.quoted_tweet_url)
@@ -172,6 +170,7 @@ def collect_quoted_tweets(driver: WrappedWebDriver, quoted_tweets: List[Tweet]):
             raise Exception(
                 f"Failed to save {tweet.screen_capture_file_path_quoted_tweet}"
             )
+    driver.quit_driver()
 
 
 def find_quoted_tweets(users_to_follow: List[str]) -> List[Tweet]:
