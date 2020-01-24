@@ -1,8 +1,10 @@
 import os
 from typing import List, Optional, Union
 
+from retrying import retry
 from twitter import Api as twitterApi
 from twitter import Status, TwitterError
+from selenium.common.exceptions import TimeoutException
 from wrapped_driver import WrappedWebDriver, scroll_to_element
 
 from config import (
@@ -25,6 +27,19 @@ twitter_api = twitterApi(
     access_token_key=OAUTH_TOKEN,
     access_token_secret=OAUTH_TOKEN_SECRET,
 )
+
+
+class Chronicler:
+    """
+    Potential class for methods dealing with more than an individual tweet
+    but more of the collecting and posting screen captures
+
+    maybe include:
+        * for_the_record_message property
+        * post_reply_to_user_tweet
+    """
+
+    ...
 
 
 class Tweet:
@@ -151,26 +166,26 @@ def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     """Loop through list of quoted tweets and screen cap them"""
     driver = WrappedWebDriver(browser="headless")
     for tweet in quoted_tweets:
-        LOGGER.info(f"Opening...tweet quoted by {tweet.user} {tweet.quoted_tweet_url}")
-        driver.open(url=tweet.quoted_tweet_url)
-        LOGGER.debug(f"Getting locator...{tweet.quoted_tweet_locator}")
-        quoted_tweet_element = driver.get_element_by_css(
-            locator=tweet.quoted_tweet_locator
-        )
-        scroll_to_element(driver=driver, element=quoted_tweet_element)
-        LOGGER.info(
-            msg=f"Saving screen shot: {tweet.screen_capture_file_path_quoted_tweet}"
-        )
-        if not quoted_tweet_element.screenshot(
-            filename=tweet.screen_capture_file_path_quoted_tweet
-        ):
-            LOGGER.error(
-                f"Failed to save {tweet.screen_capture_file_path_quoted_tweet}"
-            )
-            raise Exception(
-                f"Failed to save {tweet.screen_capture_file_path_quoted_tweet}"
-            )
+        collect_tweet(driver=driver, tweet=tweet)
     driver.quit_driver()
+
+
+@retry(wait_fixed=60, stop_max_attempt_number=5, retry_on_exception=TimeoutException)
+def collect_tweet(driver: WrappedWebDriver, tweet: Tweet):
+    """Using webdriver screen capture tweet"""
+    LOGGER.info(f"Opening...tweet quoted by {tweet.user} {tweet.quoted_tweet_url}")
+    driver.open(url=tweet.quoted_tweet_url)
+    LOGGER.debug(f"Getting locator: {tweet.quoted_tweet_locator}")
+    quoted_tweet_element = driver.get_element_by_css(locator=tweet.quoted_tweet_locator)
+    scroll_to_element(driver=driver, element=quoted_tweet_element)
+    LOGGER.info(
+        msg=f"Saving screen shot: {tweet.screen_capture_file_path_quoted_tweet}"
+    )
+    if not quoted_tweet_element.screenshot(
+        filename=tweet.screen_capture_file_path_quoted_tweet
+    ):
+        LOGGER.error(f"Failed to save {tweet.screen_capture_file_path_quoted_tweet}")
+        raise Exception(f"Failed to save {tweet.screen_capture_file_path_quoted_tweet}")
 
 
 def find_quoted_tweets(users_to_follow: List[str]) -> List[Tweet]:
@@ -226,7 +241,9 @@ def get_all_users_tweets(twitter_user: str) -> List[Tweet]:
 def get_recent_tweets_for_user(twitter_user: str, count: int = 10) -> List[Status]:
     """Using Twitter API get recent tweets using user screen name"""
     LOGGER.debug(f"Getting last {count} tweets for user: {twitter_user}")
-    return twitter_api.GetUserTimeline(screen_name=twitter_user, count=count)
+    return twitter_api.GetUserTimeline(
+        screen_name=twitter_user, since_id=None, count=count
+    )
 
 
 def get_recent_quoted_retweets_for_user(
