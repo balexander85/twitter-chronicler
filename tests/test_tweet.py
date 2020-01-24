@@ -181,14 +181,14 @@ class TestBasicTweet:
         ]
         assert not non_none_properties
 
-    @patch("twitter_helpers.get_recent_tweets_for_user")
+    @patch("twitter.api.Api.GetUserTimeline")
     def test_find_quoted_tweets(self, mock_get):
         """Verify find_quoted_tweets method returns None for non-retweet"""
         mock_get.return_value = [self.basic_tweet]
         quoted_retweets = find_quoted_tweets(users_to_follow=["FTBandFTR"])
         assert not quoted_retweets
 
-    @patch("twitter_helpers.get_recent_tweets_for_user")
+    @patch("twitter.api.Api.GetUserTimeline")
     def test_get_recent_quoted_retweets_for_user(self, mock_get):
         """
         Verify get_recent_quoted_retweets_for_user method returns None for non-retweet
@@ -203,5 +203,5 @@ class TestBasicTweet:
     @patch("twitter.api.Api.GetUserTimeline")
     def test_get_recent_tweets_for_user(self, mock_get):
         mock_get.return_value = [self.basic_tweet]
-        tweets = get_recent_tweets_for_user(twitter_user="FTBandFTR", count=10,)
+        tweets = get_recent_tweets_for_user(twitter_user="FTBandFTR", count=10)
         assert all(type(t) is Status for t in tweets)
