@@ -1,7 +1,7 @@
 import os
 from typing import List, Optional, Union
 
-from retrying import retry
+from retry import retry
 from twitter import Api as twitterApi
 from twitter import Status, TwitterError
 from selenium.common.exceptions import TimeoutException
@@ -170,7 +170,7 @@ def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     driver.quit_driver()
 
 
-@retry(wait_fixed=60, stop_max_attempt_number=5, retry_on_exception=True)
+@retry(exceptions=TimeoutException, tries=4, delay=5)
 def collect_tweet(driver: WrappedWebDriver, tweet: Tweet):
     """Using webdriver screen capture tweet"""
     LOGGER.info(f"Opening...tweet quoted by {tweet.user} {tweet.quoted_tweet_url}")
