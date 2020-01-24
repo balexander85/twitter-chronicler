@@ -2,7 +2,10 @@
 
 Module for all webdriver classes and methods
 """
+from typing import Optional
+
 from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
@@ -43,10 +46,13 @@ class WrappedWebDriver:
     def get_element_by_id(self, element_id) -> WebElement:
         return self.driver.find_element_by_id(element_id)
 
-    def get_element_by_css(self, locator: str) -> WebElement:
+    def get_element_by_css(self, locator: str) -> Optional[WebElement]:
         self.wait_for_element_to_be_present_by_css(locator=locator)
         self.wait_for_element_to_be_visible(by=By.CSS_SELECTOR, locator=locator)
-        return self.driver.find_element_by_css_selector(css_selector=locator)
+        try:
+            return self.driver.find_element_by_css_selector(css_selector=locator)
+        except TimeoutException as e:
+            LOGGER.error(f"{e} timed out looking for: {locator}")
 
     def wait_for_element_to_be_present_by_css(self, locator) -> bool:
         """Wait for element to be present"""
