@@ -170,7 +170,7 @@ def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     driver.quit_driver()
 
 
-@retry(wait_fixed=60, stop_max_attempt_number=5, retry_on_exception=TimeoutException)
+@retry(wait_fixed=60, stop_max_attempt_number=5, retry_on_exception=True)
 def collect_tweet(driver: WrappedWebDriver, tweet: Tweet):
     """Using webdriver screen capture tweet"""
     LOGGER.info(f"Opening...tweet quoted by {tweet.user} {tweet.quoted_tweet_url}")
