@@ -1,4 +1,5 @@
 import os
+import time
 from typing import List, Optional, Union
 
 from retry import retry
@@ -166,11 +167,12 @@ class TweetDiv:
 
     def _wait_until_loaded(self):
         self.driver.wait_for_element_to_be_present_by_css(
-            locator=self.TWEET_DIV_CONTAINER
+            locator=self.TWEET_DIV_CONTAINER.format(self.tweet.quoted_tweet_id)
         )
 
     def open(self):
         self.driver.open(url=self.tweet.quoted_tweet_url)
+        time.sleep(10)
         self._wait_until_loaded()
 
     @property
