@@ -155,6 +155,50 @@ class Tweet:
         )
 
 
+class TweetDiv:
+    """Page object representing div of a tweet"""
+
+    TWEET_DIV_CONTAINER = "div[data-tweet-id='{}']"
+
+    def __init__(self, webdriver: WrappedWebDriver, tweet: Tweet):
+        self.driver = webdriver
+        self.tweet = tweet
+
+    def _wait_until_loaded(self):
+        self.driver.wait_for_element_to_be_present_by_css(
+            locator=self.TWEET_DIV_CONTAINER
+        )
+
+    def open(self):
+        self.driver.open(url=self.tweet.quoted_tweet_url)
+        self._wait_until_loaded()
+
+    @property
+    @retry(exceptions=TimeoutException, tries=4, delay=5, logger=LOGGER)
+    def tweet_element(self):
+        """WebElement of the Tweet Div"""
+        LOGGER.debug(f"Getting locator: {self.tweet.quoted_tweet_locator}")
+        tweet_locator = self.TWEET_DIV_CONTAINER.format(self.tweet.quoted_tweet_id)
+        return self.driver.get_element_by_css(locator=tweet_locator)
+
+    def screen_shot_tweet(self):
+        """Take a screenshot of tweet and save to file"""
+        self.open()
+        scroll_to_element(driver=self.driver, element=self.tweet_element)
+        LOGGER.info(
+            msg=f"Saving screen shot: {self.tweet.screen_capture_file_path_quoted_tweet}"
+        )
+        if not self.tweet_element.screenshot(
+            filename=self.tweet.screen_capture_file_path_quoted_tweet
+        ):
+            LOGGER.error(
+                f"Failed to save {self.tweet.screen_capture_file_path_quoted_tweet}"
+            )
+            raise Exception(
+                f"Failed to save {self.tweet.screen_capture_file_path_quoted_tweet}"
+            )
+
+
 def collect_and_post_tweets(tweets):
 
     if tweets:
@@ -170,22 +214,10 @@ def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     driver.quit_driver()
 
 
-@retry(exceptions=TimeoutException, tries=4, delay=5, logger=LOGGER)
 def collect_tweet(driver: WrappedWebDriver, tweet: Tweet):
     """Using webdriver screen capture tweet"""
     LOGGER.info(f"Opening...tweet quoted by {tweet.user} {tweet.quoted_tweet_url}")
-    driver.open(url=tweet.quoted_tweet_url)
-    LOGGER.debug(f"Getting locator: {tweet.quoted_tweet_locator}")
-    quoted_tweet_element = driver.get_element_by_css(locator=tweet.quoted_tweet_locator)
-    scroll_to_element(driver=driver, element=quoted_tweet_element)
-    LOGGER.info(
-        msg=f"Saving screen shot: {tweet.screen_capture_file_path_quoted_tweet}"
-    )
-    if not quoted_tweet_element.screenshot(
-        filename=tweet.screen_capture_file_path_quoted_tweet
-    ):
-        LOGGER.error(f"Failed to save {tweet.screen_capture_file_path_quoted_tweet}")
-        raise Exception(f"Failed to save {tweet.screen_capture_file_path_quoted_tweet}")
+    TweetDiv(webdriver=driver, tweet=tweet).screen_shot_tweet()
 
 
 def find_quoted_tweets(users_to_follow: List[str]) -> List[Tweet]:
