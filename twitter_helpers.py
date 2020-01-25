@@ -181,7 +181,6 @@ class TweetDiv:
         return self.TWEET_DIV_CONTAINER.format(self.tweet.quoted_tweet_id)
 
     @property
-    @retry(exceptions=TimeoutException, tries=4, delay=5, logger=LOGGER)
     def tweet_element(self):
         """WebElement of the Tweet Div"""
         LOGGER.debug(f"Getting tweet_element: {self.tweet_locator}")
@@ -212,6 +211,7 @@ def collect_and_post_tweets(tweets):
         post_collected_tweets(tweets)
 
 
+@retry(exceptions=TimeoutException, tries=4, delay=5, logger=LOGGER)
 def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     """Loop through list of quoted tweets and screen cap them"""
     driver = WrappedWebDriver(browser="headless")

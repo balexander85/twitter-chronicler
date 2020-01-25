@@ -40,9 +40,13 @@ class WrappedWebDriver:
         self.driver.get(url)
 
     def close(self):
+        """Closes the current window."""
+        LOGGER.debug("Closing window.")
         self.driver.close()
 
     def quit_driver(self):
+        """Closes the browser and shuts down the ChromeDriver executable."""
+        LOGGER.debug("Closing browser and shutting down ChromeDriver instance")
         self.driver.quit()
 
     def get_element_by_id(self, element_id) -> WebElement:
@@ -54,6 +58,7 @@ class WrappedWebDriver:
         try:
             return self.driver.find_element_by_css_selector(css_selector=locator)
         except TimeoutException as e:
+            self.quit_driver()
             LOGGER.error(f"{e} timed out looking for: {locator}")
 
     def wait_for_element_to_be_present_by_css(self, locator) -> bool:
