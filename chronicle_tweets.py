@@ -14,6 +14,7 @@ Note:
     I was tired of looking at tweets that quoted tweets
     where the quoted tweets had been deleted.
 """
+
 from config import LIST_OF_USERS_TO_FOLLOW
 from _logger import LOGGER
 from twitter_helpers import (

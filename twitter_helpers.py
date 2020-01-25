@@ -164,28 +164,32 @@ class TweetDiv:
     def __init__(self, webdriver: WrappedWebDriver, tweet: Tweet):
         self.driver = webdriver
         self.tweet = tweet
+        self.open()
 
-    def _wait_until_loaded(self):
-        self.driver.wait_for_element_to_be_present_by_css(
-            locator=self.TWEET_DIV_CONTAINER.format(self.tweet.quoted_tweet_id)
+    def _wait_until_loaded(self) -> bool:
+        return self.driver.wait_for_element_to_be_visible_by_css(
+            locator=self.tweet_locator
         )
 
     def open(self):
         self.driver.open(url=self.tweet.quoted_tweet_url)
-        time.sleep(10)
+        time.sleep(5)
         self._wait_until_loaded()
+
+    @property
+    def tweet_locator(self) -> str:
+        return self.TWEET_DIV_CONTAINER.format(self.tweet.quoted_tweet_id)
 
     @property
     @retry(exceptions=TimeoutException, tries=4, delay=5, logger=LOGGER)
     def tweet_element(self):
         """WebElement of the Tweet Div"""
-        LOGGER.debug(f"Getting locator: {self.tweet.quoted_tweet_locator}")
-        tweet_locator = self.TWEET_DIV_CONTAINER.format(self.tweet.quoted_tweet_id)
-        return self.driver.get_element_by_css(locator=tweet_locator)
+        LOGGER.debug(f"Getting tweet_element: {self.tweet_locator}")
+        self.driver.wait_for_element_to_be_visible_by_css(locator=self.tweet_locator)
+        return self.driver.get_element_by_css(locator=self.tweet_locator)
 
     def screen_shot_tweet(self):
         """Take a screenshot of tweet and save to file"""
-        self.open()
         scroll_to_element(driver=self.driver, element=self.tweet_element)
         LOGGER.info(
             msg=f"Saving screen shot: {self.tweet.screen_capture_file_path_quoted_tweet}"

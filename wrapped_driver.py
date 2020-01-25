@@ -20,6 +20,8 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--window-size=1920,1080")
 chrome_options.add_argument("--disable-features=VizDisplayCompositor")
 chrome_options.add_argument("--start-maximized")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--disable-gpu")
 
 
 class WrappedWebDriver:
@@ -55,20 +57,27 @@ class WrappedWebDriver:
             LOGGER.error(f"{e} timed out looking for: {locator}")
 
     def wait_for_element_to_be_present_by_css(self, locator) -> bool:
-        """Wait for element to be present"""
+        """Wait for element to be present using CSS locator"""
         return self.wait_for_element_to_be_present(by=By.CSS_SELECTOR, locator=locator)
+
+    def wait_for_element_to_be_visible_by_css(self, locator) -> bool:
+        """Wait for element to be present using CSS locator"""
+        return self.wait_for_element_to_be_visible(by=By.CSS_SELECTOR, locator=locator)
 
     def wait_for_element_to_be_present(self, by, locator) -> bool:
         """Wait for element to be present"""
         LOGGER.debug(msg=f"Waiting for locator to be present: {locator}")
-        return WebDriverWait(driver=self.driver, timeout=30).until(
+        return WebDriverWait(driver=self.driver, timeout=60, poll_frequency=3).until(
             EC.presence_of_element_located((by, locator))
         )
 
     def wait_for_element_to_be_visible(self, by, locator) -> bool:
         """Wait for element to be visible"""
+        if not self.wait_for_element_to_be_present(by=by, locator=locator):
+            LOGGER.info(f"Locator: {locator} was not present.")
+
         LOGGER.debug(msg=f"Waiting for locator to be visible: {locator}")
-        return WebDriverWait(driver=self.driver, timeout=30).until(
+        return WebDriverWait(driver=self.driver, timeout=60, poll_frequency=3).until(
             EC.visibility_of_element_located((by, locator))
         )
 
