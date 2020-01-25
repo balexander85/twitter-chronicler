@@ -36,6 +36,12 @@ class WrappedWebDriver:
                 executable_path=chrome_driver_path, chrome_options=chrome_options
             )
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.quit_driver()
+
     def open(self, url: str):
         self.driver.get(url)
 

@@ -211,13 +211,12 @@ def collect_and_post_tweets(tweets):
         post_collected_tweets(tweets)
 
 
-@retry(exceptions=TimeoutException, tries=4, delay=5, logger=LOGGER)
+@retry(exceptions=TimeoutException, tries=4, delay=2, logger=LOGGER)
 def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     """Loop through list of quoted tweets and screen cap them"""
-    driver = WrappedWebDriver(browser="headless")
-    for tweet in quoted_tweets:
-        collect_tweet(driver=driver, tweet=tweet)
-    driver.quit_driver()
+    with WrappedWebDriver(browser="headless") as driver:
+        for tweet in quoted_tweets:
+            collect_tweet(driver=driver, tweet=tweet)
 
 
 def collect_tweet(driver: WrappedWebDriver, tweet: Tweet):
