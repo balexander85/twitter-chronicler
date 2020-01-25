@@ -23,10 +23,14 @@ from twitter_helpers import (
 )
 
 
-if __name__ == "__main__":
+def run_chronicler():
     LOGGER.info("Start of script")
 
     user_quoted_retweets = find_quoted_tweets(users_to_follow=LIST_OF_USERS_TO_FOLLOW)
     collect_and_post_tweets(user_quoted_retweets)
 
     LOGGER.info("End of script run")
+
+
+if __name__ == "__main__":
+    run_chronicler()

@@ -211,7 +211,7 @@ def collect_and_post_tweets(tweets):
         post_collected_tweets(tweets)
 
 
-@retry(exceptions=TimeoutException, tries=4, delay=2, logger=LOGGER)
+@retry(exceptions=TimeoutException, tries=4, delay=2)
 def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     """Loop through list of quoted tweets and screen cap them"""
     with WrappedWebDriver(browser="headless") as driver:
@@ -293,7 +293,7 @@ def get_recent_quoted_retweets_for_user(
         if t.quoted_status:
             tweet = Tweet(t)
             if tweet.quoted_tweet_user == TWITTER_API_USER.get("screen_name"):
-                LOGGER.debug(
+                LOGGER.info(
                     f"Skipping tweet({tweet.quoted_tweet_id}) "
                     f"from @{tweet.user}'s tweet({tweet.id}) quotes the bot user"
                 )
