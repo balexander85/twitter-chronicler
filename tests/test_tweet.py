@@ -46,7 +46,7 @@ class TestTweet:
             "/Users/brian/Development/repos/"
             "projects_github/twitter_chronicler/screen_shots/"
         )
-        file_name_quoted_tweet = "tweet_capture_1200946238033661957.png"
+        # file_name_quoted_tweet = "tweet_capture_1200946238033661957.png"
         expected_user = "WajahatAli"
         expected_id = 1200946238033661957
         tweet = Tweet(test_tweet("quoted_tweet"))
@@ -54,11 +54,11 @@ class TestTweet:
         assert tweet.quoted_tweet_user == expected_user
         assert tweet.quoted_tweet_id == expected_id
         assert tweet.quoted_tweet_locator == f"div[data-tweet-id='{expected_id}']"
-        assert tweet.screen_capture_file_name_quoted_tweet == file_name_quoted_tweet
-        assert (
-            tweet.screen_capture_file_path_quoted_tweet
-            == f"{file_path_quoted_tweet}{file_name_quoted_tweet}"
-        )
+        # assert tweet.screen_capture_file_name_quoted_tweet == file_name_quoted_tweet
+        # assert (
+        #     tweet.screen_capture_file_path_quoted_tweet
+        #     == f"{file_path_quoted_tweet}{file_name_quoted_tweet}"
+        # )
         assert (
             tweet.quoted_tweet_url
             == f"https://twitter.com/{expected_user}/status/{expected_id}"
@@ -170,8 +170,8 @@ class TestBasicTweet:
             "quoted_tweet_user",
             "quoted_tweet_url",
             "for_the_record_message",
-            "screen_capture_file_name_quoted_tweet",
-            "screen_capture_file_path_quoted_tweet",
+            # "screen_capture_file_name_quoted_tweet",
+            # "screen_capture_file_path_quoted_tweet",
             "urls_from_quoted_tweet",
         ]
         tweet = Tweet(self.basic_tweet)

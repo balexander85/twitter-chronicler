@@ -1,25 +1,19 @@
-import os
-import time
-from typing import List, Optional, Union
+from typing import List, Union
 
-from retry import retry
 from twitter import Api as twitterApi
 from twitter import Status, TwitterError
-from selenium.common.exceptions import TimeoutException
-from wrapped_driver import WrappedWebDriver, scroll_to_element
 
 from config import (
     APP_KEY,
     APP_SECRET,
     LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME,
     LIST_OF_STATUS_IDS_REPLIED_TO,
-    PROJECT_DIR_PATH,
     OAUTH_TOKEN,
     OAUTH_TOKEN_SECRET,
     TWITTER_API_USER,
-    TWITTER_URL,
 )
 from _logger import LOGGER
+from wrapped_tweet import Tweet
 
 
 twitter_api = twitterApi(
@@ -28,201 +22,6 @@ twitter_api = twitterApi(
     access_token_key=OAUTH_TOKEN,
     access_token_secret=OAUTH_TOKEN_SECRET,
 )
-
-
-class Chronicler:
-    """
-    Potential class for methods dealing with more than an individual tweet
-    but more of the collecting and posting screen captures
-
-    maybe include:
-        * for_the_record_message property
-        * post_reply_to_user_tweet
-    """
-
-    ...
-
-
-class Tweet:
-    """Wrapper class representing a Status (tweet)"""
-
-    def __init__(self, tweet: Status):
-        self.raw_tweet: Status = tweet
-        self.id: int = self.raw_tweet.id
-        self.id_str: str = self.raw_tweet.id_str
-        self.text: str = self.raw_tweet.text
-        self.user: str = self.raw_tweet.user.screen_name
-
-    def __repr__(self):
-        tweet = f"@{self.user}: {self.text}"
-        LOGGER.debug(f"Processing '{tweet}'")
-        return tweet
-
-    @property
-    def for_the_record_message(self) -> Optional[str]:
-        """Message to be tweeted with screen cap of quoted tweet"""
-        if self.quoted_status:
-            message = (
-                f"@{self.user} "
-                f"This Tweet is available! \n"
-                f"For the blocked and the record!"
-            )
-            if self.urls_from_quoted_tweet:
-                url_string_list = ", ".join(self.urls_from_quoted_tweet)
-                message += f"\nURL(s) from tweet: {url_string_list}"
-
-            LOGGER.debug(msg=message)
-            return message
-
-        return None
-
-    @property
-    def quoted_status(self) -> Optional[Status]:
-        """Return True if tweet quotes another"""
-        return self.raw_tweet.quoted_status
-
-    @property
-    def quoted_tweet_id(self) -> Optional[str]:
-        """Return id of the quoted tweet"""
-        return self.quoted_status.id if self.quoted_status else None
-
-    @property
-    def quoted_tweet_locator(self) -> Optional[str]:
-        """Return locator for the div of the quoted tweet"""
-        return (
-            f"div[data-tweet-id='{self.quoted_tweet_id}']"
-            if self.quoted_status
-            else None
-        )
-
-    @property
-    def quoted_tweet_url(self) -> Optional[str]:
-        if self.quoted_status:
-            tweet_url = (
-                f"{TWITTER_URL}/{self.quoted_tweet_user}/status/{self.quoted_tweet_id}"
-            )
-            LOGGER.debug(msg=f"Quoted Tweet URL: {tweet_url}")
-            return tweet_url
-        return None
-
-    @property
-    def quoted_tweet_user(self) -> Optional[str]:
-        """Returns the user name of the quoted tweet"""
-        return self.quoted_status.user.screen_name if self.quoted_status else None
-
-    @property
-    def replied_to_status_bool(self) -> bool:
-        """Return True if tweet quotes another"""
-        return False if not self.raw_tweet.in_reply_to_status_id else True
-
-    @property
-    def replied_to_status_id(self) -> int:
-        """Return True if tweet quotes another"""
-        return self.raw_tweet.in_reply_to_status_id
-
-    @property
-    def replied_to_user_screen_name(self) -> str:
-        """Returns screen name of the user that is being replied to"""
-        return self.raw_tweet.in_reply_to_screen_name
-
-    @property
-    def screen_capture_file_name_quoted_tweet(self) -> Optional[str]:
-        return (
-            f"tweet_capture_{self.quoted_tweet_id}.png" if self.quoted_status else None
-        )
-
-    @property
-    def screen_capture_file_path_quoted_tweet(self) -> Optional[str]:
-        return (
-            os.path.join(
-                PROJECT_DIR_PATH,
-                "screen_shots",
-                self.screen_capture_file_name_quoted_tweet,
-            )
-            if self.screen_capture_file_name_quoted_tweet
-            else None
-        )
-
-    @property
-    def tweet_locator(self) -> str:
-        return f"div[data-tweet-id='{self.id}']"
-
-    @property
-    def urls_from_quoted_tweet(self) -> Optional[List[str]]:
-        return (
-            [url_obj.url for url_obj in self.quoted_status.urls]
-            if self.quoted_status
-            else None
-        )
-
-
-class TweetDiv:
-    """Page object representing div of a tweet"""
-
-    TWEET_DIV_CONTAINER = "div[data-tweet-id='{}']"
-
-    def __init__(self, webdriver: WrappedWebDriver, tweet: Tweet):
-        self.driver = webdriver
-        self.tweet = tweet
-        self.open()
-
-    def _wait_until_loaded(self) -> bool:
-        return self.driver.wait_for_element_to_be_visible_by_css(
-            locator=self.tweet_locator
-        )
-
-    def open(self):
-        self.driver.open(url=self.tweet.quoted_tweet_url)
-        time.sleep(5)
-        self._wait_until_loaded()
-
-    @property
-    def tweet_locator(self) -> str:
-        return self.TWEET_DIV_CONTAINER.format(self.tweet.quoted_tweet_id)
-
-    @property
-    def tweet_element(self):
-        """WebElement of the Tweet Div"""
-        LOGGER.debug(f"Getting tweet_element: {self.tweet_locator}")
-        self.driver.wait_for_element_to_be_visible_by_css(locator=self.tweet_locator)
-        return self.driver.get_element_by_css(locator=self.tweet_locator)
-
-    def screen_shot_tweet(self):
-        """Take a screenshot of tweet and save to file"""
-        scroll_to_element(driver=self.driver, element=self.tweet_element)
-        LOGGER.info(
-            msg=f"Saving screen shot: {self.tweet.screen_capture_file_path_quoted_tweet}"
-        )
-        if not self.tweet_element.screenshot(
-            filename=self.tweet.screen_capture_file_path_quoted_tweet
-        ):
-            LOGGER.error(
-                f"Failed to save {self.tweet.screen_capture_file_path_quoted_tweet}"
-            )
-            raise Exception(
-                f"Failed to save {self.tweet.screen_capture_file_path_quoted_tweet}"
-            )
-
-
-def collect_and_post_tweets(tweets):
-
-    if tweets:
-        collect_quoted_tweets(quoted_tweets=tweets)
-        post_collected_tweets(tweets)
-
-
-@retry(exceptions=TimeoutException, tries=4, delay=2)
-def collect_quoted_tweets(quoted_tweets: List[Tweet]):
-    """Loop through list of quoted tweets and screen cap them"""
-    with WrappedWebDriver(browser="headless") as driver:
-        for tweet in quoted_tweets:
-            collect_tweet(driver=driver, tweet=tweet)
-
-
-def collect_tweet(driver: WrappedWebDriver, tweet: Tweet):
-    """Using webdriver screen capture tweet"""
-    LOGGER.info(f"Opening...tweet quoted by {tweet.user} {tweet.quoted_tweet_url}")
-    TweetDiv(webdriver=driver, tweet=tweet).screen_shot_tweet()
 
 
 def find_quoted_tweets(users_to_follow: List[str]) -> List[Tweet]:
@@ -293,7 +92,7 @@ def get_recent_quoted_retweets_for_user(
         if t.quoted_status:
             tweet = Tweet(t)
             if tweet.quoted_tweet_user == TWITTER_API_USER.get("screen_name"):
-                LOGGER.info(
+                LOGGER.debug(
                     f"Skipping tweet({tweet.quoted_tweet_id}) "
                     f"from @{tweet.user}'s tweet({tweet.id}) quotes the bot user"
                 )
