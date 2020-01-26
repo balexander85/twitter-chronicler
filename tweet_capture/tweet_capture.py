@@ -2,6 +2,8 @@ import os
 import time
 from typing import Optional
 
+from selenium.webdriver.remote.webelement import WebElement
+
 from config import PROJECT_DIR_PATH
 from _logger import LOGGER
 from wrapped_driver import WrappedWebDriver, scroll_to_element
@@ -24,6 +26,9 @@ class TweetCapture:
         )
 
     def open(self):
+        LOGGER.info(
+            f"Opening...tweet quoted by {self.tweet.user} {self.tweet.quoted_tweet_url}"
+        )
         self.driver.open(url=self.tweet.quoted_tweet_url)
         time.sleep(5)
         self._wait_until_loaded()
@@ -33,7 +38,7 @@ class TweetCapture:
         return self.TWEET_DIV_CONTAINER.format(self.tweet.quoted_tweet_id)
 
     @property
-    def tweet_element(self):
+    def tweet_element(self) -> WebElement:
         """WebElement of the Tweet Div"""
         LOGGER.debug(f"Getting tweet_element: {self.tweet_locator}")
         self.driver.wait_for_element_to_be_visible_by_css(locator=self.tweet_locator)

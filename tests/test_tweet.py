@@ -3,10 +3,6 @@ from unittest.mock import patch
 import pytest
 from twitter import Status
 
-from config import (
-    LIST_OF_USERS_TO_FOLLOW,
-    LIST_OF_STATUS_IDS_REPLIED_TO,
-)
 from twitter_helpers import (
     find_quoted_tweets,
     get_tweet,
@@ -41,15 +37,15 @@ class TestTweet:
     and other helper methods from twitter_helpers.py
     """
 
-    def test_quoted_tweet(self, test_tweet):
-        file_path_quoted_tweet = (
-            "/Users/brian/Development/repos/"
-            "projects_github/twitter_chronicler/screen_shots/"
-        )
+    def test_quoted_tweet(self, test_status):
+        # file_path_quoted_tweet = (
+        #     "/Users/brian/Development/repos/"
+        #     "projects_github/twitter_chronicler/screen_shots/"
+        # )
         # file_name_quoted_tweet = "tweet_capture_1200946238033661957.png"
         expected_user = "WajahatAli"
         expected_id = 1200946238033661957
-        tweet = Tweet(test_tweet("quoted_tweet"))
+        tweet = Tweet(test_status("quoted_tweet"))
         assert type(tweet.quoted_status) == Status
         assert tweet.quoted_tweet_user == expected_user
         assert tweet.quoted_tweet_id == expected_id
@@ -77,18 +73,18 @@ class TestTweet:
         )
 
     @patch("twitter.api.Api.GetUserTimeline")
-    def test_get_one_recent_tweets_for_user(self, mock_get, test_tweet):
+    def test_get_one_recent_tweets_for_user(self, mock_get, test_status):
         """Mock get_recent_tweets_for_user without making real call to Twitter API"""
-        mock_get.return_value = test_tweet("mocked_status")
+        mock_get.return_value = test_status("mocked_status")
         user_name = "FTBandFTR"
         user_tweets = get_recent_tweets_for_user(twitter_user=user_name, count=1)
         assert len(user_tweets) == 1
         assert type(user_tweets) == list
 
     @patch("twitter_helpers.get_recent_tweets_for_user")
-    def test_get_recent_quoted_retweets_for_user_excluded(self, mock_get, test_tweet):
+    def test_get_recent_quoted_retweets_for_user_excluded(self, mock_get, test_status):
         """Mock get_recent_tweets_for_user without making real call to Twitter API"""
-        mock_get.return_value = [test_tweet("quoted_tweet")]
+        mock_get.return_value = [test_status("quoted_tweet")]
         user_name = "_b_axe"
         tweets = get_recent_quoted_retweets_for_user(
             twitter_user=user_name, excluded_ids=["1201197107169898498"]
@@ -97,9 +93,9 @@ class TestTweet:
         assert type(tweets) == list
 
     @patch("twitter.api.Api.PostUpdate")
-    def test_post_reply_to_user_tweet(self, mock_get, test_tweet):
+    def test_post_reply_to_user_tweet(self, mock_get, test_status):
         """Mock post_reply_to_user_tweet without making real call to Twitter API"""
-        quoted_tweet = test_tweet("quoted_tweet")
+        quoted_tweet = test_status("quoted_tweet")
         mock_get.return_value = quoted_tweet
         response = post_reply_to_user_tweet(tweet=Tweet(quoted_tweet))
         assert response.id == 1201197107169898498
@@ -108,9 +104,9 @@ class TestTweet:
         assert type(response) == Status
 
     @patch("twitter.api.Api.PostUpdate")
-    def test_post_collected_tweets(self, mock_get, test_tweet):
+    def test_post_collected_tweets(self, mock_get, test_status):
         """Mock post_reply_to_user_tweet without making real call to Twitter API"""
-        quoted_tweet = test_tweet("quoted_tweet")
+        quoted_tweet = test_status("quoted_tweet")
         mock_get.return_value = quoted_tweet
         response = post_collected_tweets(quoted_tweets=[Tweet(quoted_tweet)])
         assert not response
@@ -144,8 +140,8 @@ class TestBasicTweet:
     """
 
     @pytest.fixture(autouse=True)
-    def setup(self, test_tweet):
-        self.basic_tweet = test_tweet("basic_tweet")
+    def setup(self, test_status):
+        self.basic_tweet = test_status("basic_tweet")
 
     def test_expected_properties(self):
         """Verify Tweet instance returns expected value for listed properties"""

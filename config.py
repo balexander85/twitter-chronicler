@@ -1,8 +1,6 @@
 from configparser import ConfigParser
-from typing import Iterator, List
+from typing import List
 import os
-
-from util import file_reader
 
 PROJECT_DIR_PATH = os.path.dirname(__file__)
 
@@ -26,10 +24,6 @@ LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME: str = os.path.join(
 LIST_OF_USERS_TO_FOLLOW_FILE_NAME: str = os.path.join(
     PROJECT_DIR_PATH, "list_of_users_to_follow.txt"
 )
-# LIST_OF_USERS_TO_FOLLOW: Iterator[str] = file_reader(LIST_OF_USERS_TO_FOLLOW_FILE_NAME)
-# LIST_OF_STATUS_IDS_REPLIED_TO: Iterator[str] = file_reader(
-#     LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME
-# )
 
 with open(LIST_OF_USERS_TO_FOLLOW_FILE_NAME, "r") as follower_file:
     LIST_OF_USERS_TO_FOLLOW: List[str] = [

@@ -22,23 +22,17 @@ def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     """Loop through list of quoted tweets and screen cap them"""
     with WrappedWebDriver(browser="headless") as driver:
         for tweet in quoted_tweets:
-            screen_shot_file_path = collect_tweet(driver=driver, tweet=tweet)
+            screen_shot_file_path = TweetCapture(
+                webdriver=driver, tweet=tweet
+            ).screen_shot_tweet()
             add_screen_shot_to_tweet(
                 tweet=tweet, screen_shot_file_path=screen_shot_file_path
             )
 
 
-def collect_tweet(driver: WrappedWebDriver, tweet: Tweet):
-    """Using webdriver screen capture tweet"""
-    LOGGER.info(f"Opening...tweet quoted by {tweet.user} {tweet.quoted_tweet_url}")
-    return TweetCapture(webdriver=driver, tweet=tweet).screen_shot_tweet()
-
-
 def add_screen_shot_to_tweet(tweet: Tweet, screen_shot_file_path: str):
     """Add the path of the screenshot to the tweet instance"""
-    LOGGER.info(
-        f"Adding path {screen_shot_file_path} to the tweet instance {tweet.id_str}"
-    )
+    LOGGER.info(f"Adding {screen_shot_file_path} to the tweet instance {tweet.id_str}")
     tweet.screen_capture_file_path_quoted_tweet = screen_shot_file_path
 
 
