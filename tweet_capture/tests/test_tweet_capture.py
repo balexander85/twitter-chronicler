@@ -1,8 +1,6 @@
 import pytest
-from retry import retry
 
 from tweet_capture import TweetCapture
-
 from wrapped_driver import WrappedWebDriver
 
 
@@ -20,12 +18,10 @@ class TestTweetCapture:
 
     def test_tweet_screen_shot_tweet(self, test_tweet):
         test_tweet = test_tweet("quoted_tweet")
-        tweet_capture = TweetCapture(webdriver=self.driver, tweet=test_tweet)
-        assert tweet_capture.tweet_locator == "div[data-tweet-id='1200946238033661957']"
-        assert (
-            tweet_capture.tweet.tweet_locator
-            == "div[data-tweet-id='1201197107169898498']"
+        tweet_capture = TweetCapture(
+            webdriver=self.driver, url=test_tweet.quoted_tweet_url
         )
+        # assert tweet_capture.tweet_locator == "div[data-tweet-id='1200946238033661957']"
 
         screen_cap_file_path = tweet_capture.screen_shot_tweet()
         assert (
