@@ -23,7 +23,7 @@ def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     with WrappedWebDriver(browser="headless") as driver:
         for tweet in quoted_tweets:
             screen_shot_file_path = TweetCapture(
-                webdriver=driver, tweet=tweet
+                webdriver=driver, url=tweet.quoted_tweet_url
             ).screen_shot_tweet()
             add_screen_shot_to_tweet(
                 tweet=tweet, screen_shot_file_path=screen_shot_file_path
