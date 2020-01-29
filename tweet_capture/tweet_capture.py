@@ -52,7 +52,7 @@ class TweetCapture:
     @property
     def tweet_element(self) -> WebElement:
         """WebElement of the Tweet Div, this assumes tweet page has loaded"""
-        LOGGER.info(f"Retrieving tweet_element")
+        LOGGER.debug(f"Retrieving tweet_element")
         if self.tweet_locator:
             return self.driver.get_element_by_css(locator=self.tweet_locator)
         else:
@@ -60,14 +60,14 @@ class TweetCapture:
                 self.tweet_locator = self.TWEET_DIV_CONTAINER_OLD.format(self.tweet_id)
                 return self.driver.get_element_by_css(locator=self.tweet_locator)
             except NoSuchElementException as e:
-                LOGGER.error(f"{e} timed out looking for: {self.tweet_locator}")
+                LOGGER.debug(f"{e} timed out looking for: {self.tweet_locator}")
                 self.tweet_locator = self.TWEET_DIV_CONTAINER
                 self.driver.wait_for_element_to_be_visible_by_css(
                     locator=self.tweet_locator
                 )
                 return self.driver.get_element_by_css(locator=self.tweet_locator)
             finally:
-                LOGGER.info(f"Finally block, nothing here: {self.tweet_locator}")
+                LOGGER.debug(f"Finally block, nothing here: {self.tweet_locator}")
 
     @property
     def screen_capture_file_name_quoted_tweet(self) -> str:
