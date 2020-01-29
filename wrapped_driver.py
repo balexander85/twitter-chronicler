@@ -2,10 +2,7 @@
 
 Module for all webdriver classes and methods
 """
-from typing import Optional
-
 from selenium import webdriver
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement

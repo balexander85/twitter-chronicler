@@ -4,11 +4,11 @@ from furl import furl
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.remote.webelement import WebElement
 
-from config import PROJECT_DIR_PATH
 from _logger import LOGGER
 from wrapped_driver import WrappedWebDriver, scroll_to_element
 
 
+MODULE_DIR_PATH = os.path.dirname(__file__)
 TWITTER_URL = "https://twitter.com"
 
 
@@ -76,10 +76,7 @@ class TweetCapture:
     @property
     def screen_capture_file_path_quoted_tweet(self) -> str:
         return os.path.join(
-            PROJECT_DIR_PATH,
-            "tweet_capture",
-            "screen_shots",
-            self.screen_capture_file_name_quoted_tweet,
+            MODULE_DIR_PATH, "screen_shots", self.screen_capture_file_name_quoted_tweet,
         )
 
     def screen_shot_tweet(self) -> str:

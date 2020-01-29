@@ -50,7 +50,12 @@ def get_tweet(tweet_id: Union[int, str]) -> Tweet:
 
 
 def get_all_users_tweets(twitter_user: str) -> List[Tweet]:
-    """Helper method to collect ALL of a user's tweets"""
+    """Helper method to collect ALL of a user's tweets
+
+    Notes:
+        Endpoint   Resource family    Requests / window (user auth)    Requests / window (app auth)
+        * GET statuses/user_timeline	statuses	900	1500
+    """
     LOGGER.info(f"Getting tweets for user: {twitter_user}")
     initial_tweets = [
         Tweet(t)
@@ -96,6 +101,11 @@ def get_recent_quoted_retweets_for_user(
                 LOGGER.debug(
                     f"Skipping tweet({tweet.quoted_tweet_id}) "
                     f"from @{tweet.user}'s tweet({tweet.id}) quotes the bot user"
+                )
+            elif tweet.user == tweet.quoted_tweet_user:
+                LOGGER.debug(
+                    f"Skipping tweet({tweet.quoted_tweet_id}) "
+                    f"from @{tweet.user}'s tweet({tweet.id}) quotes their own tweet"
                 )
             elif tweet.id_str in excluded_ids:
                 LOGGER.debug(
