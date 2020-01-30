@@ -2,6 +2,8 @@
 
 Module for all webdriver classes and methods
 """
+import os
+
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
@@ -9,16 +11,24 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from config import CHROME_DRIVER_PATH
+from config import CHROME_DRIVER_PATH, PROJECT_DIR_PATH
 from _logger import LOGGER
 
 chrome_driver_path = CHROME_DRIVER_PATH
+headless_chrome_options = webdriver.ChromeOptions()
+headless_chrome_options.add_argument("--window-size=1920,1080")
+headless_chrome_options.add_argument("--disable-features=VizDisplayCompositor")
+headless_chrome_options.add_argument("--start-maximized")
+headless_chrome_options.add_argument("--disable-dev-shm-usage")
+headless_chrome_options.add_argument("--disable-gpu")
+headless_chrome_options.add_extension(
+    os.path.join(PROJECT_DIR_PATH, "Old-Twitter-Layout_v1.0.0.crx.crx")
+)
+
 chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument("--window-size=1920,1080")
-chrome_options.add_argument("--disable-features=VizDisplayCompositor")
-chrome_options.add_argument("--start-maximized")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--disable-gpu")
+chrome_options.add_extension(
+    os.path.join(PROJECT_DIR_PATH, "Old-Twitter-Layout_v1.0.0.crx.crx")
+)
 
 
 class WrappedWebDriver:
@@ -26,11 +36,13 @@ class WrappedWebDriver:
 
     def __init__(self, browser: str = "headless"):
         if browser == "chrome":
-            self.driver = webdriver.Chrome(executable_path=chrome_driver_path)
+            self.driver = webdriver.Chrome(
+                executable_path=chrome_driver_path, options=chrome_options
+            )
         elif browser == "headless":
             chrome_options.add_argument("--headless")
             self.driver = webdriver.Chrome(
-                executable_path=chrome_driver_path, options=chrome_options
+                executable_path=chrome_driver_path, options=headless_chrome_options
             )
 
     def __enter__(self):
