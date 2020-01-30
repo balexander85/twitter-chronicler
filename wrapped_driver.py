@@ -21,13 +21,13 @@ headless_chrome_options.add_argument("--disable-features=VizDisplayCompositor")
 headless_chrome_options.add_argument("--start-maximized")
 headless_chrome_options.add_argument("--disable-dev-shm-usage")
 headless_chrome_options.add_argument("--disable-gpu")
-headless_chrome_options.add_extension(
-    os.path.join(PROJECT_DIR_PATH, "Old-Twitter-Layout_v1.0.0.crx.crx")
+headless_chrome_options.add_argument(
+    "user-agent=Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko"
 )
 
 chrome_options = webdriver.ChromeOptions()
-chrome_options.add_extension(
-    os.path.join(PROJECT_DIR_PATH, "Old-Twitter-Layout_v1.0.0.crx.crx")
+chrome_options.add_argument(
+    "user-agent=Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko"
 )
 
 
@@ -40,7 +40,7 @@ class WrappedWebDriver:
                 executable_path=chrome_driver_path, options=chrome_options
             )
         elif browser == "headless":
-            chrome_options.add_argument("--headless")
+            headless_chrome_options.add_argument("--headless")
             self.driver = webdriver.Chrome(
                 executable_path=chrome_driver_path, options=headless_chrome_options
             )
