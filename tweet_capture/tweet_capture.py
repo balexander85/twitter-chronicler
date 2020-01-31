@@ -16,23 +16,37 @@ class TweetCapture:
     """Page object representing div of a tweet"""
 
     LOGIN_BUTTON = "a[data-testid='login']"
-    TWEET_DIV_CONTAINER_OLD = "div[data-tweet-id='{}']"
-    TWEET_DIV_CONTAINER = "div[data-testid='primaryColumn'] article:nth-of-type(1)"
+    TWEET_DIV_CONTAINER = "div[data-tweet-id='{}']"
     TWITTER_BODY = "body"
 
-    def __init__(self, webdriver: WrappedWebDriver, url: str):
-        self.driver = webdriver
-        self.url = url
+    def __init__(self):
+        self.driver = WrappedWebDriver(browser="headless")
+        self._url = None
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.driver.quit_driver()
 
     def _wait_until_loaded(self) -> bool:
         return self.driver.wait_for_element_to_be_visible_by_css(
             locator=self.TWITTER_BODY
         )
 
-    def open(self):
+    def open(self, url: str):
+        self.url = url
         LOGGER.info(f"Opening...tweet: {self.url}")
         self.driver.open(url=self.url)
         self._wait_until_loaded()
+
+    @property
+    def url(self):
+        return self._url
+
+    @url.setter
+    def url(self, value):
+        self._url = value
 
     @property
     def tweet_id(self) -> str:
@@ -42,7 +56,7 @@ class TweetCapture:
 
     @property
     def tweet_locator(self) -> str:
-        return self.TWEET_DIV_CONTAINER_OLD.format(self.tweet_id)
+        return self.TWEET_DIV_CONTAINER.format(self.tweet_id)
 
     @property
     def tweet_element(self) -> WebElement:
@@ -68,9 +82,9 @@ class TweetCapture:
             MODULE_DIR_PATH, "screen_shots", self.screen_capture_file_name_quoted_tweet,
         )
 
-    def screen_shot_tweet(self) -> str:
+    def screen_shot_tweet(self, url) -> str:
         """Take a screenshot of tweet and save to file"""
-        self.open()
+        self.open(url=url)
         scroll_to_element(driver=self.driver, element=self.tweet_element)
         LOGGER.info(
             msg=f"Saving screen shot: {self.screen_capture_file_path_quoted_tweet}"

@@ -6,7 +6,6 @@ from selenium.common.exceptions import TimeoutException
 from _logger import LOGGER
 from tweet_capture import TweetCapture
 from twitter_helpers import post_collected_tweets
-from wrapped_driver import WrappedWebDriver
 from wrapped_tweet import Tweet
 
 
@@ -20,11 +19,11 @@ def collect_and_post_tweets(tweets: List[Tweet]):
 @retry(exceptions=TimeoutException, tries=4, delay=2)
 def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     """Loop through list of quoted tweets and screen cap them"""
-    with WrappedWebDriver(browser="headless") as driver:
+    with TweetCapture() as tweet_capture:
         for tweet in quoted_tweets:
-            screen_shot_file_path = TweetCapture(
-                webdriver=driver, url=tweet.quoted_tweet_url
-            ).screen_shot_tweet()
+            screen_shot_file_path = tweet_capture.screen_shot_tweet(
+                url=tweet.quoted_tweet_url
+            )
             add_screen_shot_to_tweet(
                 tweet=tweet, screen_shot_file_path=screen_shot_file_path
             )
