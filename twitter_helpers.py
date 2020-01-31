@@ -1,6 +1,7 @@
 import json
 from typing import List, Union
 
+from furl import furl
 from twitter import Api as twitterApi, Status, TwitterError, Url, User
 
 from config import (
@@ -11,6 +12,7 @@ from config import (
     OAUTH_TOKEN,
     OAUTH_TOKEN_SECRET,
     TEST_JSON_FILE_NAME,
+    TEMP_JSON_FILE_NAME,
     TWITTER_API_USER,
 )
 from _logger import LOGGER
@@ -42,6 +44,22 @@ def get_status(status_id: Union[int, str]) -> Status:
     return response
 
 
+def get_status_from_url(url: str) -> Status:
+    """Get tweet from api and return Status object
+
+    Args:
+        url: url of the tweet
+
+    Examples:
+        * https://twitter.com/briebriejoy/status/1222711763248078849
+    """
+    LOGGER.info(f"Fetching status: {url}")
+    f_url = furl(url)
+    status_id = f_url.path.segments[-1]
+    response = twitter_api.GetStatus(status_id=status_id)
+    return response
+
+
 def get_tweet(tweet_id: Union[int, str]) -> Tweet:
     """Get tweet from api and return Tweet object"""
     LOGGER.info(f"Fetching tweet with id {tweet_id}")
@@ -49,11 +67,26 @@ def get_tweet(tweet_id: Union[int, str]) -> Tweet:
     return Tweet(response)
 
 
+def get_tweet_from_url(url: str) -> Tweet:
+    """Get tweet from api and return Tweet object
+
+    Args:
+        url: url of the tweet
+
+    Examples:
+        * https://twitter.com/briebriejoy/status/1222711763248078849
+
+    """
+    LOGGER.info(f"Fetching tweet: {url}")
+    response = get_status_from_url(url=url)
+    return Tweet(response)
+
+
 def get_all_users_tweets(twitter_user: str) -> List[Tweet]:
     """Helper method to collect ALL of a user's tweets
 
     Notes:
-        Endpoint   Resource family    Requests / window (user auth)    Requests / window (app auth)
+        Endpoint Resource family Requests / window (user auth) Requests / window (app auth)
         * GET statuses/user_timeline	statuses	900	1500
     """
     LOGGER.info(f"Getting tweets for user: {twitter_user}")
@@ -207,9 +240,14 @@ def save_tweet_test_data(file_name, status):
         json.dump(tweet.AsDict(), f)
 
 
-def fetch_test_data(data_name):
+def fetch_test_data_file():
     with open(TEST_JSON_FILE_NAME, "r") as f:
         json_file = json.load(f)
+    return json_file
+
+
+def fetch_test_data(data_name):
+    json_file = fetch_test_data_file()
 
     if type(json_file.get(data_name)) is list:
         return generate_mock_tweet(
@@ -254,3 +292,9 @@ def generate_mock_tweet(
         updated_status = convert_dicts_in_status_to_obj(status=raw_status)
 
     return updated_status
+
+
+if __name__ == "__main__":
+    save_user_test_data(
+        file_name=TEMP_JSON_FILE_NAME, user_name="timheidecker", count=20
+    )

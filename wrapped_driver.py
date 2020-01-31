@@ -2,8 +2,6 @@
 
 Module for all webdriver classes and methods
 """
-import os
-
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
@@ -11,8 +9,11 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from config import CHROME_DRIVER_PATH, PROJECT_DIR_PATH
+from config import CHROME_DRIVER_PATH
 from _logger import LOGGER
+
+
+USER_AGENT = "user-agent=Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko"
 
 chrome_driver_path = CHROME_DRIVER_PATH
 headless_chrome_options = webdriver.ChromeOptions()
@@ -21,14 +22,10 @@ headless_chrome_options.add_argument("--disable-features=VizDisplayCompositor")
 headless_chrome_options.add_argument("--start-maximized")
 headless_chrome_options.add_argument("--disable-dev-shm-usage")
 headless_chrome_options.add_argument("--disable-gpu")
-headless_chrome_options.add_argument(
-    "user-agent=Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko"
-)
+headless_chrome_options.add_argument(USER_AGENT)
 
 chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument(
-    "user-agent=Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko"
-)
+chrome_options.add_argument(USER_AGENT)
 
 
 class WrappedWebDriver:
@@ -127,6 +124,5 @@ def scroll_to_element(driver: WrappedWebDriver, element: WebElement):
     """Helper method to scroll down to element"""
     LOGGER.debug(f"Scrolling to WebElement: {element}")
     raw_driver = driver.driver
-    # raw_driver.execute_script("arguments[0].scrollIntoView();", element)
     actions = ActionChains(raw_driver)
     actions.move_to_element(element).perform()

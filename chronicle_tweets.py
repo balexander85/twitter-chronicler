@@ -14,11 +14,12 @@ Note:
     I was tired of looking at tweets that quoted tweets
     where the quoted tweets had been deleted.
 """
+from typing import List
 
 from _logger import LOGGER
 from chronicler import collect_and_post_tweets
 from config import LIST_OF_USERS_TO_FOLLOW
-from twitter_helpers import find_quoted_tweets
+from twitter_helpers import find_quoted_tweets, get_tweet_from_url, Tweet
 
 
 def run_chronicler():
@@ -28,6 +29,17 @@ def run_chronicler():
     collect_and_post_tweets(user_quoted_retweets)
 
     LOGGER.info("End of script run")
+
+
+def run_chronicler_ad_hoc():
+    LOGGER.info("Starting Ad-hoc script")
+    user_quoted_retweets_urls: List[str] = []
+    user_quoted_retweets: List[Tweet] = [
+        get_tweet_from_url(url) for url in user_quoted_retweets_urls
+    ]
+    collect_and_post_tweets(user_quoted_retweets)
+
+    LOGGER.info("End of Ad-hoc script run")
 
 
 if __name__ == "__main__":

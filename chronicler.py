@@ -10,7 +10,7 @@ from wrapped_driver import WrappedWebDriver
 from wrapped_tweet import Tweet
 
 
-def collect_and_post_tweets(tweets):
+def collect_and_post_tweets(tweets: List[Tweet]):
 
     if tweets:
         collect_quoted_tweets(quoted_tweets=tweets)

@@ -3,6 +3,7 @@
 .idea/
 *.lock
 config.ini
+temp_status.json
 list_of_status_ids_replied_to.txt
 list_of_users_to_follow.txt
 screen_shots/
