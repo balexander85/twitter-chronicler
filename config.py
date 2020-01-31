@@ -6,7 +6,7 @@ PROJECT_DIR_PATH = os.path.dirname(__file__)
 
 
 config = ConfigParser()
-config.read(os.path.join(PROJECT_DIR_PATH, "config.ini"))
+config.read(os.path.join(PROJECT_DIR_PATH, "conf", "config.ini"))
 
 # Twitter API config
 APP_KEY = config.get("default", "APP_KEY")
