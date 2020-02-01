@@ -13,17 +13,20 @@ from twitter_helpers import (
 )
 
 
-@pytest.mark.skip
 class TestGetTweet:
-    def test_get_tweet_int(self):
+    @patch("twitter.api.Api.GetStatus")
+    def test_get_tweet_int(self, mock_get, test_status):
         """Verify get_tweet method returns Tweet object"""
+        mock_get.return_value = test_status("quoted_tweet")
         tweet_id_int = 1201197107169898498
         tweet = get_tweet(tweet_id=tweet_id_int)
         assert type(tweet) == Tweet
         assert tweet.id == tweet_id_int
 
-    def test_get_tweet_str(self):
+    @patch("twitter.api.Api.GetStatus")
+    def test_get_tweet_str(self, mock_get, test_status):
         """Verify get_tweet method returns Tweet object"""
+        mock_get.return_value = test_status("quoted_tweet")
         tweet_id_str = f"{1201197107169898498}"
         tweet = get_tweet(tweet_id=tweet_id_str)
         assert type(tweet) == Tweet
@@ -37,11 +40,6 @@ class TestTweet:
     """
 
     def test_quoted_tweet(self, test_status):
-        # file_path_quoted_tweet = (
-        #     "/Users/brian/Development/repos/"
-        #     "projects_github/twitter_chronicler/screen_shots/"
-        # )
-        # file_name_quoted_tweet = "tweet_capture_1200946238033661957.png"
         expected_user = "WajahatAli"
         expected_id = 1200946238033661957
         tweet = Tweet(test_status("quoted_tweet"))
@@ -49,11 +47,6 @@ class TestTweet:
         assert tweet.quoted_tweet_user == expected_user
         assert tweet.quoted_tweet_id == expected_id
         assert tweet.quoted_tweet_locator == f"div[data-tweet-id='{expected_id}']"
-        # assert tweet.screen_capture_file_name_quoted_tweet == file_name_quoted_tweet
-        # assert (
-        #     tweet.screen_capture_file_path_quoted_tweet
-        #     == f"{file_path_quoted_tweet}{file_name_quoted_tweet}"
-        # )
         assert (
             tweet.quoted_tweet_url
             == f"https://twitter.com/{expected_user}/status/{expected_id}"
@@ -99,13 +92,13 @@ class TestTweet:
         response = post_collected_tweets(quoted_tweets=[Tweet(quoted_tweet)])
         assert not response
 
-    # @patch("twitter_helpers.get_recent_tweets_for_user")
-    # def test_find_quoted_tweets_quote_bot_user(self, mock_get, test_tweet):
-    #     """Verify find_quoted_tweets method returns None for tweet by bot"""
-    #     basic_tweet = test_tweet("quote_bot_status")
-    #     mock_get.return_value = [basic_tweet]
-    #     quoted_retweets = find_quoted_tweets(users_to_follow=["FTBandFTR"])
-    #     assert not quoted_retweets
+    @patch("twitter_helpers.get_recent_tweets_for_user")
+    def test_find_quoted_tweets_quote_bot_user(self, mock_get, test_status):
+        """Verify find_quoted_tweets method returns None for tweet by bot"""
+        basic_tweet = test_status("quote_bot_status")
+        mock_get.return_value = [basic_tweet]
+        quoted_retweets = find_quoted_tweets(users_to_follow=["FTBandFTR"])
+        assert not quoted_retweets
 
 
 class TestBasicTweet:
