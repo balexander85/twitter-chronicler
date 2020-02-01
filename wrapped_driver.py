@@ -68,6 +68,13 @@ class WrappedWebDriver:
     def get_element_by_css(self, locator: str) -> WebElement:
         return self.driver.find_element_by_css_selector(css_selector=locator)
 
+    def scroll_to_element(self, element: WebElement):
+        """Helper method to scroll down to element"""
+        LOGGER.debug(f"Scrolling to WebElement: {element}")
+        raw_driver = self.driver
+        actions = ActionChains(raw_driver)
+        actions.move_to_element(element).perform()
+
     def wait_for_element_to_be_present_by_id(
         self, locator: str, timeout: int = 60, poll_frequency: int = 3
     ) -> bool:
@@ -118,11 +125,3 @@ class WrappedWebDriver:
         return WebDriverWait(
             driver=self.driver, timeout=timeout, poll_frequency=poll_frequency
         ).until(EC.visibility_of_element_located((by, locator)))
-
-
-def scroll_to_element(driver: WrappedWebDriver, element: WebElement):
-    """Helper method to scroll down to element"""
-    LOGGER.debug(f"Scrolling to WebElement: {element}")
-    raw_driver = driver.driver
-    actions = ActionChains(raw_driver)
-    actions.move_to_element(element).perform()
