@@ -2,7 +2,7 @@ import sys
 
 from filelock import FileLock, Timeout
 
-from chronicle_tweets import run_chronicler
+from chronicler import run_chronicler
 from _logger import LOGGER
 
 script_timeout = 10

@@ -17,6 +17,7 @@ from config import (
 )
 from _logger import LOGGER
 from wrapped_tweet import Tweet
+from util import add_status_id_to_file
 
 
 twitter_api = twitterApi(
@@ -113,11 +114,13 @@ def get_all_users_tweets(twitter_user: str) -> List[Tweet]:
     return initial_tweets
 
 
-def get_recent_tweets_for_user(twitter_user: str, count: int = 10) -> List[Status]:
+def get_recent_tweets_for_user(
+    twitter_user: str, since_id: int = None, count: int = 10
+) -> List[Status]:
     """Using Twitter API get recent tweets using user screen name"""
     LOGGER.debug(f"Getting last {count} tweets for user: {twitter_user}")
     return twitter_api.GetUserTimeline(
-        screen_name=twitter_user, since_id=None, count=count
+        screen_name=twitter_user, since_id=since_id, count=count
     )
 
 
@@ -190,21 +193,14 @@ def find_deleted_tweets(twitter_user: str) -> List[dict]:
     return bad_ids
 
 
-def save_status_id_of_replied_to_tweet(tweet_id: str):
-    """Save id of the replied to tweet
-
-    Save id to file so that tweet will not be replied to more than once.
-    """
-    LOGGER.debug(msg=f"Adding {tweet_id} to {LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME}")
-    with open(LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME, "a+") as f:
-        f.write(tweet_id + "\n")
-
-
 def post_collected_tweets(quoted_tweets: List[Tweet]):
     """For each quoted tweet post for the record and for the blocked"""
     for user_tweet in quoted_tweets:
         response = post_reply_to_user_tweet(tweet=user_tweet)
-        save_status_id_of_replied_to_tweet(tweet_id=str(response.in_reply_to_status_id))
+        add_status_id_to_file(
+            tweet_id=str(response.in_reply_to_status_id),
+            list_of_ids_replied_to_file_name=LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME,
+        )
 
 
 def post_reply_to_user_tweet(tweet: Tweet) -> Status:

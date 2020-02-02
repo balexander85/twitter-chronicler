@@ -1,12 +1,53 @@
+"""chronicler.py
+
+Containing some helpful objects
+
+1. List of users to follow
+2. for each user watch for retweets that quote tweets
+3. save screenshot of quoted tweet
+4. save URL(s) from quoted tweet
+5. Reply to tweet with image of quoted tweet with URL(s) and a disclaimer
+
+This Tweet is available!
+
+Note:
+    I was tired of looking at tweets that quoted tweets
+    where the quoted tweets had been deleted.
+"""
 from typing import List
 
 from retry import retry
 from selenium.common.exceptions import TimeoutException
 
+from config import LIST_OF_USERS_TO_FOLLOW
 from _logger import LOGGER
 from tweet_capture import TweetCapture
-from twitter_helpers import post_collected_tweets
+from twitter_helpers import (
+    find_quoted_tweets,
+    get_tweet_from_url,
+    post_collected_tweets,
+)
 from wrapped_tweet import Tweet
+
+
+def run_chronicler():
+    LOGGER.info("Start of script")
+
+    user_quoted_retweets = find_quoted_tweets(users_to_follow=LIST_OF_USERS_TO_FOLLOW)
+    collect_and_post_tweets(user_quoted_retweets)
+
+    LOGGER.info("End of script run")
+
+
+def run_chronicler_ad_hoc():
+    LOGGER.info("Starting Ad-hoc script")
+    user_quoted_retweets_urls: List[str] = []
+    user_quoted_retweets: List[Tweet] = [
+        get_tweet_from_url(url) for url in user_quoted_retweets_urls
+    ]
+    collect_and_post_tweets(user_quoted_retweets)
+
+    LOGGER.info("End of Ad-hoc script run")
 
 
 def collect_and_post_tweets(tweets: List[Tweet]):
