@@ -13,7 +13,12 @@ from twitter_helpers import (
 )
 
 
-class TestGetTweet:
+class TestTweet:
+    """
+    Verify functionality related to Tweet object
+    and other helper methods from twitter_helpers.py
+    """
+
     @patch("twitter.api.Api.GetStatus")
     def test_get_tweet_int(self, mock_get, test_status):
         """Verify get_tweet method returns Tweet object"""
@@ -31,13 +36,6 @@ class TestGetTweet:
         tweet = get_tweet(tweet_id=tweet_id_str)
         assert type(tweet) == Tweet
         assert tweet.id_str == tweet_id_str
-
-
-class TestTweet:
-    """
-    Verify functionality related to Tweet object
-    and other helper methods from twitter_helpers.py
-    """
 
     def test_quoted_tweet(self, test_status):
         expected_user = "WajahatAli"

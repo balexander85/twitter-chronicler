@@ -29,6 +29,18 @@ twitter_api = twitterApi(
 
 
 def find_quoted_tweets(users_to_follow: List[str]) -> List[Tweet]:
+    """Get list of tweets that were quoted by users from given list
+
+    For each user in list of users get user's recent tweets that
+    were quoting other tweets. Exclude tweet ids that have already
+    been replied to from a previous run.
+
+    Args:
+        users_to_follow: list of twitter handles w/out @ symbol
+
+    Returns:
+        A list of Tweet objects
+    """
     return [
         tweets
         for user in users_to_follow
@@ -40,7 +52,7 @@ def find_quoted_tweets(users_to_follow: List[str]) -> List[Tweet]:
 
 def get_status(status_id: Union[int, str]) -> Status:
     """Get tweet from api and return Tweet object"""
-    LOGGER.info(f"Fetching tweet with id {status_id}")
+    LOGGER.info(f"twitter_api.GetStatus(status_id={status_id})")
     response = twitter_api.GetStatus(status_id=status_id)
     return response
 
@@ -54,16 +66,16 @@ def get_status_from_url(url: str) -> Status:
     Examples:
         * https://twitter.com/briebriejoy/status/1222711763248078849
     """
-    LOGGER.info(f"Fetching status: {url}")
+    LOGGER.info(f"Fetching tweet: {url}")
     f_url = furl(url)
     status_id = f_url.path.segments[-1]
-    response = twitter_api.GetStatus(status_id=status_id)
+    response = get_status(status_id=status_id)
     return response
 
 
 def get_tweet(tweet_id: Union[int, str]) -> Tweet:
     """Get tweet from api and return Tweet object"""
-    LOGGER.info(f"Fetching tweet with id {tweet_id}")
+    LOGGER.info(f"get_status(status_id={tweet_id})")
     response = get_status(status_id=tweet_id)
     return Tweet(response)
 

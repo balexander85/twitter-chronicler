@@ -5,15 +5,20 @@ from filelock import FileLock, Timeout
 from chronicler import run_chronicler
 from _logger import LOGGER
 
-script_timeout = 10
+SCRIPT_TIMEOUT = 10
 
 
-try:
-    with FileLock(f"{__file__}.lock", timeout=script_timeout) as lock:
-        run_chronicler()
-except Timeout:
-    LOGGER.info(
-        f"Another instance of this application currently holds the lock. "
-        f"(timeout={script_timeout})"
-    )
-    sys.exit()
+def main():
+    try:
+        with FileLock(f"{__file__}.lock", timeout=SCRIPT_TIMEOUT):
+            run_chronicler()
+    except Timeout:
+        LOGGER.info(
+            f"Another instance of this application currently holds the lock. "
+            f"(timeout={SCRIPT_TIMEOUT})"
+        )
+        sys.exit()
+
+
+if __name__ == "__main__":
+    main()
