@@ -5,7 +5,6 @@ from twitter import Status
 
 from twitter_helpers import (
     find_quoted_tweets,
-    get_tweet,
     get_recent_tweets_for_user,
     post_collected_tweets,
     post_reply_to_user_tweet,
@@ -18,24 +17,6 @@ class TestTweet:
     Verify functionality related to Tweet object
     and other helper methods from twitter_helpers.py
     """
-
-    @patch("twitter.api.Api.GetStatus")
-    def test_get_tweet_int(self, mock_get, test_status):
-        """Verify get_tweet method returns Tweet object"""
-        mock_get.return_value = test_status("quoted_tweet")
-        tweet_id_int = 1201197107169898498
-        tweet = get_tweet(tweet_id=tweet_id_int)
-        assert type(tweet) == Tweet
-        assert tweet.id == tweet_id_int
-
-    @patch("twitter.api.Api.GetStatus")
-    def test_get_tweet_str(self, mock_get, test_status):
-        """Verify get_tweet method returns Tweet object"""
-        mock_get.return_value = test_status("quoted_tweet")
-        tweet_id_str = f"{1201197107169898498}"
-        tweet = get_tweet(tweet_id=tweet_id_str)
-        assert type(tweet) == Tweet
-        assert tweet.id_str == tweet_id_str
 
     def test_quoted_tweet(self, test_status):
         expected_user = "WajahatAli"
