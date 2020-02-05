@@ -32,9 +32,8 @@ class TweetCapture:
         )
 
     def open(self, url: str):
-        self.url = url
-        LOGGER.info(f"Opening...tweet: {self.url}")
-        self.driver.open(url=self.url)
+        LOGGER.info(f"Opening...tweet: {url}")
+        self.driver.open(url=url)
         self._wait_until_loaded()
 
     def get_tweet_element(self, tweet_locator) -> WebElement:
