@@ -45,16 +45,25 @@ class TestTweet:
 
     @patch("twitter.api.Api.GetUserTimeline")
     def test_get_one_recent_tweets_for_user(self, mock_get, test_status):
-        """Mock get_recent_tweets_for_user without making real call to Twitter API"""
+        """Verify get_recent_tweets_for_user method returns tweet
+
+        Notes:
+           * Mock GetUserTimeline without making real call to Twitter API
+        """
         mock_get.return_value = test_status("mocked_status")
         user_name = "FTBandFTR"
         user_tweets = get_recent_tweets_for_user(twitter_user=user_name, count=1)
         assert len(user_tweets) == 1
         assert type(user_tweets) == list
+        assert type(user_tweets[0]) == Status
 
     @patch("twitter.api.Api.PostUpdate")
     def test_post_reply_to_user_tweet(self, mock_get, test_status):
-        """Mock post_reply_to_user_tweet without making real call to Twitter API"""
+        """Verify post_reply_to_user_tweet method returns tweet
+
+        Notes:
+           * Mock PostUpdate without making real call to Twitter API
+        """
         quoted_tweet = test_status("quoted_tweet")
         mock_get.return_value = quoted_tweet
         response = post_reply_to_user_tweet(tweet=Tweet(quoted_tweet))
@@ -65,7 +74,11 @@ class TestTweet:
 
     @patch("twitter.api.Api.PostUpdate")
     def test_post_collected_tweets(self, mock_get, test_status):
-        """Mock post_reply_to_user_tweet without making real call to Twitter API"""
+        """Verify post_collected_tweets method returns None
+
+        Notes:
+           * Mock PostUpdate without making real call to Twitter API
+        """
         quoted_tweet = test_status("quoted_tweet")
         mock_get.return_value = quoted_tweet
         response = post_collected_tweets(quoted_tweets=[Tweet(quoted_tweet)])
@@ -73,7 +86,11 @@ class TestTweet:
 
     @patch("twitter_helpers.get_recent_tweets_for_user")
     def test_find_quoted_tweets_quote_bot_user(self, mock_get, test_status):
-        """Verify find_quoted_tweets method returns None for tweet by bot"""
+        """Verify find_quoted_tweets method returns None for tweet by bot
+
+        Notes:
+           * Mock get_recent_tweets_for_user without making real call to Twitter API
+        """
         basic_tweet = test_status("quote_bot_status")
         mock_get.return_value = [basic_tweet]
         quoted_retweets = find_quoted_tweets(users_to_follow=["FTBandFTR"])
