@@ -296,6 +296,9 @@ def generate_mock_tweet(
 
 
 if __name__ == "__main__":
-    save_user_test_data(
-        file_name=TEMP_JSON_FILE_NAME, user_name="timheidecker", count=20
-    )
+    # uncomment to create test data
+    # save_user_test_data(
+    #     file_name=TEMP_JSON_FILE_NAME, user_name="timheidecker", count=20
+    # )
+    # save_tweet_test_data(file_name=TEMP_JSON_FILE_NAME, status=1215708312249028609)
+    LOGGER.info("End of file")
