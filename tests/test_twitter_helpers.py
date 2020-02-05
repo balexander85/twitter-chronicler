@@ -4,7 +4,15 @@ Tests for all the helper functions from twitter_helpers.py
 """
 from unittest.mock import patch
 
-from twitter_helpers import find_quoted_tweets, get_recent_quoted_retweets_for_user
+from twitter import Status
+
+from twitter_helpers import (
+    find_quoted_tweets,
+    get_recent_quoted_retweets_for_user,
+    get_recent_tweets_for_user,
+    post_collected_tweets,
+    post_reply_to_user_tweet,
+)
 from wrapped_tweet import Tweet
 
 
@@ -180,3 +188,117 @@ def test_get_recent_quoted_retweets_for_user_for_users_own_tweet(mock_get, test_
         excluded_ids=["1218223881045139457", "1217726499781873664"],
     )
     assert not quoted_retweets
+
+
+def test_tweet_expected_properties(test_status):
+    """Verify Tweet instance returns expected value for listed properties"""
+    basic_tweet = test_status("basic_tweet")
+    tweet = Tweet(basic_tweet)
+    assert type(tweet) == Tweet
+    assert tweet.user == basic_tweet.user.screen_name
+    assert tweet.id == basic_tweet.id
+    assert tweet.id_str == basic_tweet.id_str
+    assert tweet.text == basic_tweet.text
+    assert tweet.replied_to_status_bool
+    # Verify Status has been saved to raw_tweet property
+    assert tweet.raw_tweet.user == basic_tweet.user
+    assert tweet.raw_tweet.id == basic_tweet.id
+    assert tweet.raw_tweet.id_str == basic_tweet.id_str
+    assert tweet.raw_tweet.text == basic_tweet.text
+
+
+def test_tweet_none_properties(test_status):
+    """Verify Tweet instance returns None for the expected properties"""
+    basic_tweet = test_status("basic_tweet")
+    expected_none_properties = [
+        "quoted_status",
+        "quoted_tweet_id",
+        "quoted_tweet_user",
+        "quoted_tweet_url",
+        "for_the_record_message",
+        "urls_from_quoted_tweet",
+    ]
+    tweet = Tweet(basic_tweet)
+    assert type(tweet) == Tweet
+    non_none_properties = [
+        name for name in expected_none_properties if tweet.__getattribute__(name)
+    ]
+    assert not non_none_properties
+
+
+@patch("twitter.api.Api.GetUserTimeline")
+def test_get_recent_tweets_for_user(mock_get, test_status):
+    basic_tweet = test_status("basic_tweet")
+    mock_get.return_value = [basic_tweet]
+    tweets = get_recent_tweets_for_user(twitter_user="FTBandFTR", count=10)
+    assert all(type(t) is Status for t in tweets)
+
+
+@patch("twitter.api.Api.PostUpdate")
+def test_post_reply_to_user_tweet(mock_get, test_status):
+    """Verify post_reply_to_user_tweet method returns tweet
+
+    Notes:
+       * Mock PostUpdate without making real call to Twitter API
+    """
+    quoted_tweet = test_status("quoted_tweet")
+    mock_get.return_value = quoted_tweet
+    response = post_reply_to_user_tweet(tweet=Tweet(quoted_tweet))
+    assert response.id == 1201197107169898498
+    assert response.id_str == "1201197107169898498"
+    assert response.quoted_status.id == 1200946238033661957
+    assert type(response) == Status
+
+
+@patch("twitter.api.Api.PostUpdate")
+def test_post_collected_tweets(mock_get, test_status):
+    """Verify post_collected_tweets method returns None
+
+    Notes:
+       * Mock PostUpdate without making real call to Twitter API
+    """
+    quoted_tweet = test_status("quoted_tweet")
+    mock_get.return_value = quoted_tweet
+    response = post_collected_tweets(quoted_tweets=[Tweet(quoted_tweet)])
+    assert not response
+
+
+def test_tweet_quoted_tweet(test_status):
+    expected_user = "WajahatAli"
+    expected_id = 1200946238033661957
+    tweet = Tweet(test_status("quoted_tweet"))
+    assert type(tweet.quoted_status) == Status
+    assert tweet.quoted_tweet_user == expected_user
+    assert tweet.quoted_tweet_id == expected_id
+    assert tweet.quoted_tweet_locator == f"div[data-tweet-id='{expected_id}']"
+    assert (
+        tweet.quoted_tweet_url
+        == f"https://twitter.com/{expected_user}/status/{expected_id}"
+    )
+    assert tweet.tweet_locator == f"div[data-tweet-id='1201197107169898498']"
+    assert tweet.for_the_record_message == (
+        "@_b_axe "
+        "This Tweet is available! \n"
+        "For the blocked and the record!\n"
+        "URL(s) from tweet: https://t.co/AlQY448xZs"
+    )
+    assert tweet.urls_from_quoted_tweet == ["https://t.co/AlQY448xZs"]
+    assert tweet.__repr__() == (
+        "@_b_axe: @WajahatAli Why exclude Tulsi? https://t.co/1tHcDRwFSj "
+        "https://t.co/qc3x1ro2PT"
+    )
+
+
+@patch("twitter.api.Api.GetUserTimeline")
+def test_get_one_recent_tweets_for_user(mock_get, test_status):
+    """Verify get_recent_tweets_for_user method returns tweet
+
+    Notes:
+       * Mock GetUserTimeline without making real call to Twitter API
+    """
+    mock_get.return_value = test_status("mocked_status")
+    user_name = "FTBandFTR"
+    user_tweets = get_recent_tweets_for_user(twitter_user=user_name, count=1)
+    assert len(user_tweets) == 1
+    assert type(user_tweets) == list
+    assert type(user_tweets[0]) == Status
