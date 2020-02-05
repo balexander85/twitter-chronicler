@@ -17,3 +17,15 @@ def test_tweet_screen_shot_tweet(test_tweet):
         "twitter_chronicler/tweet_capture/screen_shots/"
         "tweet_capture_1215707826783498242.png"
     )
+
+
+def test_tweet_capture_get_screen_capture_file_path_quoted_tweet(test_tweet):
+    """
+    Verify functionality tweet_capture module
+    """
+    tweet_id = 1215708312249028609
+    assert (
+        "/Users/brian/Development/repos/projects_github/twitter_chronicler"
+        "/tweet_capture/screen_shots/tweet_capture_1215708312249028609.png"
+        == TweetCapture.get_screen_capture_file_path_quoted_tweet(tweet_id=tweet_id)
+    )
