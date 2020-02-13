@@ -66,7 +66,7 @@ def get_tweet_from_url(url: str) -> Tweet:
     return Tweet(response)
 
 
-def get_all_users_tweets(twitter_user: str) -> List[Tweet]:
+def get_all_users_tweets(twitter_user: str) -> List[Status]:
     """Helper method to collect ALL of a user's tweets
 
     Notes:
@@ -74,27 +74,27 @@ def get_all_users_tweets(twitter_user: str) -> List[Tweet]:
         * GET statuses/user_timeline	statuses	900	1500
     """
     LOGGER.info(f"Getting tweets for user: {twitter_user}")
-    initial_tweets = [
-        Tweet(t)
-        for t in twitter_api.GetUserTimeline(screen_name=twitter_user, count=200)
-    ]
-    last_tweet_id = initial_tweets[-1].id
     user_tweet_count = twitter_api.GetUser(screen_name=twitter_user).statuses_count
-    if int(user_tweet_count) > 1000:
+
+    if int(user_tweet_count) > 3000:
         raise Exception("Whatever the hourly rate limit would be raise error for now")
 
+    all_tweets = []
+
+    initial_tweets = twitter_api.GetUserTimeline(screen_name=twitter_user, count=200)
+
+    last_tweet_id = initial_tweets[-1].id
+    all_tweets.extend(initial_tweets)
+
     for _ in range(int(user_tweet_count / 200)):
-        new_tweets = [
-            Tweet(t)
-            for t in twitter_api.GetUserTimeline(
-                screen_name=twitter_user, max_id=last_tweet_id, count=200
-            )
-        ]
-        initial_tweets.extend(new_tweets)
+        new_tweets = twitter_api.GetUserTimeline(
+            screen_name=twitter_user, max_id=last_tweet_id, count=200
+        )
+        all_tweets.extend(new_tweets)
         last_tweet_id = new_tweets[-1].id
 
-    LOGGER.info(f"Found {len(initial_tweets)} tweets for user {twitter_user}")
-    return initial_tweets
+    LOGGER.info(f"Found {len(all_tweets)} tweets for user {twitter_user}")
+    return all_tweets
 
 
 def get_recent_tweets_for_user(
@@ -108,9 +108,10 @@ def get_recent_tweets_for_user(
 
 
 def get_recent_quoted_retweets_for_user(
-    twitter_user: str, excluded_ids: List[str]
+    twitter_user: str, excluded_ids: List[str] = None
 ) -> List[Tweet]:
     """Get tweets for given user that has recently quoted tweet in retweet"""
+    excluded_ids = excluded_ids if excluded_ids else []
     user_tweets: List[Status] = get_recent_tweets_for_user(twitter_user=twitter_user)
     user_tweets_quoting_tweets = []
     for t in user_tweets:
@@ -151,7 +152,7 @@ def get_recent_quoted_retweets_for_user(
 def find_deleted_tweets(twitter_user: str) -> List[dict]:
     """Get list of tweets that were deleted"""
     bad_ids = []
-    list_of_users_to_ignore = ["aaronjmate", "lhfang"]
+    list_of_users_to_ignore = ["", ""]
     tweets = get_all_users_tweets(twitter_user)
     replied_to_statuses = [
         t
@@ -228,6 +229,15 @@ def post_reply_to_user_tweet(tweet: Tweet) -> Status:
 def save_user_test_data(file_name, user_name, count):
     """Make call with twitter api to get test data"""
     tweets = twitter_api.GetUserTimeline(screen_name=user_name, count=count)
+    clean_tweets = [s.AsDict() for s in tweets]
+    with open(file_name, "w") as f:
+        for t in clean_tweets:
+            json.dump(t, f)
+
+
+def save_all_user_data(file_name, user_name):
+    """Make call with twitter api to get test data"""
+    tweets = get_all_users_tweets(twitter_user=user_name)
     clean_tweets = [s.AsDict() for s in tweets]
     with open(file_name, "w") as f:
         for t in clean_tweets:
