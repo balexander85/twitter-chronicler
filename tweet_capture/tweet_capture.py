@@ -67,7 +67,9 @@ class TweetCapture:
             tweet_id=tweet_id
         )
         # move mouse cursor away to highlight any @users
-        self.driver.move_mouse_by_offset(x=0, y=0)
+        self.driver.scroll_to_element(
+            self.get_tweet_element(tweet_locator=tweet_locator + " span.metadata")
+        )
         LOGGER.info(msg=f"Saving screen shot: {screen_capture_file_path}")
         if not self.get_tweet_element(tweet_locator=tweet_locator).screenshot(
             filename=screen_capture_file_path
