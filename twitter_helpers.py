@@ -235,11 +235,11 @@ def save_user_test_data(file_name, user_name, count):
             json.dump(t, f)
 
 
-def save_all_user_data(file_name, user_name):
+def save_all_user_data(user_name: str):
     """Make call with twitter api to get test data"""
     tweets = get_all_users_tweets(twitter_user=user_name)
     clean_tweets = [s.AsDict() for s in tweets]
-    with open(file_name, "w") as f:
+    with open(f"{user_name}_all_tweets.json", "w") as f:
         for t in clean_tweets:
             json.dump(t, f)
 
