@@ -26,7 +26,7 @@ def test_find_quoted_tweets_for_quoted_tweet(mock_get, test_status):
     test_tweets = [test_status("quoted_tweet")]
     mock_get.return_value = test_tweets
     user_name = "_b_axe"
-    tweets = find_quoted_tweets(users_to_follow=[user_name])
+    tweets = find_quoted_tweets(user=user_name)
     assert len(tweets) == 1
     assert type(tweets) == list
     assert type(tweets[0]) == Tweet
@@ -44,7 +44,7 @@ def test_find_quoted_tweets_for_user_excluded(mock_get, test_status):
     """
     mock_get.return_value = [test_status("replied_to_quoted_tweet")]
     user_name = "_b_axe"
-    tweets = find_quoted_tweets(users_to_follow=[user_name])
+    tweets = find_quoted_tweets(user=user_name)
     assert len(tweets) == 0
     assert type(tweets) == list
 
@@ -61,7 +61,7 @@ def test_find_quoted_tweets_for_bot_tweet(mock_get, test_status):
     """
     basic_tweet = test_status("quote_bot_status")
     mock_get.return_value = [basic_tweet]
-    quoted_retweets = find_quoted_tweets(users_to_follow=["_b_axe"])
+    quoted_retweets = find_quoted_tweets(user="_b_axe")
     assert not quoted_retweets
 
 
@@ -76,7 +76,7 @@ def test_find_quoted_tweets_for_non_retweet(mock_get, test_status):
     """
     basic_tweet = test_status("basic_tweet")
     mock_get.return_value = [basic_tweet]
-    quoted_retweets = find_quoted_tweets(users_to_follow=["_b_axe"])
+    quoted_retweets = find_quoted_tweets(user="_b_axe")
     assert not quoted_retweets
 
 
@@ -92,7 +92,7 @@ def test_find_quoted_tweets_for_users_own_tweet(mock_get, test_status):
     """
     basic_tweet = test_status("quote_users_own_status")
     mock_get.return_value = [basic_tweet]
-    quoted_retweets = find_quoted_tweets(users_to_follow=["jvgraz"])
+    quoted_retweets = find_quoted_tweets(user="jvgraz")
     assert not quoted_retweets
 
 

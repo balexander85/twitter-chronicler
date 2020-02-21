@@ -177,7 +177,7 @@ def find_deleted_tweets(twitter_user: str) -> List[dict]:
     return bad_ids
 
 
-def find_quoted_tweets(users_to_follow: List[str]) -> List[Tweet]:
+def find_quoted_tweets(user: str) -> List[Tweet]:
     """Get list of tweets that were quoted by users from given list
 
     For each user in list of users get user's recent tweets that
@@ -185,14 +185,13 @@ def find_quoted_tweets(users_to_follow: List[str]) -> List[Tweet]:
     been replied to from a previous run.
 
     Args:
-        users_to_follow: list of twitter handles w/out @ symbol
+        user: twitter handle w/out @ symbol
 
     Returns:
         A list of Tweet objects
     """
     return [
         tweets
-        for user in users_to_follow
         for tweets in get_recent_quoted_retweets_for_user(
             twitter_user=user, excluded_ids=LIST_OF_STATUS_IDS_REPLIED_TO
         )
