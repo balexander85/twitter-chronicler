@@ -34,6 +34,7 @@ def run_chronicler():
     LOGGER.info("Start of script")
 
     for user in LIST_OF_USERS_TO_FOLLOW:
+        LOGGER.info(f"starting collection for user: @{user}")
         user_quoted_retweets = find_quoted_tweets(user=user)
         collect_and_post_tweets(user_quoted_retweets)
 
