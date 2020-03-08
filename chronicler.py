@@ -90,3 +90,7 @@ class Chronicler:
     """
 
     ...
+
+
+# if __name__ == "__main__":
+#     run_chronicler_ad_hoc()

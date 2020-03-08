@@ -1,7 +1,7 @@
 import os
 
 from furl import furl
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.remote.webelement import WebElement
 
 from _logger import LOGGER
@@ -16,6 +16,7 @@ class TweetCapture:
     """Page object representing div of a tweet"""
 
     TWITTER_BODY = "body"
+    TOMBSTONE_VIEW_LINK = "button.Tombstone-action.js-display-this-media.btn-link"
 
     def __init__(self):
         self.driver = WrappedWebDriver(browser="headless")
@@ -49,6 +50,17 @@ class TweetCapture:
             self.driver.quit_driver()
             raise TimeoutException
 
+    def dismiss_sensitive_material_warning(self):
+        """Click View for sensitive material warning"""
+        try:
+            self.driver.get_element_by_css(self.TOMBSTONE_VIEW_LINK).click()
+            self.driver.wait_for_element_not_to_be_visible_by_css(
+                self.TOMBSTONE_VIEW_LINK
+            )
+        except NoSuchElementException as e:
+            LOGGER.debug(f"Tombstone warning was not present {e}")
+            pass
+
     @staticmethod
     def get_screen_capture_file_path_quoted_tweet(tweet_id) -> str:
         return os.path.join(
@@ -70,6 +82,10 @@ class TweetCapture:
         self.driver.scroll_to_element(
             self.get_tweet_element(tweet_locator=tweet_locator + " span.metadata")
         )
+        # Check for translation
+        # to be implemented
+        # Check for "This media may contain sensitive material."
+        self.dismiss_sensitive_material_warning()
         LOGGER.info(msg=f"Saving screen shot: {screen_capture_file_path}")
         if not self.get_tweet_element(tweet_locator=tweet_locator).screenshot(
             filename=screen_capture_file_path
