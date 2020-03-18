@@ -9,13 +9,11 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from config import CHROME_DRIVER_PATH
 from _logger import LOGGER
 
 
 USER_AGENT = "user-agent=Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko"
 
-chrome_driver_path = CHROME_DRIVER_PATH
 headless_chrome_options = webdriver.ChromeOptions()
 headless_chrome_options.add_argument("--window-size=1920,1080")
 headless_chrome_options.add_argument("--disable-features=VizDisplayCompositor")
@@ -31,7 +29,7 @@ chrome_options.add_argument(USER_AGENT)
 class WrappedWebDriver:
     """Class used to wrap selenium webdriver"""
 
-    def __init__(self, browser: str = "headless"):
+    def __init__(self, chrome_driver_path: str, browser: str = "headless"):
         if browser == "chrome":
             self.driver = webdriver.Chrome(
                 executable_path=chrome_driver_path, options=chrome_options

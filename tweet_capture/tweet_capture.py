@@ -4,6 +4,7 @@ from furl import furl
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.remote.webelement import WebElement
 
+from config import CHROME_DRIVER_PATH
 from _logger import LOGGER
 from wrapped_driver import WrappedWebDriver
 
@@ -19,7 +20,9 @@ class TweetCapture:
     TOMBSTONE_VIEW_LINK = "button.Tombstone-action.js-display-this-media.btn-link"
 
     def __init__(self):
-        self.driver = WrappedWebDriver(browser="headless")
+        self.driver = WrappedWebDriver(
+            chrome_driver_path=CHROME_DRIVER_PATH, browser="headless"
+        )
 
     def __enter__(self):
         return self

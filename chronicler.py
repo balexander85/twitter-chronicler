@@ -43,6 +43,13 @@ def run_chronicler():
 
 
 def run_chronicler_ad_hoc():
+    """Helper function to run chronicler for list of urls for possible redo's
+
+    Example of user_quoted_retweets_urls list:
+
+        ['https://twitter.com/_b_axe/status/1236662806163984385', '...']
+
+    """
     LOGGER.info("Starting Ad-hoc script")
     user_quoted_retweets_urls: List[str] = []
     user_quoted_retweets: List[Tweet] = [
