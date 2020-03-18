@@ -6,7 +6,7 @@ from selenium.webdriver.remote.webelement import WebElement
 
 from config import CHROME_DRIVER_PATH
 from _logger import LOGGER
-from wrapped_driver import WrappedWebDriver
+from wrapped_driver import WrappedDriver
 
 
 MODULE_DIR_PATH = os.path.dirname(__file__)
@@ -20,7 +20,7 @@ class TweetCapture:
     TOMBSTONE_VIEW_LINK = "button.Tombstone-action.js-display-this-media.btn-link"
 
     def __init__(self):
-        self.driver = WrappedWebDriver(
+        self.driver = WrappedDriver(
             chrome_driver_path=CHROME_DRIVER_PATH, browser="headless"
         )
 
