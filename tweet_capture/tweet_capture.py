@@ -26,7 +26,7 @@ class TweetCapture:
         self.driver = WrappedDriver(
             chrome_driver_path=CHROME_DRIVER_PATH,
             browser="chrome",
-            headless=False,
+            headless=True,
             user_agent=TWITTER_USER_AGENT,
         )
 
