@@ -11,6 +11,9 @@ from wrapped_driver import WrappedDriver
 
 MODULE_DIR_PATH = os.path.dirname(__file__)
 TWITTER_URL = "https://twitter.com"
+TWITTER_USER_AGENT = (
+    "user-agent=Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko"
+)
 
 
 class TweetCapture:
@@ -21,7 +24,10 @@ class TweetCapture:
 
     def __init__(self):
         self.driver = WrappedDriver(
-            chrome_driver_path=CHROME_DRIVER_PATH, browser="headless"
+            chrome_driver_path=CHROME_DRIVER_PATH,
+            browser="chrome",
+            headless=False,
+            user_agent=TWITTER_USER_AGENT,
         )
 
     def __enter__(self):
