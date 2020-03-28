@@ -4,6 +4,7 @@ Tests for all the helper functions from twitter_helpers.py
 """
 from unittest.mock import patch
 
+import pytest
 from twitter import Status
 
 from twitter_helpers import (
@@ -107,6 +108,7 @@ def test_find_quoted_tweets_for_users_own_tweet(mock_get, test_status):
     assert type(quoted_retweets) == list
 
 
+@pytest.mark.skip("This logic has been temporarily disabled.")
 @patch("twitter.api.Api.GetUserTimeline")
 @patch("twitter.api.Api.GetStatus")
 def test_find_quoted_tweets_for_tweeted_already_quoted_by_user(
