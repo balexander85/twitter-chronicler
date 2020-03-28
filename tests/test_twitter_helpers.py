@@ -101,7 +101,7 @@ def test_find_quoted_tweets_for_users_own_tweet(mock_get, test_status):
     """
     basic_tweet = test_status("quote_users_own_status")
     mock_get.return_value = [basic_tweet]
-    quoted_retweets = find_quoted_tweets(user="jvgraz")
+    quoted_retweets = find_quoted_tweets(user="_b_axe")
     assert not quoted_retweets
     assert len(quoted_retweets) == 0
     assert type(quoted_retweets) == list
@@ -290,12 +290,14 @@ def test_post_collected_tweets(mock_get, test_status):
     """
     from os import path
 
+    expected_num_of_ids = 3
+
     status_id_file_name = path.join(
         path.dirname(__file__), "../list_of_status_ids_replied_to.txt"
     )
     list_of_status_ids_replied_to = list(file_reader(status_id_file_name))
-    assert len(list_of_status_ids_replied_to) == 2, (
-        f"Expected number (2) of status ids replied to "
+    assert len(list_of_status_ids_replied_to) == expected_num_of_ids, (
+        f"Expected number ({expected_num_of_ids}) of status ids replied to "
         f"did not match actual ({len(list_of_status_ids_replied_to)})"
     )
     quoted_tweet = test_status("post_reply_response")

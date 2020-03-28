@@ -127,18 +127,18 @@ def get_recent_quoted_retweets_for_user(
             tweet = Tweet(t)
             if tweet.quoted_tweet_user == TWITTER_API_USER.get("screen_name"):
                 LOGGER.debug(
-                    f"Skipping tweet({tweet.quoted_tweet_id}) "
-                    f"from @{tweet.user}'s tweet({tweet.id}) quotes the bot user"
+                    f"Skipping: Tweet({tweet.id}) from @{tweet.user} "
+                    f"quotes bot user tweet"
                 )
             elif tweet.user == tweet.quoted_tweet_user:
                 LOGGER.debug(
-                    f"Skipping tweet({tweet.quoted_tweet_id}) "
-                    f"from @{tweet.user}'s tweet({tweet.id}) quotes their own tweet"
+                    f"Skipping: Tweet({tweet.id}) from @{tweet.user} "
+                    f"quotes their own tweet"
                 )
             elif tweet.id_str in excluded_ids:
                 LOGGER.debug(
-                    f"Skipping tweet({tweet.quoted_tweet_id}) from @{tweet.user}'s "
-                    f"tweet({tweet.id}) because tweet is in excluded_ids list"
+                    f"Skipping: Tweet({tweet.id}) from @{tweet.user} "
+                    f"because tweet has been replied to."
                 )
             elif str(tweet.replied_to_status_id) in excluded_ids:
                 LOGGER.info(
@@ -174,7 +174,7 @@ def get_recent_quoted_retweets_for_user(
             )
 
     if not user_tweets_quoting_tweets:
-        LOGGER.debug(msg=f"No recent retweets for user: {twitter_user}")
+        LOGGER.debug(msg=f"No new retweets for user: {twitter_user}")
 
     return user_tweets_quoting_tweets
 

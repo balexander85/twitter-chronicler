@@ -192,81 +192,103 @@
     "user_mentions": []
   },
   "replied_to_quoted_tweet": {
-    "created_at": "Fri Jan 10 18:53:43 +0000 2020",
+    "created_at": "Thu Mar 12 01:01:47 +0000 2020",
     "hashtags": [],
-    "id": 1215708312249028609,
-    "id_str": "1215708312249028609",
-    "lang": "en",
+    "id": 1237906602516234240,
+    "id_str": "1237906602516234240",
+    "lang": "und",
     "quoted_status": {
-      "created_at": "Fri Jan 10 18:51:47 +0000 2020",
+      "created_at": "Wed Mar 11 12:42:57 +0000 2020",
+      "favorite_count": 8638,
       "hashtags": [],
-      "id": 1215707826783498242,
-      "id_str": "1215707826783498242",
-      "in_reply_to_screen_name": "JoaquinCastrotx",
-      "in_reply_to_status_id": 1215700696768634881,
-      "in_reply_to_user_id": 231510077,
+      "id": 1237720669024108545,
+      "id_str": "1237720669024108545",
       "lang": "en",
-      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
-      "text": "@JoaquinCastrotx Thank you \ud83d\ude4f\ud83c\udffb! If you haven\u2019t already would you please sign this petition to stop pipeline from bei\u2026 https://t.co/JDSDKX1m2W",
-      "truncated": true,
-      "urls": [
+      "media": [
         {
-          "expanded_url": "https://twitter.com/i/web/status/1215707826783498242",
-          "url": "https://t.co/JDSDKX1m2W"
+          "display_url": "pic.twitter.com/Y5unOrPtLL",
+          "expanded_url": "https://twitter.com/RealKaylaJames/status/1237720669024108545/photo/1",
+          "id": 1237720666834710530,
+          "media_url": "http://pbs.twimg.com/media/ES1EY4XXsAISdDY.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/ES1EY4XXsAISdDY.jpg",
+          "sizes": {
+            "small": {
+              "w": 680,
+              "h": 391,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 750,
+              "h": 431,
+              "resize": "fit"
+            },
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "large": {
+              "w": 750,
+              "h": 431,
+              "resize": "fit"
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/Y5unOrPtLL"
         }
       ],
+      "retweet_count": 1845,
+      "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+      "text": "Looking forward to all the Blue check Mammies telling me this is better than Trump. https://t.co/Y5unOrPtLL",
+      "urls": [],
       "user": {
-        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
-        "description": "Chea! I like pups and stuff! #Bernie2020",
-        "favourites_count": 2816,
-        "followers_count": 115,
-        "following": true,
-        "friends_count": 200,
-        "id": 348789414,
-        "id_str": "348789414",
-        "listed_count": 3,
-        "location": "Austin, TX",
-        "name": "Brian",
-        "profile_background_color": "000000",
-        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
-        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
-        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
-        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
-        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
-        "profile_link_color": "1B95E0",
-        "profile_sidebar_border_color": "000000",
-        "profile_sidebar_fill_color": "000000",
-        "profile_text_color": "000000",
-        "screen_name": "_b_axe",
-        "statuses_count": 2400,
-        "url": "https://t.co/4fmloLEuSV"
+        "created_at": "Mon Sep 17 20:48:08 +0000 2018",
+        "default_profile": true,
+        "description": "Black, IT nerd, M. Trent Reznor is God. Following Back since 2018. \ud83d\ude0d\ud83d\ude0d\ud83d\ude0d",
+        "favourites_count": 162644,
+        "followers_count": 6742,
+        "friends_count": 3511,
+        "geo_enabled": true,
+        "id": 1041790931563937794,
+        "id_str": "1041790931563937794",
+        "listed_count": 17,
+        "location": "United States",
+        "name": "Kayla \u262d",
+        "profile_background_color": "F5F8FA",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/1041790931563937794/1579682467",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1234763897908998145/ypaLVtp5_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1234763897908998145/ypaLVtp5_normal.jpg",
+        "profile_link_color": "1DA1F2",
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "screen_name": "RealKaylaJames",
+        "statuses_count": 37553
       },
-      "user_mentions": [
-        {
-          "id": 231510077,
-          "id_str": "231510077",
-          "name": "Joaquin Castro",
-          "screen_name": "JoaquinCastrotx"
-        }
-      ]
+      "user_mentions": []
     },
-    "quoted_status_id": 1215707826783498242,
-    "quoted_status_id_str": "1215707826783498242",
+    "quoted_status_id": 1237720669024108545,
+    "quoted_status_id_str": "1237720669024108545",
     "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
-    "text": "Still 3,226 signatures remaining! https://t.co/gLLe2tzund",
+    "text": "https://t.co/N9G6NeVskw https://t.co/fenvm2aLje",
     "urls": [
       {
-        "expanded_url": "https://twitter.com/_b_axe/status/1215707826783498242",
-        "url": "https://t.co/gLLe2tzund"
+        "expanded_url": "https://www.msn.com/en-us/news/us/joe-biden-worried-in-1977-that-certain-desegregation-policies-would-cause-his-kids-to-grow-up-in-a-racial-jungle/vp-AAEmRWo",
+        "url": "https://t.co/N9G6NeVskw"
+      },
+      {
+        "expanded_url": "https://twitter.com/RealKaylaJames/status/1237720669024108545",
+        "url": "https://t.co/fenvm2aLje"
       }
     ],
     "user": {
       "created_at": "Fri Aug 05 00:41:40 +0000 2011",
-      "description": "Chea! I like pups and stuff! #Bernie2020",
-      "favourites_count": 2816,
-      "followers_count": 115,
+      "description": "Chea! I like pups and stuff! #Bernie2020 Checkout a bot I made @FTBANDFTR",
+      "favourites_count": 3020,
+      "followers_count": 129,
       "following": true,
-      "friends_count": 200,
+      "friends_count": 217,
       "id": 348789414,
       "id_str": "348789414",
       "listed_count": 3,
@@ -283,7 +305,7 @@
       "profile_sidebar_fill_color": "000000",
       "profile_text_color": "000000",
       "screen_name": "_b_axe",
-      "statuses_count": 2400,
+      "statuses_count": 2542,
       "url": "https://t.co/4fmloLEuSV"
     },
     "user_mentions": []
@@ -2055,111 +2077,101 @@
     ]
   },
   "quote_users_own_status": {
-    "created_at": "Wed Jan 29 05:41:22 +0000 2020",
-    "favorite_count": 6,
+    "created_at": "Fri Jan 10 18:53:43 +0000 2020",
     "hashtags": [],
-    "id": 1222394281362522112,
-    "id_str": "1222394281362522112",
-    "in_reply_to_screen_name": "DornigSilber",
-    "in_reply_to_status_id": 1222393969054629888,
-    "in_reply_to_user_id": 1163611538634113024,
-    "lang": "und",
+    "id": 1215708312249028609,
+    "id_str": "1215708312249028609",
+    "lang": "en",
     "quoted_status": {
-      "created_at": "Wed Jan 29 05:39:41 +0000 2020",
-      "favorite_count": 162,
+      "created_at": "Fri Jan 10 18:51:47 +0000 2020",
       "hashtags": [],
-      "id": 1222393859151257600,
-      "id_str": "1222393859151257600",
-      "in_reply_to_screen_name": "MiaFarrow",
-      "in_reply_to_status_id": 1222163346817978368,
-      "in_reply_to_user_id": 33235771,
+      "id": 1215707826783498242,
+      "id_str": "1215707826783498242",
+      "in_reply_to_screen_name": "JoaquinCastrotx",
+      "in_reply_to_status_id": 1215700696768634881,
+      "in_reply_to_user_id": 231510077,
       "lang": "en",
-      "retweet_count": 10,
-      "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
-      "text": "@MiaFarrow And by \"we\", Mia means rich, spoiled white people.",
-      "urls": [],
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "@JoaquinCastrotx Thank you \ud83d\ude4f\ud83c\udffb! If you haven\u2019t already would you please sign this petition to stop pipeline from bei\u2026 https://t.co/JDSDKX1m2W",
+      "truncated": true,
+      "urls": [
+        {
+          "expanded_url": "https://twitter.com/i/web/status/1215707826783498242",
+          "url": "https://t.co/JDSDKX1m2W"
+        }
+      ],
       "user": {
-        "created_at": "Fri Oct 24 23:41:31 +0000 2008",
-        "description": "Veteran of NeXT, Apple, and Pixar. Creator of XCode. Parrot whisperer. Jazz pianist. Kitchen guru.  Chief Technical Officer to the @Sema4Texas campaign.",
-        "favourites_count": 94549,
-        "followers_count": 21253,
+        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+        "description": "Chea! I like pups and stuff! #Bernie2020 Checkout a bot I made @FTBANDFTR",
+        "favourites_count": 3020,
+        "followers_count": 129,
         "following": true,
-        "friends_count": 9312,
-        "id": 16959075,
-        "id_str": "16959075",
-        "listed_count": 290,
-        "location": "California, USA",
-        "name": "Plain Ol' Johnny Graz",
-        "profile_background_color": "FFFFFF",
+        "friends_count": 217,
+        "id": 348789414,
+        "id_str": "348789414",
+        "listed_count": 3,
+        "location": "Austin, TX",
+        "name": "Brian",
+        "profile_background_color": "000000",
         "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
         "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
-        "profile_banner_url": "https://pbs.twimg.com/profile_banners/16959075/1558992627",
-        "profile_image_url": "http://pbs.twimg.com/profile_images/995535838426492928/htFBNJYh_normal.jpg",
-        "profile_image_url_https": "https://pbs.twimg.com/profile_images/995535838426492928/htFBNJYh_normal.jpg",
-        "profile_link_color": "58A6FF",
-        "profile_sidebar_border_color": "EEEEEE",
-        "profile_sidebar_fill_color": "F6F6F6",
-        "profile_text_color": "333333",
-        "profile_use_background_image": true,
-        "screen_name": "jvgraz",
-        "statuses_count": 123891,
-        "url": "https://t.co/qxZrYDmib4"
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+        "profile_link_color": "1B95E0",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "_b_axe",
+        "statuses_count": 2542,
+        "url": "https://t.co/4fmloLEuSV"
       },
       "user_mentions": [
         {
-          "id": 33235771,
-          "id_str": "33235771",
-          "name": "Mia Farrow",
-          "screen_name": "MiaFarrow"
+          "id": 231510077,
+          "id_str": "231510077",
+          "name": "Joaquin Castro",
+          "screen_name": "JoaquinCastrotx"
         }
       ]
     },
-    "quoted_status_id": 1222393859151257600,
-    "quoted_status_id_str": "1222393859151257600",
-    "retweet_count": 3,
-    "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
-    "text": "@DornigSilber https://t.co/YXwo92v5yn",
+    "quoted_status_id": 1215707826783498242,
+    "quoted_status_id_str": "1215707826783498242",
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "text": "Still 3,226 signatures remaining! https://t.co/gLLe2tzund",
     "urls": [
       {
-        "expanded_url": "https://twitter.com/jvgraz/status/1222393859151257600",
-        "url": "https://t.co/YXwo92v5yn"
+        "expanded_url": "https://twitter.com/_b_axe/status/1215707826783498242",
+        "url": "https://t.co/gLLe2tzund"
       }
     ],
     "user": {
-      "created_at": "Fri Oct 24 23:41:31 +0000 2008",
-      "description": "Veteran of NeXT, Apple, and Pixar. Creator of XCode. Parrot whisperer. Jazz pianist. Kitchen guru.  Chief Technical Officer to the @Sema4Texas campaign.",
-      "favourites_count": 94549,
-      "followers_count": 21253,
+      "created_at": "Fri Aug 05 00:41:40 +0000 2011",
+      "description": "Chea! I like pups and stuff! #Bernie2020 Checkout a bot I made @FTBANDFTR",
+      "favourites_count": 3020,
+      "followers_count": 129,
       "following": true,
-      "friends_count": 9312,
-      "id": 16959075,
-      "id_str": "16959075",
-      "listed_count": 290,
-      "location": "California, USA",
-      "name": "Plain Ol' Johnny Graz",
-      "profile_background_color": "FFFFFF",
+      "friends_count": 217,
+      "id": 348789414,
+      "id_str": "348789414",
+      "listed_count": 3,
+      "location": "Austin, TX",
+      "name": "Brian",
+      "profile_background_color": "000000",
       "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
       "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
-      "profile_banner_url": "https://pbs.twimg.com/profile_banners/16959075/1558992627",
-      "profile_image_url": "http://pbs.twimg.com/profile_images/995535838426492928/htFBNJYh_normal.jpg",
-      "profile_image_url_https": "https://pbs.twimg.com/profile_images/995535838426492928/htFBNJYh_normal.jpg",
-      "profile_link_color": "58A6FF",
-      "profile_sidebar_border_color": "EEEEEE",
-      "profile_sidebar_fill_color": "F6F6F6",
-      "profile_text_color": "333333",
-      "profile_use_background_image": true,
-      "screen_name": "jvgraz",
-      "statuses_count": 123891,
-      "url": "https://t.co/qxZrYDmib4"
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
+      "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
+      "profile_link_color": "1B95E0",
+      "profile_sidebar_border_color": "000000",
+      "profile_sidebar_fill_color": "000000",
+      "profile_text_color": "000000",
+      "screen_name": "_b_axe",
+      "statuses_count": 2542,
+      "url": "https://t.co/4fmloLEuSV"
     },
-    "user_mentions": [
-      {
-        "id": 1163611538634113024,
-        "id_str": "1163611538634113024",
-        "name": "Silber Dornig, CPA and Necromancer",
-        "screen_name": "DornigSilber"
-      }
-    ]
+    "user_mentions": []
   },
   "quoted_tweets_for_tweeted_already_quoted_by_user": [
     {

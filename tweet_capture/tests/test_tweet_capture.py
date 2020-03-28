@@ -6,7 +6,7 @@ def test_tweet_screen_shot_tweet(test_tweet):
     """
     Verify functionality tweet_capture module
     """
-    tweet_id = 1215707826783498242
+    tweet_id = 1237720669024108545
     test_tweet = test_tweet("replied_to_quoted_tweet")
     with TweetCapture() as tweet_capture:
         screen_cap_file_path = tweet_capture.screen_shot_tweet(
