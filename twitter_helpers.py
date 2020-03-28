@@ -110,7 +110,15 @@ def get_recent_tweets_for_user(
 def get_recent_quoted_retweets_for_user(
     twitter_user: str, excluded_ids: List[str] = None
 ) -> List[Tweet]:
-    """Get tweets for given user that has recently quoted tweet in retweet"""
+    """Get tweets for given user that has recently quoted tweet in retweet
+
+    Notes:
+        * Skip if tweet does not quote tweet
+        * Skip if the quoted_tweet_user is the twitter api account
+        * Skip if the user quotes their own tweet
+        * Skip if the tweet has already been quoted in same thread
+        * Skip if the tweet.id is in excluded list (b/c already been replied to)
+    """
     excluded_ids = excluded_ids if excluded_ids else []
     user_tweets: List[Status] = get_recent_tweets_for_user(twitter_user=twitter_user)
     user_tweets_quoting_tweets = []
@@ -132,6 +140,28 @@ def get_recent_quoted_retweets_for_user(
                     f"Skipping tweet({tweet.quoted_tweet_id}) from @{tweet.user}'s "
                     f"tweet({tweet.id}) because tweet is in excluded_ids list"
                 )
+            elif str(tweet.replied_to_status_id) in excluded_ids:
+                LOGGER.info(
+                    f"The Tweet({tweet.id_str}) replied to a "
+                    f"Tweet({tweet.replied_to_status_id}) that has already"
+                    f"been processed. Get response for the replied_to_status "
+                    f"to verify if the two tweets are quoting same tweet."
+                )
+                replied_to_tweet = Tweet(get_status(tweet.id))
+                if replied_to_tweet.quoted_tweet_id == tweet.quoted_tweet_id:
+                    LOGGER.debug(
+                        f"Skipping tweet({tweet.quoted_tweet_id}) from @{tweet.user}'s "
+                        f"tweet({tweet.id}) because tweet was already quoted by "
+                        f"user in same thread"
+                    )
+                else:
+                    LOGGER.info(
+                        f"The Tweet({tweet.id})is quoting a different tweet than "
+                        f"the Tweet({tweet.replied_to_status_id}) that was replied to. "
+                        f"Adding Tweet({tweet.quoted_tweet_id}) from @{tweet.user}'s"
+                        f"tweet({tweet.id}) to list of tweets to collect"
+                    )
+                    user_tweets_quoting_tweets.append(tweet)
             else:
                 LOGGER.debug(
                     f"Adding tweet({tweet.quoted_tweet_id}) from "
@@ -198,14 +228,18 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
     ]
 
 
-def post_collected_tweets(quoted_tweets: List[Tweet]):
+def post_collected_tweets(quoted_tweets: List[Tweet]) -> bool:
     """For each quoted tweet post for the record and for the blocked"""
     for user_tweet in quoted_tweets:
         response = post_reply_to_user_tweet(tweet=user_tweet)
+        tweet_reply_id = response.in_reply_to_status_id
+        if not tweet_reply_id:
+            raise Exception(f"The tweet_reply_id was None.")
         add_status_id_to_file(
-            tweet_id=str(response.in_reply_to_status_id),
+            tweet_id=str(tweet_reply_id),
             list_of_ids_replied_to_file_name=LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME,
         )
+    return True
 
 
 def post_reply_to_user_tweet(tweet: Tweet) -> Status:
