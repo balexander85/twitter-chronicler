@@ -16,7 +16,7 @@ class Tweet:
         self.text: str = self.raw_tweet.text
         self.user: str = self.raw_tweet.user.screen_name
         self._screen_capture_file_path_quoted_tweet = None
-        LOGGER.debug(f"Processing '{self.tweet_str}'")
+        LOGGER.debug(f"Processing Tweet({self.id}) from {self.user}")
 
     def __repr__(self) -> str:
         return self.tweet_str
