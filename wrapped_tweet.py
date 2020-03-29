@@ -30,13 +30,13 @@ class Tweet:
         """Message to be tweeted with screen cap of quoted tweet"""
         if self.quoted_status:
             message = (
-                f"@{self.user} "
-                f"This Tweet is available! \n"
-                f"For the blocked and the record!"
+                f"@ {self.quoted_tweet_user}: {self.quoted_status.text}"
+                # f"This Tweet is available! \n"
+                # f"For the blocked and the record!"
             )
-            if self.urls_from_quoted_tweet:
-                url_string_list = ", ".join(self.urls_from_quoted_tweet)
-                message += f"\nURL(s) from tweet: {url_string_list}"
+            # if self.urls_from_quoted_tweet:
+            #     url_string_list = ", ".join(self.urls_from_quoted_tweet)
+            #     message += f"\nURL(s) from tweet: {url_string_list}"
 
             LOGGER.debug(msg=message)
             return message

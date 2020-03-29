@@ -201,9 +201,10 @@ def test_post_collected_tweets(mock_get, test_status):
 
 
 def test_tweet_quoted_tweet(test_status):
-    expected_user = "jimcramer"
-    expected_id = 1236824680239181825
-    tweet = Tweet(test_status("quoted_tweet"))
+    test_tweet = test_status("quoted_tweet")
+    expected_user = test_tweet.quoted_status.user.screen_name
+    expected_id = test_tweet.quoted_status.id
+    tweet = Tweet(test_tweet)
     assert type(tweet.quoted_status) == Status
     assert tweet.quoted_tweet_user == expected_user
     assert tweet.quoted_tweet_id == expected_id
@@ -212,14 +213,16 @@ def test_tweet_quoted_tweet(test_status):
         tweet.quoted_tweet_url
         == f"https://twitter.com/{expected_user}/status/{expected_id}"
     )
-    assert tweet.tweet_locator == f"div[data-tweet-id='1236873389073141760']"
-    assert tweet.for_the_record_message == (
-        "@_b_axe This Tweet is available! \n"
-        "For the blocked and the record!\n"
-        "URL(s) from tweet: https://t.co/wQw2axvaY9"
+    assert tweet.tweet_locator == f"div[data-tweet-id='{test_tweet.id}']"
+    assert (
+        tweet.for_the_record_message
+        == f"@ {test_tweet.quoted_status.user.screen_name}: "
+        f"{test_tweet.quoted_status.text}"
     )
-    assert tweet.urls_from_quoted_tweet == ["https://t.co/wQw2axvaY9"]
-    assert tweet.__repr__() == "@_b_axe: #FTR https://t.co/VPPbd36BbX"
+    assert tweet.urls_from_quoted_tweet == [
+        url_obj.url for url_obj in test_tweet.quoted_status.urls
+    ]
+    assert tweet.__repr__() == f"@{test_tweet.user.screen_name}: {test_tweet.text}"
 
 
 @patch("twitter.api.Api.GetUserTimeline")
