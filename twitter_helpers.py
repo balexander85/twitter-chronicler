@@ -1,5 +1,5 @@
 import json
-from typing import List, Union
+from typing import List, Union, Optional
 
 from furl import furl
 from twitter import Api as twitterApi, Status, TwitterError, Url, User
@@ -205,7 +205,7 @@ def post_reply_to_user_tweet(tweet: Tweet) -> Status:
     return response
 
 
-def process_tweet(status: Status, excluded_ids: List[str]) -> Tweet:
+def process_tweet(status: Status, excluded_ids: List[str] = None) -> Optional[Tweet]:
     """Determine if the Status should be documented
 
     Notes:
@@ -215,45 +215,47 @@ def process_tweet(status: Status, excluded_ids: List[str]) -> Tweet:
         * Skip if the tweet has already been quoted in same thread
         * Skip if the tweet.id is in excluded list (b/c already been replied to)
     """
+    excluded_ids = excluded_ids if excluded_ids else []
     if status.quoted_status:
         tweet = Tweet(status)
         if tweet.quoted_tweet_user == TWITTER_API_USER.get("screen_name"):
             LOGGER.debug(
-                f"Skipping: Tweet({tweet.id}) from @{tweet.user} "
-                f"quotes bot user tweet"
+                f"Skipping: Tweet({tweet.id}) from @{tweet.user} quotes bot user tweet"
             )
         elif tweet.user == tweet.quoted_tweet_user:
             LOGGER.debug(
-                f"Skipping: Tweet({tweet.id}) from @{tweet.user} "
-                f"quotes their own tweet"
+                f"Skipping: Tweet({tweet.id}) from @{tweet.user} quotes their own tweet"
             )
         elif tweet.id_str in excluded_ids:
             LOGGER.debug(
                 f"Skipping: Tweet({tweet.id}) from @{tweet.user} "
                 f"because tweet has been replied to."
             )
-        # elif str(tweet.replied_to_status_id) in excluded_ids:
-        #     LOGGER.info(
-        #         f"The Tweet({tweet.id_str}) replied to a "
-        #         f"Tweet({tweet.replied_to_status_id}) that has already "
-        #         f"been processed. Get response for the replied_to_status "
-        #         f"to verify if the two tweets are quoting same tweet."
-        #     )
-        #     replied_to_tweet = Tweet(get_status(tweet.id))
-        #     if replied_to_tweet.quoted_tweet_id == tweet.quoted_tweet_id:
-        #         LOGGER.debug(
-        #             f"Skipping: Tweet({tweet.quoted_tweet_id}) from @{tweet.user}'s"
-        #             f" Tweet({tweet.id}) because tweet was already quoted by "
-        #             f"user in same thread"
-        #         )
-        #     else:
-        #         LOGGER.info(
-        #             f"The Tweet({tweet.id})is quoting a different tweet than "
-        #             f"the Tweet({tweet.replied_to_status_id}) that was replied to. "
-        #             f"Adding Tweet({tweet.quoted_tweet_id}) from @{tweet.user}'s"
-        #             f"tweet({tweet.id}) to list of tweets to collect"
-        #         )
-        #         return tweet
+        elif (
+            tweet.replied_to_status_bool
+            and str(tweet.replied_to_status_id) in excluded_ids
+        ):
+            LOGGER.info(
+                f"The Tweet({tweet.id_str}) replied to a "
+                f"Tweet({tweet.replied_to_status_id}) that has already "
+                f"been processed. Get response for the replied_to_status "
+                f"to verify if the two tweets are quoting same tweet."
+            )
+            replied_to_tweet = Tweet(get_status(tweet.id))
+            if replied_to_tweet.quoted_tweet_id == tweet.quoted_tweet_id:
+                LOGGER.debug(
+                    f"Skipping: Tweet({tweet.quoted_tweet_id}) from @{tweet.user}'s"
+                    f" Tweet({tweet.id}) because tweet was already quoted by "
+                    f"user in same thread"
+                )
+            else:
+                LOGGER.info(
+                    f"The Tweet({tweet.id})is quoting a different tweet than "
+                    f"the Tweet({tweet.replied_to_status_id}) that was replied to. "
+                    f"Adding Tweet({tweet.quoted_tweet_id}) from @{tweet.user}'s"
+                    f"tweet({tweet.id}) to list of tweets to collect"
+                )
+                return tweet
         else:
             LOGGER.debug(
                 f"Adding tweet({tweet.quoted_tweet_id}) from "

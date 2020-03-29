@@ -347,6 +347,102 @@
     },
     "user_mentions": []
   },
+  "basic_quoted_tweet": {
+    "created_at": "Sat Mar 28 21:47:57 +0000 2020",
+    "favorite_count": 1471,
+    "hashtags": [
+      {
+        "text": "FuckOff"
+      },
+      {
+        "text": "NeverBiden"
+      }
+    ],
+    "id": 1244018414428942339,
+    "id_str": "1244018414428942339",
+    "lang": "en",
+    "quoted_status": {
+      "created_at": "Sat Mar 28 18:23:18 +0000 2020",
+      "favorite_count": 86934,
+      "hashtags": [],
+      "id": 1243966912951918592,
+      "id_str": "1243966912951918592",
+      "lang": "en",
+      "retweet_count": 13700,
+      "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+      "text": "Let me be clear: No one should have to pay for coronavirus testing or treatment.",
+      "urls": [],
+      "user": {
+        "created_at": "Sun Mar 11 17:51:24 +0000 2007",
+        "description": "Senator, Vice President, 2020 candidate for President of the United States, husband to @DrBiden, proud father & grandfather. Loves ice cream, aviators & @Amtrak",
+        "favourites_count": 18,
+        "followers_count": 4631322,
+        "friends_count": 26,
+        "id": 939091,
+        "id_str": "939091",
+        "listed_count": 16446,
+        "location": "Wilmington, DE",
+        "name": "Joe Biden",
+        "profile_background_color": "565959",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_tile": true,
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/939091/1569000846",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1235244704859664385/oneP6BrA_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1235244704859664385/oneP6BrA_normal.jpg",
+        "profile_link_color": "233F94",
+        "profile_sidebar_border_color": "FFFFFF",
+        "profile_sidebar_fill_color": "EBEBFF",
+        "profile_text_color": "323232",
+        "profile_use_background_image": true,
+        "screen_name": "JoeBiden",
+        "statuses_count": 4298,
+        "url": "https://t.co/UClrPuJpyZ",
+        "verified": true
+      },
+      "user_mentions": []
+    },
+    "quoted_status_id": 1243966912951918592,
+    "quoted_status_id_str": "1243966912951918592",
+    "retweet_count": 302,
+    "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+    "text": "\"But you should go broke if you get sick any other way.\" \n\n#FuckOff #NeverBiden https://t.co/Sumw4roEKT",
+    "urls": [
+      {
+        "expanded_url": "https://twitter.com/JoeBiden/status/1243966912951918592",
+        "url": "https://t.co/Sumw4roEKT"
+      }
+    ],
+    "user": {
+      "created_at": "Thu Dec 24 00:39:30 +0000 2009",
+      "description": "My show https://t.co/XRPOhIf6c8, Stand Up https://t.co/d8dHJL0X9a Podcast https://t.co/AHzmtHshO0 Book https://t.co/hiPSViSCm1",
+      "favourites_count": 72373,
+      "followers_count": 203626,
+      "friends_count": 1564,
+      "id": 98992586,
+      "id_str": "98992586",
+      "listed_count": 2073,
+      "location": "Hollywood, CA",
+      "name": "Jimmy Dore",
+      "profile_background_color": "642D8B",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme10/bg.gif",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme10/bg.gif",
+      "profile_background_tile": true,
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/98992586/1575601871",
+      "profile_image_url": "http://pbs.twimg.com/profile_images/687881601506652160/lY9Gb19l_normal.jpg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/687881601506652160/lY9Gb19l_normal.jpg",
+      "profile_link_color": "981CEB",
+      "profile_sidebar_border_color": "65B0DA",
+      "profile_sidebar_fill_color": "53A2D1",
+      "profile_text_color": "3D1957",
+      "profile_use_background_image": true,
+      "screen_name": "jimmy_dore",
+      "statuses_count": 25305,
+      "url": "https://t.co/OrvqglnJJL",
+      "verified": true
+    },
+    "user_mentions": []
+  },
   "mocked_status": [
     {
       "created_at": "Sun Jan 19 03:36:13 +0000 2020",
@@ -2173,98 +2269,7 @@
     },
     "user_mentions": []
   },
-  "quoted_tweets_for_tweeted_already_quoted_by_user": [
-    {
-      "created_at": "Thu Mar 26 03:02:06 +0000 2020",
-      "hashtags": [],
-      "id": 1243010309067071489,
-      "id_str": "1243010309067071489",
-      "lang": "en",
-      "quoted_status": {
-        "created_at": "Wed Mar 25 00:21:21 +0000 2020",
-        "favorite_count": 176912,
-        "hashtags": [],
-        "id": 1242607468611547138,
-        "id_str": "1242607468611547138",
-        "lang": "en",
-        "retweet_count": 25827,
-        "source": "<a href=\"https://studio.twitter.com\" rel=\"nofollow\">Twitter Media Studio</a>",
-        "text": "This is Bogey. He was pupset about the Olympics being postponed until he realized that's just more time to perfect\u2026 https://t.co/FbsJZvJ4ZV",
-        "truncated": true,
-        "urls": [
-          {
-            "expanded_url": "https://twitter.com/i/web/status/1242607468611547138",
-            "url": "https://t.co/FbsJZvJ4ZV"
-          }
-        ],
-        "user": {
-          "created_at": "Sun Nov 15 21:41:29 +0000 2015",
-          "description": "Your Only Source For Professional Dog Ratings Instagram and Facebook \u27aa WeRateDogs partnerships@weratedogs.com \u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800\u2800",
-          "favourites_count": 145130,
-          "followers_count": 8729870,
-          "friends_count": 15,
-          "geo_enabled": true,
-          "id": 4196983835,
-          "id_str": "4196983835",
-          "listed_count": 7173,
-          "location": "\u300c DM YOUR DOGS \u300d",
-          "name": "WeRateDogs\u00ae",
-          "profile_background_color": "000000",
-          "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
-          "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
-          "profile_banner_url": "https://pbs.twimg.com/profile_banners/4196983835/1575511391",
-          "profile_image_url": "http://pbs.twimg.com/profile_images/1218319284557905920/ntuD-LOA_normal.jpg",
-          "profile_image_url_https": "https://pbs.twimg.com/profile_images/1218319284557905920/ntuD-LOA_normal.jpg",
-          "profile_link_color": "F5ABB5",
-          "profile_sidebar_border_color": "000000",
-          "profile_sidebar_fill_color": "000000",
-          "profile_text_color": "000000",
-          "screen_name": "dog_rates",
-          "statuses_count": 11807,
-          "url": "https://t.co/N7sNNHSfPq",
-          "verified": true
-        },
-        "user_mentions": []
-      },
-      "quoted_status_id": 1242607468611547138,
-      "quoted_status_id_str": "1242607468611547138",
-      "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
-      "text": "Quoting this tweet for a test for my bot. https://t.co/jdPtmvU555",
-      "urls": [
-        {
-          "expanded_url": "https://twitter.com/dog_rates/status/1242607468611547138",
-          "url": "https://t.co/jdPtmvU555"
-        }
-      ],
-      "user": {
-        "created_at": "Fri Aug 05 00:41:40 +0000 2011",
-        "description": "Chea! I like pups and stuff! #Bernie2020 Checkout a bot I made @FTBANDFTR",
-        "favourites_count": 3009,
-        "followers_count": 129,
-        "following": true,
-        "friends_count": 217,
-        "id": 348789414,
-        "id_str": "348789414",
-        "listed_count": 3,
-        "location": "Austin, TX",
-        "name": "Brian",
-        "profile_background_color": "000000",
-        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
-        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
-        "profile_banner_url": "https://pbs.twimg.com/profile_banners/348789414/1574989773",
-        "profile_image_url": "http://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
-        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1200255213887741952/QhP_bZ9X_normal.jpg",
-        "profile_link_color": "1B95E0",
-        "profile_sidebar_border_color": "000000",
-        "profile_sidebar_fill_color": "000000",
-        "profile_text_color": "000000",
-        "screen_name": "_b_axe",
-        "statuses_count": 2529,
-        "url": "https://t.co/4fmloLEuSV"
-      },
-      "user_mentions": []
-    },
-    {
+  "quoted_tweets_for_tweeted_already_quoted_by_user": {
       "created_at": "Thu Mar 26 03:06:14 +0000 2020",
       "hashtags": [],
       "id": 1243011350043013122,
@@ -2356,8 +2361,7 @@
         "url": "https://t.co/4fmloLEuSV"
       },
       "user_mentions": []
-    }
-  ],
+    },
   "post_reply_response": {
     "created_at": "Sun Feb 23 03:09:17 +0000 2020",
     "favorite_count": 1,

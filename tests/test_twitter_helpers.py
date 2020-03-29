@@ -4,7 +4,6 @@ Tests for all the helper functions from twitter_helpers.py
 """
 from unittest.mock import patch
 
-import pytest
 from twitter import Status
 
 from twitter_helpers import (
@@ -13,6 +12,7 @@ from twitter_helpers import (
     get_recent_tweets_for_user,
     post_collected_tweets,
     post_reply_to_user_tweet,
+    process_tweet,
 )
 from util import file_reader
 from wrapped_tweet import Tweet
@@ -106,27 +106,6 @@ def test_find_quoted_tweets_for_users_own_tweet(mock_get, test_status):
     assert not quoted_retweets
     assert len(quoted_retweets) == 0
     assert type(quoted_retweets) == list
-
-
-@pytest.mark.skip("This logic has been temporarily disabled.")
-@patch("twitter.api.Api.GetUserTimeline")
-@patch("twitter.api.Api.GetStatus")
-def test_find_quoted_tweets_for_tweeted_already_quoted_by_user(
-    mock_get_user_time_line, mock_get_status, test_status
-):
-    """Verify find_quoted_tweets method returns None
-
-    The find_quoted_tweets method returns None for a tweet that
-    quotes a tweet that has already been quoted in same thread.
-
-    Notes:
-       * Mock GetUserTimeline without making real call to Twitter API
-    """
-    basic_tweets = test_status("quoted_tweets_for_tweeted_already_quoted_by_user")
-    mock_get_user_time_line.side_effect = basic_tweets
-    mock_get_status.side_effect = [basic_tweets, basic_tweets[0]]
-    quoted_retweets = find_quoted_tweets(user="_b_axe_")
-    assert not quoted_retweets
 
 
 @patch("twitter.api.Api.GetUserTimeline")
@@ -292,7 +271,7 @@ def test_post_collected_tweets(mock_get, test_status):
     """
     from os import path
 
-    expected_num_of_ids = 3
+    expected_num_of_ids = 4
 
     status_id_file_name = path.join(
         path.dirname(__file__), "../list_of_status_ids_replied_to.txt"
@@ -351,3 +330,48 @@ def test_get_one_recent_tweets_for_user(mock_get, test_status):
     assert len(user_tweets) == 1
     assert type(user_tweets) == list
     assert type(user_tweets[0]) == Status
+
+
+def test_process_tweet_from_excluded_list(test_status):
+    """Verify process_tweet method returns None
+
+    The process_tweet method returns None for a tweet that is in the excluded_ids list.
+    """
+    test_tweet = test_status("quoted_tweet")
+    tweet = process_tweet(status=test_tweet, excluded_ids=["1236873389073141760"])
+    assert not tweet
+
+
+def test_process_tweet_for_bot_tweet(test_status):
+    """Verify process_tweet method returns None
+
+    The process_tweet method returns None for a tweet that is created by bot user.
+    """
+    test_tweet = test_status("quote_bot_status")
+    tweet = process_tweet(status=test_tweet)
+    assert not tweet
+
+
+def test_process_tweet_for_tweet_already_quoted_by_user(test_status):
+    """Verify process_tweet method returns None
+
+    The process_tweet method returns None for a tweet that
+    quotes a tweet that has already been quoted in same thread.
+    """
+    test_tweet = test_status("quoted_tweets_for_tweeted_already_quoted_by_user")
+    tweet = process_tweet(status=test_tweet, excluded_ids=["1243010309067071489"])
+    assert not tweet
+
+
+def test_process_tweet_for_tweet_with_none_reply_status_id(test_status):
+    """Verify process_tweet method returns tweet"""
+    test_tweet = test_status("basic_quoted_tweet")
+    tweet = process_tweet(status=test_tweet)
+
+    assert type(tweet) == Tweet
+    assert not tweet.replied_to_status_id
+    assert tweet.user == test_tweet.user.screen_name
+    assert tweet.quoted_tweet_id == test_tweet.quoted_status.id
+    assert tweet.tweet_str == f"@{test_tweet.user.screen_name}: {test_tweet.text}"
+    assert tweet.quoted_status == test_tweet.quoted_status
+    assert tweet.id == test_tweet.id
