@@ -2444,5 +2444,94 @@
         "screen_name": "_b_axe"
       }
     ]
+  },
+  "quoted_a_reply_to": {
+    "created_at": "Sun Mar 29 02:44:11 +0000 2020",
+    "favorite_count": 11,
+    "hashtags": [],
+    "id": 1244092964298686466,
+    "id_str": "1244092964298686466",
+    "lang": "en",
+    "quoted_status": {
+      "created_at": "Sun Mar 29 02:42:44 +0000 2020",
+      "favorite_count": 3,
+      "hashtags": [],
+      "id": 1244092599532748801,
+      "id_str": "1244092599532748801",
+      "in_reply_to_screen_name": "BethLynch2020",
+      "in_reply_to_status_id": 1244091841731010561,
+      "in_reply_to_user_id": 829715365223682048,
+      "lang": "en",
+      "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+      "text": "@BethLynch2020 You forgot Tara Reade.",
+      "urls": [],
+      "user": {
+        "created_at": "Thu Nov 30 00:43:43 +0000 2017",
+        "description": "I'm not crazy! I'm just paying attention!\nA gay, anti-fascist furry. Also an anarcho-socialist and non-binary. Engaged to @Ash_and_Cinder !\n#Bernie2020",
+        "favourites_count": 130513,
+        "followers_count": 1305,
+        "friends_count": 3033,
+        "id": 936032961232809985,
+        "id_str": "936032961232809985",
+        "listed_count": 5,
+        "location": "Massachusetts, USA",
+        "name": "Jamie Cinder",
+        "profile_background_color": "000000",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/936032961232809985/1583638337",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1236494616951734272/zZbtH1wy_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1236494616951734272/zZbtH1wy_normal.jpg",
+        "profile_link_color": "FF691F",
+        "profile_sidebar_border_color": "000000",
+        "profile_sidebar_fill_color": "000000",
+        "profile_text_color": "000000",
+        "screen_name": "Jamie_Foxworthy",
+        "statuses_count": 43970
+      },
+      "user_mentions": [
+        {
+          "id": 829715365223682048,
+          "id_str": "829715365223682048",
+          "name": "The Other Beth, who hates all of you",
+          "screen_name": "BethLynch2020"
+        }
+      ]
+    },
+    "quoted_status_id": 1244092599532748801,
+    "quoted_status_id_str": "1244092599532748801",
+    "retweet_count": 2,
+    "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+    "text": "yes, of course. https://t.co/HfzRoeIvZE",
+    "urls": [
+      {
+        "expanded_url": "https://twitter.com/Jamie_Foxworthy/status/1244092599532748801",
+        "url": "https://t.co/HfzRoeIvZE"
+      }
+    ],
+    "user": {
+      "created_at": "Thu Feb 09 15:35:33 +0000 2017",
+      "description": "Mother. Socialist Feminist. Oligarchy Troll.   All opinions are those of my employer. All RTs are future tattoos.",
+      "favourites_count": 273499,
+      "followers_count": 46814,
+      "friends_count": 2526,
+      "id": 829715365223682048,
+      "id_str": "829715365223682048",
+      "listed_count": 345,
+      "name": "The Other Beth, who hates all of you",
+      "profile_background_color": "000000",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/829715365223682048/1548824369",
+      "profile_image_url": "http://pbs.twimg.com/profile_images/1192993454474907649/35TTNA3A_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1192993454474907649/35TTNA3A_normal.png",
+      "profile_link_color": "000000",
+      "profile_sidebar_border_color": "000000",
+      "profile_sidebar_fill_color": "000000",
+      "profile_text_color": "000000",
+      "screen_name": "BethLynch2020",
+      "statuses_count": 156521
+    },
+    "user_mentions": []
   }
 }

@@ -30,7 +30,7 @@ class Tweet:
         """Message to be tweeted with screen cap of quoted tweet"""
         if self.quoted_status:
             message = (
-                f"@ {self.quoted_tweet_user}: {self.quoted_status.text}"
+                f'@{self.user} "{self.quoted_tweet_text}" -.@{self.quoted_tweet_user}'
                 # f"This Tweet is available! \n"
                 # f"For the blocked and the record!"
             )
@@ -58,6 +58,17 @@ class Tweet:
         """Return locator for the div of the quoted tweet"""
         return (
             f"div[data-tweet-id='{self.quoted_tweet_id}']"
+            if self.quoted_status
+            else None
+        )
+
+    @property
+    def quoted_tweet_text(self) -> Optional[str]:
+        """Return locator for the div of the quoted tweet"""
+        return (
+            self.quoted_status.text.replace(
+                f"@{self.quoted_status.in_reply_to_screen_name} ", ""
+            )
             if self.quoted_status
             else None
         )
