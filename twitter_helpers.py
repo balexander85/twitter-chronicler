@@ -107,24 +107,6 @@ def get_recent_tweets_for_user(
     )
 
 
-def get_recent_quoted_retweets_for_user(
-    twitter_user: str, excluded_ids: List[str] = None
-) -> List[Tweet]:
-    """Get tweets for given user that has recently quoted tweet in retweet"""
-    excluded_ids = excluded_ids if excluded_ids else []
-    user_tweets: List[Status] = get_recent_tweets_for_user(twitter_user=twitter_user)
-    user_tweets_quoting_tweets = []
-    for t in user_tweets:
-        tweet = process_tweet(status=t, excluded_ids=excluded_ids)
-        if tweet:
-            user_tweets_quoting_tweets.append(tweet)
-
-    if not user_tweets_quoting_tweets:
-        LOGGER.debug(msg=f"No new retweets for user: {twitter_user}")
-
-    return user_tweets_quoting_tweets
-
-
 def find_deleted_tweets(twitter_user: str) -> List[dict]:
     """Get list of tweets that were deleted"""
     bad_ids = []
@@ -166,12 +148,17 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
     Returns:
         A list of Tweet objects
     """
-    return [
-        tweets
-        for tweets in get_recent_quoted_retweets_for_user(
-            twitter_user=user, excluded_ids=LIST_OF_STATUS_IDS_REPLIED_TO
-        )
-    ]
+    user_tweets: List[Status] = get_recent_tweets_for_user(twitter_user=user)
+    user_tweets_quoting_tweets = []
+    for t in user_tweets:
+        tweet = process_tweet(status=t, excluded_ids=LIST_OF_STATUS_IDS_REPLIED_TO)
+        if tweet:
+            user_tweets_quoting_tweets.append(tweet)
+
+    if not user_tweets_quoting_tweets:
+        LOGGER.debug(msg=f"No new retweets for user: {user}")
+
+    return user_tweets_quoting_tweets
 
 
 def post_collected_tweets(quoted_tweets: List[Tweet]) -> bool:

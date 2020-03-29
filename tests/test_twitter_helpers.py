@@ -8,7 +8,6 @@ from twitter import Status
 
 from twitter_helpers import (
     find_quoted_tweets,
-    get_recent_quoted_retweets_for_user,
     get_recent_tweets_for_user,
     post_collected_tweets,
     post_reply_to_user_tweet,
@@ -106,100 +105,6 @@ def test_find_quoted_tweets_for_users_own_tweet(mock_get, test_status):
     assert not quoted_retweets
     assert len(quoted_retweets) == 0
     assert type(quoted_retweets) == list
-
-
-@patch("twitter.api.Api.GetUserTimeline")
-def test_get_recent_quoted_retweets_for_user_for_quoted_tweet(mock_get, test_status):
-    """Verify get_recent_quoted_retweets_for_user method returns Tweet
-
-    Notes:
-       * Mock GetUserTimeline without making real call to Twitter API
-    """
-    mock_get.return_value = [test_status("quoted_tweet")]
-    user_name = "_b_axe"
-    tweets = get_recent_quoted_retweets_for_user(
-        twitter_user=user_name,
-        excluded_ids=["1218223881045139457", "1217726499781873664"],
-    )
-    assert len(tweets) == 1
-    assert type(tweets) == list
-    assert type(tweets[0]) == Tweet
-
-
-@patch("twitter.api.Api.GetUserTimeline")
-def test_get_recent_quoted_retweets_for_user_for_user_excluded(mock_get, test_status):
-    """Verify get_recent_quoted_retweets_for_user method returns None
-
-    The get_recent_quoted_retweets_for_user method returns None for a tweet that
-    is in the excluded_ids list.
-
-    Notes:
-       * Mock GetUserTimeline without making real call to Twitter API
-    """
-    mock_get.return_value = [test_status("quoted_tweet")]
-    user_name = "_b_axe"
-    tweets = get_recent_quoted_retweets_for_user(
-        twitter_user=user_name, excluded_ids=["1236873389073141760"]
-    )
-    assert len(tweets) == 0
-    assert type(tweets) == list
-
-
-@patch("twitter.api.Api.GetUserTimeline")
-def test_get_recent_quoted_retweets_for_user_for_bot_tweet(mock_get, test_status):
-    """Verify get_recent_quoted_retweets_for_user method returns None
-
-    The get_recent_quoted_retweets_for_user method returns None for a tweet that
-    is created by bot user.
-
-    Notes:
-       * Mock GetUserTimeline without making real call to Twitter API
-    """
-    basic_tweet = test_status("quote_bot_status")
-    mock_get.return_value = [basic_tweet]
-    quoted_retweets = get_recent_quoted_retweets_for_user(
-        twitter_user="_b_axe",
-        excluded_ids=["1218223881045139457", "1217726499781873664"],
-    )
-    assert not quoted_retweets
-
-
-@patch("twitter.api.Api.GetUserTimeline")
-def test_get_recent_quoted_retweets_for_user_for_non_retweet(mock_get, test_status):
-    """Verify get_recent_quoted_retweets_for_user method returns None
-
-    The get_recent_quoted_retweets_for_user method returns None for a tweet that
-    is not a retweet.
-
-    Notes:
-       * Mock GetUserTimeline without making real call to Twitter API
-    """
-    basic_tweet = test_status("basic_tweet")
-    mock_get.return_value = [basic_tweet]
-    quoted_retweets = get_recent_quoted_retweets_for_user(
-        twitter_user="FTBandFTR",
-        excluded_ids=["1218223881045139457", "1217726499781873664"],
-    )
-    assert not quoted_retweets
-
-
-@patch("twitter.api.Api.GetUserTimeline")
-def test_get_recent_quoted_retweets_for_user_for_users_own_tweet(mock_get, test_status):
-    """Verify get_recent_quoted_retweets_for_user method returns None
-
-    The get_recent_quoted_retweets_for_user method returns None for a tweet that
-    quotes the user's own tweet.
-
-    Notes:
-       * Mock GetUserTimeline without making real call to Twitter API
-    """
-    basic_tweet = test_status("quote_users_own_status")
-    mock_get.return_value = [basic_tweet]
-    quoted_retweets = get_recent_quoted_retweets_for_user(
-        twitter_user="jvgraz",
-        excluded_ids=["1218223881045139457", "1217726499781873664"],
-    )
-    assert not quoted_retweets
 
 
 def test_tweet_expected_properties(test_status):
@@ -332,6 +237,15 @@ def test_get_one_recent_tweets_for_user(mock_get, test_status):
     assert type(user_tweets[0]) == Status
 
 
+def test_process_tweet_for_quoted_tweet(test_status):
+    """Verify process_tweet method returns Tweet"""
+    test_tweet = test_status("quoted_tweet")
+    tweet = process_tweet(
+        status=test_tweet, excluded_ids=["1218223881045139457", "1217726499781873664"],
+    )
+    assert type(tweet) == Tweet
+
+
 def test_process_tweet_from_excluded_list(test_status):
     """Verify process_tweet method returns None
 
@@ -375,3 +289,27 @@ def test_process_tweet_for_tweet_with_none_reply_status_id(test_status):
     assert tweet.tweet_str == f"@{test_tweet.user.screen_name}: {test_tweet.text}"
     assert tweet.quoted_status == test_tweet.quoted_status
     assert tweet.id == test_tweet.id
+
+
+def test_process_tweet_for_user_for_non_retweet(test_status):
+    """Verify get_recent_quoted_retweets_for_user method returns None
+
+    The process_tweet method returns None for a tweet that is not a retweet.
+    """
+    test_tweet = test_status("basic_tweet")
+    quoted_retweets = process_tweet(
+        status=test_tweet, excluded_ids=["1218223881045139457", "1217726499781873664"],
+    )
+    assert not quoted_retweets
+
+
+def test_process_tweet_for_user_for_users_own_tweet(test_status):
+    """Verify process_tweet method returns None
+
+    The process_tweet method returns None for a tweet that quotes the user's own tweet.
+    """
+    test_tweet = test_status("quote_users_own_status")
+    quoted_retweets = process_tweet(
+        status=test_tweet, excluded_ids=["1218223881045139457", "1217726499781873664"],
+    )
+    assert not quoted_retweets
