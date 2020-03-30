@@ -65,10 +65,19 @@ class Tweet:
     @property
     def quoted_tweet_text(self) -> Optional[str]:
         """Return locator for the div of the quoted tweet"""
+        raw_text = self.quoted_status.text
+        # clean_text = " ".join(
+        #     [
+        #         w
+        #         for w in raw_text.split(" ")
+        #         if w
+        #         not in [f"@{u.screen_name}" for u in self.quoted_status.user_mentions]
+        #     ]
+        # )
+        clean_text = raw_text.replace("&amp;", "&")
+
         return (
-            self.quoted_status.text.replace(
-                f"@{self.quoted_status.in_reply_to_screen_name} ", ""
-            )
+            clean_text.replace(f"@{self.quoted_status.in_reply_to_screen_name} ", "")
             if self.quoted_status
             else None
         )
