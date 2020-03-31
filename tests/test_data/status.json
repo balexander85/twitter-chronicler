@@ -2533,5 +2533,286 @@
       "statuses_count": 156521
     },
     "user_mentions": []
-  }
+  },
+  "quoted_no_reply_with_image_and_no_text": [],
+  "quoted_no_reply_with_image_and_text": [],
+  "quoted_no_reply_with_mentions_and_no_text": [],
+  "quoted_no_reply_with_mentions_and_text": [],
+  "quoted_single_user_reply_with_image_and_no_text": [],
+  "quoted_single_user_reply_with_image_and_text": [],
+  "quoted_single_user_reply_with_mentions_and_no_text": [],
+  "quoted_single_user_reply_with_mentions_and_text": {
+    "created_at": "Sun Mar 29 21:44:25 +0000 2020",
+    "favorite_count": 77,
+    "hashtags": [],
+    "id": 1244379912732991488,
+    "id_str": "1244379912732991488",
+    "lang": "en",
+    "quoted_status": {
+      "created_at": "Sun Mar 29 21:36:14 +0000 2020",
+      "favorite_count": 1,
+      "hashtags": [],
+      "id": 1244377854806093825,
+      "id_str": "1244377854806093825",
+      "lang": "en",
+      "retweet_count": 1,
+      "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+      "text": "hey @timheidecker @ericwareheim any chance the 2nd epi of beef house will be available tonight? we all already watc\u2026 https://t.co/9y0XgNMbXC",
+      "truncated": true,
+      "urls": [
+        {
+          "expanded_url": "https://twitter.com/i/web/status/1244377854806093825",
+          "url": "https://t.co/9y0XgNMbXC"
+        }
+      ],
+      "user": {
+        "created_at": "Sun Aug 04 08:35:50 +0000 2019",
+        "default_profile": true,
+        "description": "\u2606 previously @m33gs \u2606 they suspended my 12 year old account so i am reborn. totally bitchcakes the 2nd i guess so whatever man.  ($m33gs)",
+        "favourites_count": 5617,
+        "followers_count": 93,
+        "friends_count": 864,
+        "id": 1157933148572831745,
+        "id_str": "1157933148572831745",
+        "location": "rain city",
+        "name": "\ud835\udceb\ud835\udcf2\ud835\udcfd\ud835\udcec\ud835\udcf1\ud835\udcec\ud835\udcea\ud835\udcf4\ud835\udcee\ud835\udcfc \ud83e\udda0 \ud835\udc3c\ud835\udc3c",
+        "profile_background_color": "F5F8FA",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/1157933148572831745/1583908749",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1228979563591397376/JLJYCw3p_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1228979563591397376/JLJYCw3p_normal.jpg",
+        "profile_link_color": "1DA1F2",
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "screen_name": "meatballsandwi4",
+        "statuses_count": 3844,
+        "url": "https://t.co/COIBgS8a8p"
+      },
+      "user_mentions": [
+        {
+          "id": 15108422,
+          "id_str": "15108422",
+          "name": "Beef Boy",
+          "screen_name": "timheidecker"
+        },
+        {
+          "id": 23122597,
+          "id_str": "23122597",
+          "name": "eric wareheim",
+          "screen_name": "ericwareheim"
+        }
+      ]
+    },
+    "quoted_status_id": 1244377854806093825,
+    "quoted_status_id_str": "1244377854806093825",
+    "retweet_count": 1,
+    "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+    "text": "I'm sorry but tonight is Army Buddy Brad. thought we were just moving everything up a week but thats now how it's p\u2026 https://t.co/61O6vYoOIV",
+    "truncated": true,
+    "urls": [
+      {
+        "expanded_url": "https://twitter.com/i/web/status/1244379912732991488",
+        "url": "https://t.co/61O6vYoOIV"
+      }
+    ],
+    "user": {
+      "created_at": "Fri Jun 13 15:45:29 +0000 2008",
+      "description": "Subscribe to Office Hours Patreon https://t.co/zUCyxUmlI7 \nnew show BEEF HOUSE premieres on Adult Swim March 29",
+      "favourites_count": 6837,
+      "followers_count": 518563,
+      "friends_count": 390,
+      "geo_enabled": true,
+      "id": 15108422,
+      "id_str": "15108422",
+      "listed_count": 4213,
+      "location": "Los Angeles",
+      "name": "Beef Boy",
+      "profile_background_color": "9AE4E8",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/15108422/1584925084",
+      "profile_image_url": "http://pbs.twimg.com/profile_images/1243740354525794305/BcdqXjfZ_normal.jpg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1243740354525794305/BcdqXjfZ_normal.jpg",
+      "profile_link_color": "91D2FA",
+      "profile_sidebar_border_color": "BDDCAD",
+      "profile_sidebar_fill_color": "DDFFCC",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "screen_name": "timheidecker",
+      "statuses_count": 32880,
+      "url": "https://t.co/MTojsYfP3H",
+      "verified": true
+    },
+    "user_mentions": []
+  },
+  "quoted_multiple_user_reply_with_image_and_no_text": {
+    "created_at": "Mon Mar 30 00:36:57 +0000 2020",
+    "favorite_count": 5465,
+    "hashtags": [],
+    "id": 1244423332629487616,
+    "id_str": "1244423332629487616",
+    "lang": "en",
+    "quoted_status": {
+      "created_at": "Sun Mar 29 22:26:43 +0000 2020",
+      "favorite_count": 1228,
+      "hashtags": [],
+      "id": 1244390560481398784,
+      "id_str": "1244390560481398784",
+      "in_reply_to_screen_name": "ChrisWilde801",
+      "in_reply_to_status_id": 1244386939945357314,
+      "in_reply_to_user_id": 935149981,
+      "lang": "und",
+      "media": [
+        {
+          "display_url": "pic.twitter.com/r0Jp94aGho",
+          "expanded_url": "https://twitter.com/Jonescrusher11/status/1244390560481398784/photo/1",
+          "id": 1244390554181517313,
+          "media_url": "http://pbs.twimg.com/media/EUT2na_XQAE3Zr4.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EUT2na_XQAE3Zr4.jpg",
+          "sizes": {
+            "medium": {
+              "w": 1098,
+              "h": 1200,
+              "resize": "fit"
+            },
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "small": {
+              "w": 622,
+              "h": 680,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 1150,
+              "h": 1257,
+              "resize": "fit"
+            }
+          },
+          "type": "photo",
+          "url": "https://t.co/r0Jp94aGho"
+        }
+      ],
+      "retweet_count": 303,
+      "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+      "text": "@ChrisWilde801 @susanfoertsch @keidekay @ColtonBoettcher @NoFascistLies @JRubinBlogger @BernieSanders https://t.co/r0Jp94aGho",
+      "urls": [],
+      "user": {
+        "created_at": "Sun Jul 26 21:28:23 +0000 2015",
+        "default_profile": true,
+        "description": "Antisocial Butterfly. #Bernie2020",
+        "favourites_count": 56651,
+        "followers_count": 1144,
+        "friends_count": 1137,
+        "geo_enabled": true,
+        "id": 3296106678,
+        "id_str": "3296106678",
+        "listed_count": 1,
+        "location": "Massachusetts, USA",
+        "name": "Holly",
+        "profile_background_color": "C0DEED",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/3296106678/1584190852",
+        "profile_image_url": "http://pbs.twimg.com/profile_images/1172166573592911873/wV2jb5bj_normal.jpg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/1172166573592911873/wV2jb5bj_normal.jpg",
+        "profile_link_color": "1DA1F2",
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "screen_name": "Jonescrusher11",
+        "statuses_count": 3059
+      },
+      "user_mentions": [
+        {
+          "id": 935149981,
+          "id_str": "935149981",
+          "name": "Christopher Wilde",
+          "screen_name": "ChrisWilde801"
+        },
+        {
+          "id": 708067165845495808,
+          "id_str": "708067165845495808",
+          "name": "SFK",
+          "screen_name": "susanfoertsch"
+        },
+        {
+          "id": 738483854420279297,
+          "id_str": "738483854420279297",
+          "name": "EndTheDuopoly #BerniesGonnaWin",
+          "screen_name": "keidekay"
+        },
+        {
+          "id": 37987541,
+          "id_str": "37987541",
+          "name": "Colton Boettcher",
+          "screen_name": "ColtonBoettcher"
+        },
+        {
+          "id": 299929232,
+          "id_str": "299929232",
+          "name": "#BernieOrGreen #LearnMMT \ud83c\udf39",
+          "screen_name": "NoFascistLies"
+        },
+        {
+          "id": 218975278,
+          "id_str": "218975278",
+          "name": "Jennifer Rubin",
+          "screen_name": "JRubinBlogger"
+        },
+        {
+          "id": 216776631,
+          "id_str": "216776631",
+          "name": "Bernie Sanders",
+          "screen_name": "BernieSanders"
+        }
+      ]
+    },
+    "quoted_status_id": 1244390560481398784,
+    "quoted_status_id_str": "1244390560481398784",
+    "retweet_count": 894,
+    "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+    "text": "Do it. https://t.co/LUOubj7q1Y",
+    "urls": [
+      {
+        "expanded_url": "https://twitter.com/Jonescrusher11/status/1244390560481398784",
+        "url": "https://t.co/LUOubj7q1Y"
+      }
+    ],
+    "user": {
+      "created_at": "Sat Apr 06 22:27:51 +0000 2013",
+      "description": "National Press Secretary for the next president i.e. #BernieSanders2020. Former Contributing Editor @curaffairs. Former Senior Politics Editor @theintercept",
+      "favourites_count": 36403,
+      "followers_count": 200107,
+      "friends_count": 3200,
+      "geo_enabled": true,
+      "id": 1332630685,
+      "id_str": "1332630685",
+      "listed_count": 1393,
+      "location": "Manhattan, NY",
+      "name": "Briahna Joy Gray",
+      "profile_background_color": "000000",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/1332630685/1580918173",
+      "profile_image_url": "http://pbs.twimg.com/profile_images/681160883549155328/lCTrSicW_normal.jpg",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/681160883549155328/lCTrSicW_normal.jpg",
+      "profile_link_color": "1B95E0",
+      "profile_sidebar_border_color": "000000",
+      "profile_sidebar_fill_color": "000000",
+      "profile_text_color": "000000",
+      "screen_name": "briebriejoy",
+      "statuses_count": 25976,
+      "url": "https://t.co/EZ6xrIBrMa",
+      "verified": true
+    },
+    "user_mentions": []
+  },
+  "quoted_multiple_user_reply_with_image_and_text": [],
+  "quoted_multiple_user_reply_with_mentions_and_no_text": [],
+  "quoted_multiple_user_reply_with_mentions_and_text": []
 }

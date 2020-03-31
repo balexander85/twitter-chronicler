@@ -144,11 +144,26 @@ def test_tweet_none_properties(test_status):
 
 
 @patch("twitter.api.Api.GetUserTimeline")
-def test_get_recent_tweets_for_user(mock_get, test_status):
+def test_get_recent_tweets_for_user_default(mock_get, test_status):
     basic_tweet = test_status("basic_tweet")
     mock_get.return_value = [basic_tweet]
     tweets = get_recent_tweets_for_user(twitter_user="FTBandFTR", count=10)
     assert all(type(t) is Status for t in tweets)
+
+
+@patch("twitter.api.Api.GetUserTimeline")
+def test_get_recent_tweets_for_user_single_tweet(mock_get, test_status):
+    """Verify get_recent_tweets_for_user method returns tweet
+
+    Notes:
+       * Mock GetUserTimeline without making real call to Twitter API
+    """
+    mock_get.return_value = test_status("mocked_status")
+    user_name = "FTBandFTR"
+    user_tweets = get_recent_tweets_for_user(twitter_user=user_name, count=1)
+    assert len(user_tweets) == 1
+    assert type(user_tweets) == list
+    assert type(user_tweets[0]) == Status
 
 
 @patch("twitter.api.Api.PostUpdate")
@@ -198,77 +213,6 @@ def test_post_collected_tweets(mock_get, test_status):
     with open(status_id_file_name, "w") as f:
         for line in list_of_status_ids_replied_to:
             f.write(line + "\n")
-
-
-def test_tweet_quoted_tweet(test_status):
-    test_tweet = test_status("quoted_tweet")
-    expected_user = test_tweet.quoted_status.user.screen_name
-    expected_replied_to_user = test_tweet.quoted_status.in_reply_to_screen_name
-    expected_quoted_status_text = test_tweet.quoted_status.text.replace(
-        f"@{expected_replied_to_user} ", f'@{expected_replied_to_user} "'
-    )
-    expected_id = test_tweet.quoted_status.id
-    tweet = Tweet(test_tweet)
-    assert type(tweet.quoted_status) == Status
-    assert tweet.quoted_tweet_user == expected_user
-    assert tweet.quoted_tweet_id == expected_id
-    assert tweet.quoted_tweet_locator == f"div[data-tweet-id='{expected_id}']"
-    assert (
-        tweet.quoted_tweet_url
-        == f"https://twitter.com/{expected_user}/status/{expected_id}"
-    )
-    assert tweet.tweet_locator == f"div[data-tweet-id='{test_tweet.id}']"
-    assert (
-        tweet.for_the_record_message
-        == f'@{tweet.user} "{expected_quoted_status_text}" -.@{expected_user}'
-    )
-    assert tweet.urls_from_quoted_tweet == [
-        url_obj.url for url_obj in test_tweet.quoted_status.urls
-    ]
-    assert tweet.__repr__() == f"@{test_tweet.user.screen_name}: {test_tweet.text}"
-
-
-def test_tweet_quoted_a_reply_to_tweet(test_status):
-    test_tweet = test_status("quoted_a_reply_to")
-    expected_user = test_tweet.quoted_status.user.screen_name
-    expected_replied_to_user = test_tweet.quoted_status.in_reply_to_screen_name
-    expected_quoted_status_text = test_tweet.quoted_status.text.replace(
-        f"@{expected_replied_to_user} ", f'@{expected_replied_to_user} "'
-    )
-    expected_id = test_tweet.quoted_status.id
-    tweet = Tweet(test_tweet)
-    assert type(tweet.quoted_status) == Status
-    assert tweet.quoted_tweet_user == expected_user
-    assert tweet.quoted_tweet_id == expected_id
-    assert tweet.quoted_tweet_locator == f"div[data-tweet-id='{expected_id}']"
-    assert (
-        tweet.quoted_tweet_url
-        == f"https://twitter.com/{expected_user}/status/{expected_id}"
-    )
-    assert tweet.tweet_locator == f"div[data-tweet-id='{test_tweet.id}']"
-    assert (
-        tweet.for_the_record_message
-        == f'{expected_quoted_status_text}" -.@{expected_user}'
-    )
-    assert tweet.urls_from_quoted_tweet == [
-        url_obj.url for url_obj in test_tweet.quoted_status.urls
-    ]
-    assert tweet.__repr__() == f"@{test_tweet.user.screen_name}: {test_tweet.text}"
-
-
-@patch("twitter.api.Api.GetUserTimeline")
-def test_get_one_recent_tweets_for_user(mock_get, test_status):
-    """Verify get_recent_tweets_for_user method returns tweet
-
-    Notes:
-       * Mock GetUserTimeline without making real call to Twitter API
-    """
-    mock_get.return_value = test_status("mocked_status")
-    user_name = "FTBandFTR"
-    user_tweets = get_recent_tweets_for_user(twitter_user=user_name, count=1)
-    assert len(user_tweets) == 1
-    assert type(user_tweets) == list
-    assert type(user_tweets[0]) == Status
 
 
 def test_process_tweet_for_quoted_tweet(test_status):
