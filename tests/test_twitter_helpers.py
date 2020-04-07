@@ -194,7 +194,7 @@ def test_post_collected_tweets(mock_get, test_status):
     expected_num_of_ids = 4
 
     status_id_file_name = path.join(
-        path.dirname(__file__), "../list_of_status_ids_replied_to.txt"
+        path.dirname(__file__), "../conf/list_of_status_ids_replied_to.txt"
     )
     list_of_status_ids_replied_to = list(file_reader(status_id_file_name))
     assert len(list_of_status_ids_replied_to) == expected_num_of_ids, (

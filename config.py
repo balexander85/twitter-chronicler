@@ -19,10 +19,10 @@ CHROME_DRIVER_PATH = config.get("default", "CHROME_DRIVER_PATH")
 
 # General config
 LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME: str = os.path.join(
-    PROJECT_DIR_PATH, "list_of_status_ids_replied_to.txt"
+    PROJECT_DIR_PATH, "conf", "list_of_status_ids_replied_to.txt"
 )
 LIST_OF_USERS_TO_FOLLOW_FILE_NAME: str = os.path.join(
-    PROJECT_DIR_PATH, "list_of_users_to_follow.txt"
+    PROJECT_DIR_PATH, "conf", "list_of_users_to_follow.txt"
 )
 
 with open(LIST_OF_USERS_TO_FOLLOW_FILE_NAME, "r") as follower_file:
