@@ -3,13 +3,13 @@ import os
 from furl import furl
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.remote.webelement import WebElement
+from wrapped_driver import WrappedDriver
 
 from config import CHROME_DRIVER_PATH
 from _logger import LOGGER
-from wrapped_driver import WrappedDriver
 
 
-MODULE_DIR_PATH = os.path.dirname(__file__)
+SCREEN_SHOT_DIR_PATH = os.path.join(os.path.dirname(__file__), "screen_shots")
 TWITTER_URL = "https://twitter.com"
 TWITTER_USER_AGENT = (
     "user-agent=Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko"
@@ -72,9 +72,7 @@ class TweetCapture:
 
     @staticmethod
     def get_screen_capture_file_path_quoted_tweet(tweet_id) -> str:
-        return os.path.join(
-            MODULE_DIR_PATH, "screen_shots", f"tweet_capture_{tweet_id}.png",
-        )
+        return os.path.join(SCREEN_SHOT_DIR_PATH, f"tweet_capture_{tweet_id}.png")
 
     def screen_shot_tweet(self, url) -> str:
         """Take a screenshot of tweet and save to file"""
