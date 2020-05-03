@@ -17,7 +17,7 @@ from config import (
 )
 from _logger import LOGGER
 from wrapped_tweet import Tweet
-from util import add_status_id_to_file
+from util import add_status_id_to_file, fetch_test_data_file
 
 
 twitter_api = twitterApi(
@@ -26,6 +26,12 @@ twitter_api = twitterApi(
     access_token_key=OAUTH_TOKEN,
     access_token_secret=OAUTH_TOKEN_SECRET,
 )
+
+
+def add_screen_shot_to_tweet(tweet: Tweet, screen_shot_file_path: str):
+    """Add the path of the screenshot to the tweet instance"""
+    LOGGER.info(f"Adding {screen_shot_file_path} to the tweet instance {tweet.id_str}")
+    tweet.screen_capture_file_path_quoted_tweet = screen_shot_file_path
 
 
 def get_status(status_id: Union[int, str]) -> Status:
@@ -280,14 +286,8 @@ def save_tweet_test_data(file_name, status):
         json.dump(tweet.AsDict(), f)
 
 
-def fetch_test_data_file():
-    with open(TEST_JSON_FILE_NAME, "r") as f:
-        json_file = json.load(f)
-    return json_file
-
-
 def fetch_test_data(data_name):
-    json_file = fetch_test_data_file()
+    json_file = fetch_test_data_file(file_name=TEST_JSON_FILE_NAME)
 
     if type(json_file.get(data_name)) is list:
         return generate_mock_tweet(

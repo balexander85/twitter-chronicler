@@ -1,6 +1,13 @@
+import json
 from typing import Iterator
 
 from _logger import LOGGER
+
+
+def fetch_test_data_file(file_name: str):
+    with open(file_name, "r") as f:
+        json_file = json.load(f)
+    return json_file
 
 
 def file_reader(file_name: str) -> Iterator[str]:

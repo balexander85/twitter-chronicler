@@ -16,13 +16,11 @@ Note:
 """
 from typing import List
 
-from retry import retry
-from selenium.common.exceptions import TimeoutException
-
 from config import LIST_OF_USERS_TO_FOLLOW
 from _logger import LOGGER
 from tweet_capture import TweetCapture
 from twitter_helpers import (
+    add_screen_shot_to_tweet,
     find_quoted_tweets,
     get_tweet_from_url,
     post_collected_tweets,
@@ -67,7 +65,6 @@ def collect_and_post_tweets(tweets: List[Tweet]):
         post_collected_tweets(tweets)
 
 
-@retry(exceptions=TimeoutException, tries=4, delay=2)
 def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     """Loop through list of quoted tweets and screen cap them"""
     with TweetCapture() as tweet_capture:
@@ -78,12 +75,6 @@ def collect_quoted_tweets(quoted_tweets: List[Tweet]):
             add_screen_shot_to_tweet(
                 tweet=tweet, screen_shot_file_path=screen_shot_file_path
             )
-
-
-def add_screen_shot_to_tweet(tweet: Tweet, screen_shot_file_path: str):
-    """Add the path of the screenshot to the tweet instance"""
-    LOGGER.info(f"Adding {screen_shot_file_path} to the tweet instance {tweet.id_str}")
-    tweet.screen_capture_file_path_quoted_tweet = screen_shot_file_path
 
 
 class Chronicler:
