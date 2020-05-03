@@ -1,5 +1,6 @@
 import logging
 import os
+import sys
 
 MODULE_DIR_PATH = os.path.dirname(__file__)
 LOG_DIR_PATH = os.path.join(MODULE_DIR_PATH, "logs")
@@ -16,8 +17,8 @@ file_handler.setLevel(logging.DEBUG)
 file_handler.setFormatter(formatter)
 
 # create console handler with a higher log level
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.ERROR)
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.setLevel(logging.DEBUG)
 console_handler.setFormatter(formatter)
 
 # add the handlers to the logger
