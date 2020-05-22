@@ -1,5 +1,5 @@
 #!/bin/sh
-FILES=$(git diff --diff-filter=rd --cached --name-only -- . ':!*.json' ':!*.txt' ':!*.gitignore' ':!pre-commit' | sed 's| |\\ |g')
+FILES=$(git diff --diff-filter=rd --cached --name-only -- . ':!*.json' ':!*.txt' ':!*.gitignore' ':!hooks/pre-commit' | sed 's| |\\ |g')
 [ -z "$FILES" ] && exit 0
 
 # Run black formatter all selected files
