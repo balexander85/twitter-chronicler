@@ -67,7 +67,6 @@ def get_tweet_from_url(url: str) -> Tweet:
         * https://twitter.com/briebriejoy/status/1222711763248078849
 
     """
-    LOGGER.info(f"Fetching tweet: {url}")
     response = get_status_from_url(url=url)
     return Tweet(response)
 
