@@ -10,9 +10,7 @@ echo "$FILES" | xargs git reset
 
 # Run automated tests
 # pytest tests/test_tweet.py || exit 1
-pytest tests/test_twitter_helpers.py || exit 1
-pytest tests/test_wrapped_tweet.py || exit 1
-pytest tweet_capture/tests/test_tweet_capture.py || exit 1
+pytest tests/test_twitter_helpers.py tests/test_wrapped_tweet.py tweet_capture/tests/test_tweet_capture.py || exit 1
 
 # Add back the modified/prettified files to staging
 echo "$FILES" | xargs git add
