@@ -14,6 +14,7 @@ Note:
     I was tired of looking at tweets that quoted tweets
     where the quoted tweets had been deleted.
 """
+from pathlib import Path
 from typing import List
 
 from config import LIST_OF_USERS_TO_FOLLOW
@@ -67,9 +68,10 @@ def collect_and_post_tweets(tweets: List[Tweet]):
 
 def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     """Loop through list of quoted tweets and screen cap them"""
-    with TweetCapture() as tweet_capture:
+    screenshot_dir = Path(__file__).parent
+    with TweetCapture(screenshot_dir=screenshot_dir) as tweet_capture:
         for tweet in quoted_tweets:
-            screen_shot_file_path = tweet_capture.screen_shot_tweet(
+            screen_shot_file_path = tweet_capture.screen_capture_tweet(
                 url=tweet.quoted_tweet_url
             )
             add_screen_shot_to_tweet(
