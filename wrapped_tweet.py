@@ -22,21 +22,20 @@ class Tweet:
         return self.tweet_str
 
     @property
-    def tweet_str(self) -> str:
-        return f"@{self.user}: {self.text}"
+    def hash_tags(self) -> List[str]:
+        return (
+            [ht.get("text") for ht in self.raw_tweet.hashtags]
+            if self.raw_tweet.hashtags
+            else []
+        )
 
     @property
     def for_the_record_message(self) -> Optional[str]:
         """Message to be tweeted with screen cap of quoted tweet"""
-        if self.quoted_status:
+        if self.quoted_to_status_bool:
             message = (
                 f'@{self.user} "{self.quoted_tweet_text}" -.@{self.quoted_tweet_user}'
-                # f"This Tweet is available! \n"
-                # f"For the blocked and the record!"
             )
-            # if self.urls_from_quoted_tweet:
-            #     url_string_list = ", ".join(self.urls_from_quoted_tweet)
-            #     message += f"\nURL(s) from tweet: {url_string_list}"
 
             LOGGER.debug(msg=message)
             return message
@@ -44,9 +43,16 @@ class Tweet:
         return None
 
     @property
-    def quoted_status(self) -> Optional[Status]:
+    def quoted_to_status_bool(self) -> bool:
         """Return True if tweet quotes another"""
-        return self.raw_tweet.quoted_status
+        return False if not self.raw_tweet.quoted_status else True
+
+    @property
+    def quoted_status(self) -> Optional["Tweet"]:
+        """Return Quoted Status"""
+        return (
+            Tweet(self.raw_tweet.quoted_status) if self.quoted_to_status_bool else None
+        )
 
     @property
     def quoted_tweet_id(self) -> Optional[str]:
@@ -65,22 +71,16 @@ class Tweet:
     @property
     def quoted_tweet_text(self) -> Optional[str]:
         """Return locator for the div of the quoted tweet"""
-        raw_text = self.quoted_status.text
-        # clean_text = " ".join(
-        #     [
-        #         w
-        #         for w in raw_text.split(" ")
-        #         if w
-        #         not in [f"@{u.screen_name}" for u in self.quoted_status.user_mentions]
-        #     ]
-        # )
-        clean_text = raw_text.replace("&amp;", "&")
+        if self.quoted_to_status_bool:
+            raw_text = self.quoted_status.text
+            clean_text = raw_text.replace("&amp;", "&")
 
-        return (
-            clean_text.replace(f"@{self.quoted_status.in_reply_to_screen_name} ", "")
-            if self.quoted_status
-            else None
-        )
+            return (
+                clean_text.replace(f"@{self.quoted_status.replied_to_user_name} ", "")
+                if self.quoted_to_status_bool
+                else None
+            )
+        return None
 
     @property
     def quoted_tweet_url(self) -> Optional[str]:
@@ -95,11 +95,11 @@ class Tweet:
     @property
     def quoted_tweet_user(self) -> Optional[str]:
         """Returns the user name of the quoted tweet"""
-        return self.quoted_status.user.screen_name if self.quoted_status else None
+        return self.quoted_status.user if self.quoted_to_status_bool else None
 
     @property
     def replied_to_status_bool(self) -> bool:
-        """Return True if tweet quotes another"""
+        """Return True if tweet replies to another"""
         return False if not self.raw_tweet.in_reply_to_status_id else True
 
     @property
@@ -108,7 +108,19 @@ class Tweet:
         return self.raw_tweet.in_reply_to_status_id
 
     @property
-    def replied_to_user_screen_name(self) -> str:
+    def replied_to_tweet_url(self) -> Optional[str]:
+        """Return True if tweet quotes another"""
+        if self.replied_to_status_bool:
+            tweet_url = (
+                f"{TWITTER_URL}/{self.replied_to_user_name}/"
+                f"status/{self.replied_to_status_id}"
+            )
+            LOGGER.debug(msg=f"Replied to Tweet URL: {tweet_url}")
+            return tweet_url
+        return None
+
+    @property
+    def replied_to_user_name(self) -> str:
         """Returns screen name of the user that is being replied to"""
         return self.raw_tweet.in_reply_to_screen_name
 
@@ -125,9 +137,15 @@ class Tweet:
         return f"div[data-tweet-id='{self.id}']"
 
     @property
-    def urls_from_quoted_tweet(self) -> Optional[List[str]]:
-        return (
-            [url_obj.url for url_obj in self.quoted_status.urls]
-            if self.quoted_status
-            else None
-        )
+    def tweet_str(self) -> str:
+        return f"@{self.user}: {self.text}"
+
+    @property
+    def tweet_url(self) -> str:
+        tweet_url = f"{TWITTER_URL}/{self.user}/status/{self.id}"
+        LOGGER.debug(msg=f"Tweet URL: {tweet_url}")
+        return tweet_url
+
+    @property
+    def urls(self) -> Optional[List[str]]:
+        return [url_obj.url for url_obj in self.raw_tweet.urls]

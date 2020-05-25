@@ -35,7 +35,7 @@ def test_find_quoted_tweets_for_quoted_tweet(mock_get, test_status):
     assert tweet.user == user_name
     assert tweet.quoted_tweet_id == 1236824680239181825
     assert tweet.tweet_str == f"@{user_name}: {test_tweets[0].text}"
-    assert tweet.quoted_status == test_tweets[0].quoted_status
+    assert tweet.raw_tweet.quoted_status == test_tweets[0].quoted_status
     assert tweet.id == test_tweets[0].id
 
 
@@ -133,7 +133,7 @@ def test_tweet_none_properties(test_status):
         "quoted_tweet_user",
         "quoted_tweet_url",
         "for_the_record_message",
-        "urls_from_quoted_tweet",
+        "urls",
     ]
     tweet = Tweet(basic_tweet)
     assert type(tweet) == Tweet
@@ -265,7 +265,7 @@ def test_process_tweet_for_tweet_with_none_reply_status_id(test_status):
     assert tweet.user == test_tweet.user.screen_name
     assert tweet.quoted_tweet_id == test_tweet.quoted_status.id
     assert tweet.tweet_str == f"@{test_tweet.user.screen_name}: {test_tweet.text}"
-    assert tweet.quoted_status == test_tweet.quoted_status
+    assert tweet.raw_tweet.quoted_status == test_tweet.quoted_status
     assert tweet.id == test_tweet.id
 
 

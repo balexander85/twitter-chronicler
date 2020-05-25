@@ -21,7 +21,7 @@ from config import LIST_OF_USERS_TO_FOLLOW
 from _logger import LOGGER
 from tweet_capture import TweetCapture
 from twitter_helpers import (
-    add_screen_shot_to_tweet,
+    add_screenshot_to_tweet,
     find_quoted_tweets,
     get_tweet_from_url,
     post_collected_tweets,
@@ -71,11 +71,11 @@ def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     screenshot_dir = Path(__file__).parent
     with TweetCapture(screenshot_dir=screenshot_dir) as tweet_capture:
         for tweet in quoted_tweets:
-            screen_shot_file_path = tweet_capture.screen_capture_tweet(
+            screenshot_file_path = tweet_capture.screen_capture_tweet(
                 url=tweet.quoted_tweet_url
             )
-            add_screen_shot_to_tweet(
-                tweet=tweet, screen_shot_file_path=screen_shot_file_path
+            add_screenshot_to_tweet(
+                tweet=tweet, screen_shot_file_path=screenshot_file_path
             )
 
 

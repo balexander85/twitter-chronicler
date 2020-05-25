@@ -28,7 +28,7 @@ twitter_api = twitterApi(
 )
 
 
-def add_screen_shot_to_tweet(tweet: Tweet, screen_shot_file_path: str):
+def add_screenshot_to_tweet(tweet: Tweet, screen_shot_file_path: str):
     """Add the path of the screenshot to the tweet instance"""
     LOGGER.info(f"Adding {screen_shot_file_path} to the tweet instance {tweet.id_str}")
     tweet.screen_capture_file_path_quoted_tweet = screen_shot_file_path

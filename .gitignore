@@ -7,5 +7,5 @@ conf/config.ini
 temp_status.json
 conf/list_of_status_ids_replied_to.txt
 conf/list_of_users_to_follow.txt
-screen_shots/
+screenshots/
 __pycache__/
