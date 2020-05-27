@@ -34,7 +34,7 @@ class Tweet:
         """Message to be tweeted with screen cap of quoted tweet"""
         if self.quoted_to_status_bool:
             message = (
-                f'@{self.user} "{self.quoted_tweet_text}" -.@{self.quoted_tweet_user}'
+                f'@{self.user} "{self.quoted_tweet_text}" -{self.quoted_tweet_user}'
             )
 
             LOGGER.debug(msg=message)
