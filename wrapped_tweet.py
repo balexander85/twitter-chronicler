@@ -30,19 +30,6 @@ class Tweet:
         )
 
     @property
-    def for_the_record_message(self) -> Optional[str]:
-        """Message to be tweeted with screen cap of quoted tweet"""
-        if self.quoted_to_status_bool:
-            message = (
-                f'@{self.user} "{self.quoted_tweet_text}" -{self.quoted_tweet_user}'
-            )
-
-            LOGGER.debug(msg=message)
-            return message
-
-        return None
-
-    @property
     def quoted_to_status_bool(self) -> bool:
         """Return True if tweet quotes another"""
         return False if not self.raw_tweet.quoted_status else True
@@ -58,15 +45,6 @@ class Tweet:
     def quoted_tweet_id(self) -> Optional[str]:
         """Return id of the quoted tweet"""
         return self.quoted_status.id if self.quoted_status else None
-
-    @property
-    def quoted_tweet_locator(self) -> Optional[str]:
-        """Return locator for the div of the quoted tweet"""
-        return (
-            f"div[data-tweet-id='{self.quoted_tweet_id}']"
-            if self.quoted_status
-            else None
-        )
 
     @property
     def quoted_tweet_text(self) -> Optional[str]:
@@ -96,6 +74,19 @@ class Tweet:
     def quoted_tweet_user(self) -> Optional[str]:
         """Returns the user name of the quoted tweet"""
         return self.quoted_status.user if self.quoted_to_status_bool else None
+
+    @property
+    def for_the_record_message(self) -> Optional[str]:
+        """Message to be tweeted with screen cap of quoted tweet"""
+        if self.quoted_to_status_bool:
+            message = (
+                f'@{self.user} "{self.quoted_tweet_text}" -{self.quoted_tweet_user}'
+            )
+
+            LOGGER.debug(msg=message)
+            return message
+
+        return None
 
     @property
     def replied_to_status_bool(self) -> bool:
@@ -131,10 +122,6 @@ class Tweet:
     @screen_capture_file_path_quoted_tweet.setter
     def screen_capture_file_path_quoted_tweet(self, value):
         self._screen_capture_file_path_quoted_tweet = value
-
-    @property
-    def tweet_locator(self) -> str:
-        return f"div[data-tweet-id='{self.id}']"
 
     @property
     def tweet_str(self) -> str:

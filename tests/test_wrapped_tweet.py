@@ -19,12 +19,10 @@ def test_tweet_quoted_tweet(test_status):
     assert type(tweet.quoted_status) == Tweet
     assert tweet.quoted_tweet_user == expected_user
     assert tweet.quoted_tweet_id == expected_id
-    assert tweet.quoted_tweet_locator == f"div[data-tweet-id='{expected_id}']"
     assert (
         tweet.quoted_tweet_url
         == f"https://twitter.com/{expected_user}/status/{expected_id}"
     )
-    assert tweet.tweet_locator == f"div[data-tweet-id='{test_tweet.id}']"
     assert (
         tweet.for_the_record_message
         == f'@{tweet.user} "{expected_quoted_status_text}" -{expected_user}'
@@ -47,12 +45,10 @@ def test_tweet_quoted_a_reply_to_tweet(test_status):
     assert type(tweet.quoted_status) == Tweet
     assert tweet.quoted_tweet_user == expected_user
     assert tweet.quoted_tweet_id == expected_id
-    assert tweet.quoted_tweet_locator == f"div[data-tweet-id='{expected_id}']"
     assert (
         tweet.quoted_tweet_url
         == f"https://twitter.com/{expected_user}/status/{expected_id}"
     )
-    assert tweet.tweet_locator == f"div[data-tweet-id='{test_tweet.id}']"
     assert (
         tweet.for_the_record_message
         == f'{expected_quoted_status_text}" -{expected_user}'
@@ -114,12 +110,10 @@ def test_tweet_quoted_single_user_reply_with_mentions_and_text(test_status):
     assert type(tweet.quoted_status) == Tweet
     assert tweet.quoted_tweet_user == expected_user
     assert tweet.quoted_tweet_id == expected_id
-    assert tweet.quoted_tweet_locator == f"div[data-tweet-id='{expected_id}']"
     assert (
         tweet.quoted_tweet_url
         == f"https://twitter.com/{expected_user}/status/{expected_id}"
     )
-    assert tweet.tweet_locator == f"div[data-tweet-id='{test_tweet.id}']"
     assert (
         tweet.for_the_record_message
         == f'@{tweet.user} "{expected_quoted_status_text}" -{expected_user}'
@@ -143,12 +137,10 @@ def test_tweet_quoted_multiple_user_reply_with_image_and_no_text(test_status):
     assert type(tweet.quoted_status) == Tweet
     assert tweet.quoted_tweet_user == expected_user
     assert tweet.quoted_tweet_id == expected_id
-    assert tweet.quoted_tweet_locator == f"div[data-tweet-id='{expected_id}']"
     assert (
         tweet.quoted_tweet_url
         == f"https://twitter.com/{expected_user}/status/{expected_id}"
     )
-    assert tweet.tweet_locator == f"div[data-tweet-id='{test_tweet.id}']"
     assert (
         tweet.for_the_record_message
         == f'@{tweet.user} "{expected_quoted_status_text}" -{expected_user}'
