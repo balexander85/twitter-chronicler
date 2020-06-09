@@ -17,7 +17,7 @@ Note:
 from pathlib import Path
 from typing import List
 
-from config import LIST_OF_USERS_TO_FOLLOW
+from config import CHROME_DRIVER_PATH, LIST_OF_USERS_TO_FOLLOW
 from _logger import LOGGER
 from tweet_capture import TweetCapture
 from twitter_helpers import (
@@ -69,7 +69,11 @@ def collect_and_post_tweets(tweets: List[Tweet]):
 def collect_quoted_tweets(quoted_tweets: List[Tweet]):
     """Loop through list of quoted tweets and screen cap them"""
     screenshot_dir = Path(__file__).parent
-    with TweetCapture(screenshot_dir=screenshot_dir) as tweet_capture:
+    with TweetCapture(
+        chrome_driver_path=CHROME_DRIVER_PATH,
+        screenshot_dir=screenshot_dir,
+        headless=True,
+    ) as tweet_capture:
         for tweet in quoted_tweets:
             screenshot_file_path = tweet_capture.screen_capture_tweet(
                 url=tweet.quoted_tweet_url
