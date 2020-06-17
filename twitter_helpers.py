@@ -172,11 +172,12 @@ def post_collected_tweets(quoted_tweets: List[Tweet]) -> bool:
         response = post_reply_to_user_tweet(tweet=user_tweet)
         tweet_reply_id = response.in_reply_to_status_id
         if not tweet_reply_id:
-            raise Exception(f"The tweet_reply_id was None.")
-        add_status_id_to_file(
-            tweet_id=str(tweet_reply_id),
-            list_of_ids_replied_to_file_name=LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME,
-        )
+            LOGGER.info(f"The tweet_reply_id was None.")
+        else:
+            add_status_id_to_file(
+                tweet_id=str(tweet_reply_id),
+                list_of_ids_replied_to_file_name=LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME,
+            )
     return True
 
 
@@ -208,13 +209,14 @@ def process_tweet(status: Status, excluded_ids: List[str] = None) -> Optional[Tw
         * Skip if the tweet.id is in excluded list (b/c already been replied to)
     """
     excluded_ids = excluded_ids if excluded_ids else []
-    if status.quoted_status:
-        tweet = Tweet(status)
-        if tweet.quoted_tweet_user == TWITTER_API_USER.get("screen_name"):
+    tweet = Tweet(status)
+    if tweet.quoted_to_status_bool:
+        quoted_tweet_user = tweet.quoted_tweet_user
+        if quoted_tweet_user == TWITTER_API_USER.get("screen_name"):
             LOGGER.debug(
                 f"Skipping: Tweet({tweet.id}) from @{tweet.user} quotes bot user tweet"
             )
-        elif tweet.user == tweet.quoted_tweet_user:
+        elif quoted_tweet_user == tweet.user:
             LOGGER.debug(
                 f"Skipping: Tweet({tweet.id}) from @{tweet.user} quotes their own tweet"
             )

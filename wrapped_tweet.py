@@ -2,7 +2,7 @@ from typing import List, Optional
 
 from twitter import Status
 
-from config import TWITTER_URL
+from config import TWITTER_API_USER, TWITTER_URL
 from _logger import LOGGER
 
 
@@ -16,7 +16,6 @@ class Tweet:
         self.text: str = self.raw_tweet.text
         self.user: str = self.raw_tweet.user.screen_name
         self._screen_capture_file_path_quoted_tweet = None
-        LOGGER.debug(f"Processing Tweet({self.id}) from {self.user}")
 
     def __repr__(self) -> str:
         return self.tweet_str
@@ -32,31 +31,37 @@ class Tweet:
     @property
     def quoted_to_status_bool(self) -> bool:
         """Return True if tweet quotes another"""
+        # if self.raw_tweet.quoted_status_id:
+        #     LOGGER.info(
+        #         "At very least this is a retweet, "
+        #         "need to confirm if quoting a tweet too"
+        #     )
+        #     if (
+        #             self.raw_tweet.quoted_status_id_str
+        #             in [url.expanded_url for url in self.raw_tweet.urls][0]
+        #     ):
+        #         return True
+        # return False
         return False if not self.raw_tweet.quoted_status else True
 
     @property
-    def quoted_status(self) -> Optional["Tweet"]:
+    def quoted_status(self) -> Optional[Status]:
         """Return Quoted Status"""
-        return (
-            Tweet(self.raw_tweet.quoted_status) if self.quoted_to_status_bool else None
-        )
+        return self.raw_tweet.quoted_status
 
     @property
     def quoted_tweet_id(self) -> Optional[str]:
         """Return id of the quoted tweet"""
-        return self.quoted_status.id if self.quoted_status else None
+        return self.raw_tweet.quoted_status_id
 
     @property
     def quoted_tweet_text(self) -> Optional[str]:
-        """Return locator for the div of the quoted tweet"""
+        """Return text of the quoted tweet"""
         if self.quoted_to_status_bool:
             raw_text = self.quoted_status.text
             clean_text = raw_text.replace("&amp;", "&")
-
-            return (
-                clean_text.replace(f"@{self.quoted_status.replied_to_user_name} ", "")
-                if self.quoted_to_status_bool
-                else None
+            return clean_text.replace(
+                f"@{self.quoted_status.in_reply_to_screen_name} ", ""
             )
         return None
 
@@ -73,7 +78,7 @@ class Tweet:
     @property
     def quoted_tweet_user(self) -> Optional[str]:
         """Returns the user name of the quoted tweet"""
-        return self.quoted_status.user if self.quoted_to_status_bool else None
+        return self.quoted_status.user.screen_name if self.quoted_status else None
 
     @property
     def for_the_record_message(self) -> Optional[str]:
@@ -86,7 +91,11 @@ class Tweet:
             LOGGER.debug(msg=message)
             return message
 
-        return None
+        # return (
+        #     f"@{self.user} Cannot include text of quoted tweet because this account "
+        #     f"@{TWITTER_API_USER.get('screen_name')} has been blocked by the user of "
+        #     f"the quoted tweet."
+        # )
 
     @property
     def replied_to_status_bool(self) -> bool:
