@@ -153,7 +153,14 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
     Returns:
         A list of Tweet objects
     """
-    user_tweets: List[Status] = get_recent_tweets_for_user(twitter_user=user)
+    try:
+        user_tweets: List[Status] = get_recent_tweets_for_user(twitter_user=user)
+    except TwitterError as e:
+        LOGGER.error(
+            f"Something happened, unable to retrieve recent tweets for {user}: {e}"
+        )
+        return []
+
     user_tweets_quoting_tweets = []
     for t in user_tweets:
         tweet = process_tweet(status=t, excluded_ids=LIST_OF_STATUS_IDS_REPLIED_TO)
