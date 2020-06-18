@@ -44,11 +44,3 @@ TEMP_JSON_FILE_NAME: str = os.path.join(
 )
 TWITTER_API_USER = {"screen_name": "FTBandFTR"}
 TWITTER_URL = "https://twitter.com"
-
-LIST_OF_REQUESTS_IDS_COMPLETED_FILE_NAME: str = os.path.join(
-    PROJECT_DIR_PATH, "conf", "list_of_ids_of_completed_requests.txt"
-)
-with open(LIST_OF_REQUESTS_IDS_COMPLETED_FILE_NAME, "r") as f:
-    LIST_OF_REQUESTS_IDS_COMPLETED: List[str] = [
-        line.strip("\n") for line in f.readlines()
-    ]
