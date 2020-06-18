@@ -30,6 +30,7 @@ with open(LIST_OF_USERS_TO_FOLLOW_FILE_NAME, "r") as follower_file:
         line.strip("\n")
         for line in follower_file.readlines()
         if not line.startswith("#")
+        if line.strip("\n")
     ]
 
 with open(LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME, "r") as f:
