@@ -26,12 +26,15 @@ LIST_OF_USERS_TO_FOLLOW_FILE_NAME: str = os.path.join(
 )
 
 with open(LIST_OF_USERS_TO_FOLLOW_FILE_NAME, "r") as follower_file:
-    LIST_OF_USERS_TO_FOLLOW: List[str] = [
-        line.strip("\n")
-        for line in follower_file.readlines()
-        if not line.startswith("#")
-        if line.strip("\n")
-    ]
+    followers = follower_file.readlines()
+    LIST_OF_USERS_TO_FOLLOW: List[str] = list(
+        map(
+            lambda line: line.strip("\n"),
+            filter(
+                lambda line: not line.startswith("#") and line.strip("\n"), followers
+            ),
+        )
+    )
 
 with open(LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME, "r") as f:
     LIST_OF_STATUS_IDS_REPLIED_TO: List[str] = [
