@@ -161,11 +161,17 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
         )
         return []
 
-    user_tweets_quoting_tweets = []
-    for t in user_tweets:
-        tweet = process_tweet(status=t, excluded_ids=LIST_OF_STATUS_IDS_REPLIED_TO)
-        if tweet:
-            user_tweets_quoting_tweets.append(tweet)
+    user_tweets_quoting_tweets = list(
+        filter(
+            None,
+            map(
+                lambda tweet: process_tweet(
+                    status=tweet, excluded_ids=LIST_OF_STATUS_IDS_REPLIED_TO
+                ),
+                user_tweets,
+            ),
+        )
+    )
 
     if not user_tweets_quoting_tweets:
         LOGGER.debug(msg=f"No new retweets for user: {user}")
