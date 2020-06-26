@@ -23,6 +23,7 @@ from tweet_capture import TweetCapture
 from twitter_helpers import (
     add_screenshot_to_tweet,
     find_quoted_tweets,
+    process_tweet,
     get_tweet_from_url,
     post_collected_tweets,
 )
@@ -54,7 +55,12 @@ def run_chronicler_ad_hoc():
     user_quoted_retweets: List[Tweet] = [
         get_tweet_from_url(url) for url in user_quoted_retweets_urls
     ]
-    collect_and_post_tweets(user_quoted_retweets)
+    processed_tweets = [
+        process_tweet(status=tweet.raw_tweet)
+        for tweet in user_quoted_retweets
+        if tweet.quoted_to_status_bool
+    ]
+    collect_and_post_tweets(processed_tweets)
 
     LOGGER.info("End of Ad-hoc script run")
 
@@ -111,7 +117,6 @@ class Chronicler:
           then skip collection
 
     To be implemented:
-        * Handle error if user blocks bot or their account is private or suspended
         * Collect tweet if user quotes tweet where the user of the quoted tweet
           blocks the bot
         * Send notification if user blocks bot or their account is private or suspended

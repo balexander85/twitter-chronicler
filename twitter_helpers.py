@@ -245,13 +245,13 @@ def process_tweet(status: Status, excluded_ids: List[str] = None) -> Optional[Tw
             replied_to_tweet = Tweet(get_status(tweet.id))
             if replied_to_tweet.quoted_tweet_id == tweet.quoted_tweet_id:
                 LOGGER.debug(
-                    f"Skipping: Tweet({tweet.quoted_tweet_id}) from @{tweet.user}'s"
-                    f" Tweet({tweet.id}) because tweet was already quoted by "
+                    f"Skipping: Tweet({tweet.quoted_tweet_id}) from @{tweet.user}'s "
+                    f"Tweet({tweet.id}) because tweet was already quoted by "
                     f"user in same thread"
                 )
             else:
                 LOGGER.info(
-                    f"The Tweet({tweet.id})is quoting a different tweet than "
+                    f"The Tweet({tweet.id}) is quoting a different tweet than "
                     f"the Tweet({tweet.replied_to_status_id}) that was replied to. "
                     f"Adding Tweet({tweet.quoted_tweet_id}) from @{tweet.user}'s"
                     f"tweet({tweet.id}) to list of tweets to collect"
