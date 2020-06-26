@@ -30,7 +30,7 @@ twitter_api = twitterApi(
 
 def add_screenshot_to_tweet(tweet: Tweet, screen_shot_file_path: str):
     """Add the path of the screenshot to the tweet instance"""
-    LOGGER.info(f"Adding {screen_shot_file_path} to the tweet instance {tweet.id_str}")
+    LOGGER.debug(f"Adding {screen_shot_file_path} to the tweet instance {tweet.id_str}")
     tweet.screen_capture_file_path_quoted_tweet = screen_shot_file_path
 
 
@@ -218,8 +218,8 @@ def process_tweet(status: Status, excluded_ids: List[str] = None) -> Optional[Tw
         * Skip if tweet does not quote tweet
         * Skip if the quoted_tweet_user is the twitter api account
         * Skip if the user quotes their own tweet
-        * Skip if the tweet has already been quoted in same thread
         * Skip if the tweet.id is in excluded list (b/c already been replied to)
+        * Skip if the tweet has already been quoted in same thread
     """
     excluded_ids = excluded_ids if excluded_ids else []
     tweet = Tweet(status)
@@ -278,6 +278,7 @@ def process_tweet(status: Status, excluded_ids: List[str] = None) -> Optional[Tw
 def save_user_test_data(file_name, user_name, count):
     """Make call with twitter api to get test data"""
     tweets = twitter_api.GetUserTimeline(screen_name=user_name, count=count)
+    # maybe replace with map()
     clean_tweets = [s.AsDict() for s in tweets]
     with open(file_name, "w") as f:
         for t in clean_tweets:
@@ -287,6 +288,7 @@ def save_user_test_data(file_name, user_name, count):
 def save_all_user_data(user_name: str):
     """Make call with twitter api to get test data"""
     tweets = get_all_users_tweets(twitter_user=user_name)
+    # maybe replace with map()
     clean_tweets = [s.AsDict() for s in tweets]
     with open(f"{user_name}_all_tweets.json", "w") as f:
         for t in clean_tweets:
