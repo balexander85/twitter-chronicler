@@ -41,9 +41,9 @@ with open(LIST_OF_USERS_TO_FOLLOW_FILE_NAME, "r") as follower_file:
     )
 
 with open(LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME, "r") as f:
-    LIST_OF_STATUS_IDS_REPLIED_TO: List[str] = [
-        line.strip("\n") for line in f.readlines()
-    ]
+    LIST_OF_STATUS_IDS_REPLIED_TO: List[str] = list(
+        filter(None, map(lambda line: line.strip("\n"), f.readlines()))
+    )
 
 # Test config
 TEST_JSON_FILE_NAME: str = os.path.join(PROJECT_DIR_PATH, "tests/test_data/status.json")
