@@ -255,6 +255,20 @@ def test_process_tweet_for_tweet_already_quoted_by_user(test_status):
     assert not tweet
 
 
+def test_process_tweet_for_different_tweets_quoted_by_user_in_same_thread(test_status):
+    """Verify process_tweet method returns Tweet object
+
+    If a user starts a thread by quoting a tweet and then later in the thread
+    the user quotes a different tweet both tweets should be collected.
+    """
+    test_tweets = test_status("quoted_different_tweets_in_same_thread")
+    excluded_ids = ["1243010309067071489"]
+    for test_tweet in test_tweets:
+        tweet = process_tweet(status=test_tweet, excluded_ids=excluded_ids)
+        assert tweet
+        excluded_ids.append(tweet.id_str)
+
+
 def test_process_tweet_for_tweet_with_none_reply_status_id(test_status):
     """Verify process_tweet method returns tweet"""
     test_tweet = test_status("basic_quoted_tweet")

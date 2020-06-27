@@ -178,7 +178,7 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
             twitter_user=user, since_id=last_status_id
         )
         if user_tweets:
-            LOGGER.info(
+            LOGGER.debug(
                 f"Found {len(user_tweets)} "
                 f"{'tweets' if len(user_tweets) > 1 else 'tweet'} for {user}"
             )
@@ -207,7 +207,7 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
     )
 
     if not user_tweets_quoting_tweets:
-        LOGGER.info(msg=f"No new retweets for user: {user}")
+        LOGGER.debug(msg=f"No new retweets for user: {user}")
 
     return user_tweets_quoting_tweets
 
@@ -276,16 +276,17 @@ def process_tweet(status: Status, excluded_ids: List[str] = None) -> Optional[Tw
             and str(tweet.replied_to_status_id) in excluded_ids
         ):
             LOGGER.info(
-                f"The Tweet({tweet.id_str}) replied to a "
+                f"@{tweet.user}'s Tweet({tweet.id}) quotes "
+                f"Tweet({tweet.quoted_tweet_id}) but replied to a "
                 f"Tweet({tweet.replied_to_status_id}) that has already "
                 f"been processed. Get response for the replied_to_status "
                 f"to verify if the two tweets are quoting same tweet."
             )
-            replied_to_tweet = Tweet(get_status(tweet.id))
+            replied_to_tweet = Tweet(get_status(tweet.replied_to_status_id))
             if replied_to_tweet.quoted_tweet_id == tweet.quoted_tweet_id:
                 LOGGER.debug(
-                    f"Skipping: Tweet({tweet.quoted_tweet_id}) from @{tweet.user}'s "
-                    f"Tweet({tweet.id}) because tweet was already quoted by "
+                    f"Skipping: Tweet({tweet.id}) from @{tweet.user} quoted "
+                    f"Tweet({tweet.quoted_tweet_id}) was already quoted by "
                     f"user in same thread"
                 )
             else:
@@ -298,8 +299,8 @@ def process_tweet(status: Status, excluded_ids: List[str] = None) -> Optional[Tw
                 return tweet
         else:
             LOGGER.debug(
-                f"Adding tweet({tweet.quoted_tweet_id}) from "
-                f"@{tweet.user}'s tweet({tweet.id}) to list of tweets to collect"
+                f"Adding Tweet({tweet.quoted_tweet_id}) from @{tweet.user}'s "
+                f"Tweet({tweet.id}) to list of tweets to collect"
             )
             return tweet
     else:
