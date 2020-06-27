@@ -185,6 +185,9 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
             add_status_id_to_file_new(
                 tweet_id=user_tweets[0].id_str, user_status_file=user_status_file_path
             )
+        else:
+            LOGGER.debug(f"No new tweets from {user} since {last_status_id}")
+            return []
     except TwitterError as e:
         LOGGER.error(
             f"Something happened, unable to retrieve recent tweets for {user}: {e}"
@@ -204,7 +207,7 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
     )
 
     if not user_tweets_quoting_tweets:
-        LOGGER.debug(msg=f"No new retweets for user: {user}")
+        LOGGER.info(msg=f"No new retweets for user: {user}")
 
     return user_tweets_quoting_tweets
 
