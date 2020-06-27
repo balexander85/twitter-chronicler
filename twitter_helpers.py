@@ -284,7 +284,7 @@ def process_tweet(status: Status, excluded_ids: List[str] = None) -> Optional[Tw
             )
             replied_to_tweet = Tweet(get_status(tweet.replied_to_status_id))
             if replied_to_tweet.quoted_tweet_id == tweet.quoted_tweet_id:
-                LOGGER.debug(
+                LOGGER.info(
                     f"Skipping: Tweet({tweet.id}) from @{tweet.user} quoted "
                     f"Tweet({tweet.quoted_tweet_id}) was already quoted by "
                     f"user in same thread"
