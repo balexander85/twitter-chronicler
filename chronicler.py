@@ -17,7 +17,12 @@ Note:
 from pathlib import Path
 from typing import List
 
-from config import CHROME_DRIVER_PATH, LIST_OF_USERS_TO_FOLLOW
+from config import (
+    CHECKED_STATUSES_DIR_PATH,
+    CHROME_DRIVER_PATH,
+    LIST_OF_USERS_TO_FOLLOW,
+)
+from filelock import FileLock, Timeout
 from _logger import LOGGER
 from tweet_capture import TweetCapture
 from twitter_helpers import (
@@ -28,6 +33,32 @@ from twitter_helpers import (
     post_collected_tweets,
 )
 from wrapped_tweet import Tweet
+
+SCRIPT_TIMEOUT = 5
+
+
+def run_new_chronicler():
+    LOGGER.info("Start of script")
+
+    for user in LIST_OF_USERS_TO_FOLLOW:
+        try:
+            lock_file_name = Path(CHECKED_STATUSES_DIR_PATH).joinpath(f"{user}.lock")
+            LOGGER.info(f"Attempting to lock file {lock_file_name}")
+            with FileLock(
+                lock_file=lock_file_name, timeout=SCRIPT_TIMEOUT,
+            ):
+                LOGGER.info(f"starting collection for user: @{user}")
+                user_quoted_retweets = find_quoted_tweets(user=user)
+                collect_and_post_tweets(user_quoted_retweets)
+                LOGGER.info(f"ending collection for user: @{user}")
+        except Timeout:
+            LOGGER.info(
+                f"Another instance of this application currently "
+                f"holds lock for this user @{user}. "
+                f"(timeout={SCRIPT_TIMEOUT})"
+            )
+
+    LOGGER.info("End of script run")
 
 
 def run_chronicler():
