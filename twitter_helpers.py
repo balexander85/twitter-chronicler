@@ -161,7 +161,7 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
         with open(user_status_file_path, "r") as f:
             read_file = f.readlines()
             last_status_id = int(list(filter(lambda line: line.strip(), read_file))[-1])
-            LOGGER.info(f"Last status id checked {last_status_id}")
+            LOGGER.info(f"Last status id checked {last_status_id} for user @{user}")
     except FileNotFoundError:
         last_status_id = None
         LOGGER.info(f"No status id file has been created for user @{user}")
