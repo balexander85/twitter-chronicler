@@ -1,3 +1,4 @@
+from logging.handlers import TimedRotatingFileHandler
 import logging
 import os
 import sys
@@ -12,7 +13,10 @@ LOGGER.setLevel(logging.INFO)
 formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(name)s - %(message)s")
 
 # create file handler which logs even debug messages
-file_handler = logging.FileHandler(os.path.join(LOG_DIR_PATH, "chronicler.log"))
+file_handler = TimedRotatingFileHandler(
+    filename=os.path.join(LOG_DIR_PATH, "chronicler.log"), when="midnight", interval=1
+)
+file_handler.suffix = "%Y-%m-%d"
 file_handler.setLevel(logging.DEBUG)
 file_handler.setFormatter(formatter)
 
