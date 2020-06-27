@@ -25,3 +25,13 @@ def add_status_id_to_file(tweet_id: str, list_of_ids_replied_to_file_name: str):
     LOGGER.debug(msg=f"Adding {tweet_id} to {list_of_ids_replied_to_file_name}")
     with open(list_of_ids_replied_to_file_name, "a+") as f:
         f.write(tweet_id + "\n")
+
+
+def add_status_id_to_file_new(tweet_id: str, user_status_file: str):
+    """Save id of the replied to tweet
+
+    Save id to file so that tweet will not be replied to more than once.
+    """
+    LOGGER.debug(msg=f"Adding {tweet_id} to {user_status_file}")
+    with open(user_status_file, "a+") as f:
+        f.write(tweet_id + "\n")

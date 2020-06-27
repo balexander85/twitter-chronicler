@@ -25,6 +25,10 @@ LIST_OF_USERS_TO_FOLLOW_FILE_NAME: str = os.path.join(
     PROJECT_DIR_PATH, "conf", "list_of_users_to_follow.txt"
 )
 
+CHECKED_STATUSES_DIR_PATH: str = os.path.join(
+    PROJECT_DIR_PATH, "conf", "statuses_checked"
+)
+
 with open(LIST_OF_USERS_TO_FOLLOW_FILE_NAME, "r") as follower_file:
     followers = follower_file.readlines()
     LIST_OF_USERS_TO_FOLLOW: List[str] = list(
