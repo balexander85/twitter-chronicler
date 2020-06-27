@@ -45,7 +45,7 @@ def check_for_last_status_id(file_name: str) -> int:
                     -1
                 ]
             )
-            LOGGER.info(f"Last status id checked {last_status_id}")
+            LOGGER.debug(f"Last status id checked {last_status_id}")
             return last_status_id
     except FileNotFoundError:
         LOGGER.info(f"No status id file has been created {file_name}")
