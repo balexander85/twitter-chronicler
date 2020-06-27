@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 from typing import List, Union, Optional
 
 from furl import furl
@@ -7,6 +8,7 @@ from twitter import Api as twitterApi, Status, TwitterError, Url, User
 from config import (
     APP_KEY,
     APP_SECRET,
+    CHECKED_STATUSES_DIR_PATH,
     LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME,
     LIST_OF_STATUS_IDS_REPLIED_TO,
     OAUTH_TOKEN,
@@ -17,7 +19,7 @@ from config import (
 )
 from _logger import LOGGER
 from wrapped_tweet import Tweet
-from util import add_status_id_to_file, fetch_test_data_file
+from util import add_status_id_to_file, add_status_id_to_file_new, fetch_test_data_file
 
 
 twitter_api = twitterApi(
@@ -153,8 +155,25 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
     Returns:
         A list of Tweet objects
     """
+    # get last retrieved tweet if possible
+    user_status_file_path = Path(CHECKED_STATUSES_DIR_PATH).joinpath(f"{user}.txt")
     try:
-        user_tweets: List[Status] = get_recent_tweets_for_user(twitter_user=user)
+        with open(user_status_file_path, "r") as f:
+            read_file = f.readlines()
+            last_status_id = int(list(filter(lambda line: line.strip(), read_file))[-1])
+            LOGGER.info(f"Last status id checked {last_status_id}")
+    except FileNotFoundError:
+        last_status_id = None
+        LOGGER.info(f"No status id file has been created for user @{user}")
+
+    try:
+        user_tweets: List[Status] = get_recent_tweets_for_user(
+            twitter_user=user, since_id=last_status_id
+        )
+        if user_tweets:
+            add_status_id_to_file_new(
+                tweet_id=str(user_tweets[0].id), user_status_file=user_status_file_path
+            )
     except TwitterError as e:
         LOGGER.error(
             f"Something happened, unable to retrieve recent tweets for {user}: {e}"
