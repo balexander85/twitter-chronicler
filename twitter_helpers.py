@@ -178,8 +178,9 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
             twitter_user=user, since_id=last_status_id
         )
         if user_tweets:
+            LOGGER.info(f"Found {len(user_tweets)} tweets for {user}")
             add_status_id_to_file_new(
-                tweet_id=str(user_tweets[0].id), user_status_file=user_status_file_path
+                tweet_id=user_tweets[0].id_str, user_status_file=user_status_file_path
             )
     except TwitterError as e:
         LOGGER.error(
