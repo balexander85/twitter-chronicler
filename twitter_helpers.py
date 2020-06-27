@@ -36,6 +36,21 @@ def add_screenshot_to_tweet(tweet: Tweet, screen_shot_file_path: str):
     tweet.screen_capture_file_path_quoted_tweet = screen_shot_file_path
 
 
+def check_for_last_status_id(file_name: str) -> int:
+    """Look for user file and get last status id checked"""
+    try:
+        with open(file_name, "r") as f:
+            last_status_id: int = int(
+                list(filter(None, map(lambda line: line.strip("\n"), f.readlines())))[
+                    -1
+                ]
+            )
+            LOGGER.info(f"Last status id checked {last_status_id}")
+            return last_status_id
+    except FileNotFoundError:
+        LOGGER.info(f"No status id file has been created {file_name}")
+
+
 def get_status(status_id: Union[int, str]) -> Status:
     """Get tweet from api and return Tweet object"""
     LOGGER.info(f"twitter_api.GetStatus(status_id={status_id})")
@@ -155,16 +170,8 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
     Returns:
         A list of Tweet objects
     """
-    # get last retrieved tweet if possible
     user_status_file_path = Path(CHECKED_STATUSES_DIR_PATH).joinpath(f"{user}.txt")
-    try:
-        with open(user_status_file_path, "r") as f:
-            read_file = f.readlines()
-            last_status_id = int(list(filter(lambda line: line.strip(), read_file))[-1])
-            LOGGER.info(f"Last status id checked {last_status_id} for user @{user}")
-    except FileNotFoundError:
-        last_status_id = None
-        LOGGER.info(f"No status id file has been created for user @{user}")
+    last_status_id = check_for_last_status_id(file_name=user_status_file_path)
 
     try:
         user_tweets: List[Status] = get_recent_tweets_for_user(
