@@ -210,7 +210,10 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
         LOGGER.debug(msg=f"No new retweets for user: @{user}")
         return []
 
-    LOGGER.info(f"Collecting quoted tweets for user: @{user}")
+    LOGGER.info(
+        f"Collecting quoted {'tweets' if len(user_tweets) > 1 else 'tweet'} "
+        f"for user: @{user}"
+    )
 
     return user_tweets_quoting_tweets
 
