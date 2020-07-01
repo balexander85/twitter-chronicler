@@ -41,11 +41,14 @@ def check_for_last_status_id(file_name: str) -> int:
     try:
         with open(file_name, "r") as f:
             lines = f.readlines()
-            last_status_id: List = list(
+            latest_status_ids: List = list(
                 filter(None, map(lambda line: line.strip("\n"), lines))
             )
-            LOGGER.debug(f"Last status id checked {last_status_id}")
-            return int(last_status_id[-1]) if len(last_status_id) > 0 else None
+            latest_status_id = (
+                int(latest_status_ids[-1]) if len(latest_status_ids) > 0 else None
+            )
+            LOGGER.debug(f"Last status id checked {latest_status_id}")
+            return latest_status_id
     except FileNotFoundError:
         LOGGER.info(f"No status id file has been created {file_name}")
 
