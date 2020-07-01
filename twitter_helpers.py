@@ -40,13 +40,12 @@ def check_for_last_status_id(file_name: str) -> int:
     """Look for user file and get last status id checked"""
     try:
         with open(file_name, "r") as f:
-            last_status_id: int = int(
-                list(filter(None, map(lambda line: line.strip("\n"), f.readlines())))[
-                    -1
-                ]
+            lines = f.readlines()
+            last_status_id: List = list(
+                filter(None, map(lambda line: line.strip("\n"), lines))
             )
             LOGGER.debug(f"Last status id checked {last_status_id}")
-            return last_status_id
+            return int(last_status_id[-1]) if len(last_status_id) > 0 else None
     except FileNotFoundError:
         LOGGER.info(f"No status id file has been created {file_name}")
 
