@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import List, Union, Optional
 
 from furl import furl
-from twitter import Api as twitterApi, Status, TwitterError, Url, User
+from twitter import Api, Status, TwitterError, Url, User
 
 from config import (
     APP_KEY,
@@ -22,7 +22,7 @@ from wrapped_tweet import Tweet
 from util import add_status_id_to_file, add_status_id_to_file_new, fetch_test_data_file
 
 
-twitter_api = twitterApi(
+twitter_api = Api(
     consumer_key=APP_KEY,
     consumer_secret=APP_SECRET,
     access_token_key=OAUTH_TOKEN,
