@@ -21,10 +21,7 @@ RUN apt-get update \
  # Install chromedriver and chromium with aptitude
  && aptitude install chromium-driver -y \
  # Install packages
- && apt-get install -y --no-install-recommends --no-install-suggests \
-         build-essential \
-         python3-dev \
-         cron \
+ && apt-get install -y --no-install-recommends --no-install-suggests cron \
  && chmod +x ./entrypoint.sh \
  && pip install -r requirements.txt \
  && pip install -e git+https://github.com/balexander85/WrappedDriver.git#egg=WrappedDriver \

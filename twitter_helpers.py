@@ -192,13 +192,19 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
             LOGGER.debug(f"No new tweets from {user} since {last_status_id}")
             return []
     except TwitterError as e:
-        if e.message[0].get("code") == 88:
+        error_code = e.message[0].get("code")
+        if error_code == 88:
             LOGGER.error(
                 f"'Rate limit exceeded': unable to retrieve recent tweets for {user}"
             )
             sleep_time = 180
             LOGGER.error(f"Sleeping for {sleep_time} seconds")
             sleep(sleep_time)
+        elif error_code == 326:
+            LOGGER.error(
+                f"'This account is temporarily locked, please login': "
+                f"unable to retrieve recent tweets for {user}"
+            )
         else:
             LOGGER.error(
                 f"Something happened, unable to retrieve recent tweets for {user}: {e}"

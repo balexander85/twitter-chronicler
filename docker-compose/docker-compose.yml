@@ -1,0 +1,8 @@
+version: '3'
+services:
+  chronicler:
+    container_name: chronicler
+    image: balexander85/twitter-chronicler
+    restart: unless-stopped
+    volumes:
+      - ./conf:/usr/src/twitter_chronicler/conf
