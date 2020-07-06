@@ -2,10 +2,11 @@
 .python-version
 .idea/
 *.lock
-*.log
 conf/config.ini
 temp_status.json
+conf/statuses_checked/*
 conf/list_of_status_ids_replied_to.txt
 conf/list_of_users_to_follow.txt
+logs/
 screenshots/
 __pycache__/
