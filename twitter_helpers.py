@@ -4,6 +4,7 @@ from time import sleep
 from typing import List, Union, Optional
 
 from furl import furl
+from retry import retry
 from twitter import Api, Status, TwitterError, Url, User
 
 from config import (
@@ -29,6 +30,10 @@ twitter_api = Api(
     access_token_key=OAUTH_TOKEN,
     access_token_secret=OAUTH_TOKEN_SECRET,
 )
+
+
+class TwitterRateLimitException(TwitterError):
+    pass
 
 
 def add_screenshot_to_tweet(tweet: Tweet, screen_shot_file_path: str):
@@ -122,14 +127,39 @@ def get_all_users_tweets(twitter_user: str) -> List[Status]:
     return all_tweets
 
 
+@retry(exceptions=TwitterRateLimitException, tries=4, delay=2)
 def get_recent_tweets_for_user(
     twitter_user: str, since_id: int = None, count: int = 10
 ) -> List[Status]:
     """Using Twitter API get recent tweets using user screen name"""
-    LOGGER.debug(f"Getting last {count} tweets for user: {twitter_user}")
-    return twitter_api.GetUserTimeline(
-        screen_name=twitter_user, since_id=since_id, count=count
-    )
+    try:
+        LOGGER.debug(f"Getting last {count} tweets for user: {twitter_user}")
+        response = twitter_api.GetUserTimeline(
+            screen_name=twitter_user, since_id=since_id, count=count
+        )
+        return response
+    except TwitterError as errors:
+        for error in errors.message:
+            error_code = error.get("code")
+            if error_code == 88:
+                LOGGER.error(
+                    f"'Rate limit exceeded': "
+                    f"unable to retrieve recent tweets for {twitter_user}. {error}"
+                )
+                sleep_time = 120
+                LOGGER.error(f"Sleeping for {sleep_time} seconds")
+                sleep(sleep_time)
+                raise TwitterRateLimitException
+            elif error_code == 326:
+                LOGGER.critical(
+                    f"'This account is temporarily locked, please login': "
+                    f"unable to retrieve recent tweets for {twitter_user}. {error}"
+                )
+            else:
+                LOGGER.error(
+                    f"Something happened, unable to retrieve recent "
+                    f"tweets for {twitter_user}. {error}"
+                )
 
 
 def find_deleted_tweets(twitter_user: str) -> List[dict]:
@@ -175,40 +205,19 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
     """
     user_status_file_path = Path(CHECKED_STATUSES_DIR_PATH).joinpath(f"{user}.txt")
     last_status_id = check_for_last_status_id(file_name=user_status_file_path)
-
-    try:
-        user_tweets: List[Status] = get_recent_tweets_for_user(
-            twitter_user=user, since_id=last_status_id
+    user_tweets: List[Status] = get_recent_tweets_for_user(
+        twitter_user=user, since_id=last_status_id
+    )
+    if user_tweets:
+        LOGGER.debug(
+            f"Found {len(user_tweets)} "
+            f"{'tweets' if len(user_tweets) > 1 else 'tweet'} for {user}"
         )
-        if user_tweets:
-            LOGGER.debug(
-                f"Found {len(user_tweets)} "
-                f"{'tweets' if len(user_tweets) > 1 else 'tweet'} for {user}"
-            )
-            add_status_id_to_file_new(
-                tweet_id=user_tweets[0].id_str, user_status_file=user_status_file_path
-            )
-        else:
-            LOGGER.debug(f"No new tweets from {user} since {last_status_id}")
-            return []
-    except TwitterError as e:
-        error_code = e.message[0].get("code")
-        if error_code == 88:
-            LOGGER.error(
-                f"'Rate limit exceeded': unable to retrieve recent tweets for {user}"
-            )
-            sleep_time = 180
-            LOGGER.error(f"Sleeping for {sleep_time} seconds")
-            sleep(sleep_time)
-        elif error_code == 326:
-            LOGGER.error(
-                f"'This account is temporarily locked, please login': "
-                f"unable to retrieve recent tweets for {user}"
-            )
-        else:
-            LOGGER.error(
-                f"Something happened, unable to retrieve recent tweets for {user}: {e}"
-            )
+        add_status_id_to_file_new(
+            tweet_id=user_tweets[0].id_str, user_status_file=user_status_file_path
+        )
+    else:
+        LOGGER.debug(f"No new tweets from {user} since {last_status_id}")
         return []
 
     user_tweets_quoting_tweets = list(

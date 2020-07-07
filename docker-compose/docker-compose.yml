@@ -5,4 +5,5 @@ services:
     image: balexander85/twitter-chronicler
     restart: unless-stopped
     volumes:
-      - ./conf:/usr/src/twitter_chronicler/conf
+      - /media/bot_conf/conf:/usr/src/twitter_chronicler/conf
+      - /media/bot_conf/screenshots:/usr/src/twitter_chronicler/screenshots
