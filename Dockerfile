@@ -25,7 +25,6 @@ RUN apt-get update \
  && chmod +x ./entrypoint.sh \
  && pip install -r requirements.txt \
  && pip install -e git+https://github.com/balexander85/WrappedDriver.git#egg=WrappedDriver \
- && mkdir logs \
  # Cleanup unnecessary stuff
  && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
