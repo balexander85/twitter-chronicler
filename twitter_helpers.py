@@ -19,10 +19,12 @@ from config import (
     TEMP_JSON_FILE_NAME,
     TWITTER_API_USER,
 )
-from _logger import LOGGER
+from _logger import get_module_logger
 from wrapped_tweet import Tweet
 from util import add_status_id_to_file, add_status_id_to_file_new, fetch_test_data_file
 
+
+LOGGER = get_module_logger(__name__)
 
 twitter_api = Api(
     consumer_key=APP_KEY,
