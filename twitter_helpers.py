@@ -152,6 +152,11 @@ def get_recent_tweets_for_user(
                 LOGGER.error(f"Sleeping for {sleep_time} seconds")
                 sleep(sleep_time)
                 raise TwitterRateLimitException
+            elif error_code == 136:
+                LOGGER.error(
+                    f"You have been blocked from viewing "
+                    f"this user's ({twitter_user}) profile. {error}"
+                )
             elif error_code == 326:
                 LOGGER.critical(
                     f"'This account is temporarily locked, please login': "
