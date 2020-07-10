@@ -11,8 +11,7 @@ COPY _logger.py \
   wrapped_tweet.py \
   util.py \
   entrypoint.sh ./
-RUN echo "America/Chicago" > /etc/timezone \
- && apt-get update \
+RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y --no-install-recommends --no-install-suggests ca-certificates \
  && update-ca-certificates \

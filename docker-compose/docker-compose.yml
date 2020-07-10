@@ -2,6 +2,8 @@ version: '3'
 services:
   chronicler:
     container_name: chronicler
+    environment:
+      - TZ=America/Chicago
     image: balexander85/twitter-chronicler
     restart: unless-stopped
     volumes:
