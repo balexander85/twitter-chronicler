@@ -10,3 +10,4 @@ conf/list_of_users_to_follow.txt
 logs/
 screenshots/
 __pycache__/
+tests/conf/config.ini
