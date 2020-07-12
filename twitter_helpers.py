@@ -18,6 +18,14 @@ from config import (
     TEST_JSON_FILE_NAME,
     TEMP_JSON_FILE_NAME,
     TWITTER_API_USER,
+    READ_APP_KEY,
+    READ_APP_SECRET,
+    READ_OAUTH_TOKEN,
+    READ_OAUTH_TOKEN_SECRET,
+    WRITE_APP_KEY,
+    WRITE_APP_SECRET,
+    WRITE_OAUTH_TOKEN,
+    WRITE_OAUTH_TOKEN_SECRET,
 )
 from _logger import get_module_logger
 from wrapped_tweet import Tweet
@@ -31,6 +39,20 @@ twitter_api = Api(
     consumer_secret=APP_SECRET,
     access_token_key=OAUTH_TOKEN,
     access_token_secret=OAUTH_TOKEN_SECRET,
+)
+
+tweet_scanner_api = Api(
+    consumer_key=READ_APP_KEY,
+    consumer_secret=READ_APP_SECRET,
+    access_token_key=READ_OAUTH_TOKEN,
+    access_token_secret=READ_OAUTH_TOKEN_SECRET,
+)
+
+tweeter_api = Api(
+    consumer_key=WRITE_APP_KEY,
+    consumer_secret=WRITE_APP_SECRET,
+    access_token_key=WRITE_OAUTH_TOKEN,
+    access_token_secret=WRITE_OAUTH_TOKEN_SECRET,
 )
 
 
@@ -136,7 +158,7 @@ def get_recent_tweets_for_user(
     """Using Twitter API get recent tweets using user screen name"""
     try:
         LOGGER.debug(f"Getting last {count} tweets for user: {twitter_user}")
-        response = twitter_api.GetUserTimeline(
+        response = tweet_scanner_api.GetUserTimeline(
             screen_name=twitter_user, since_id=since_id, count=count
         )
         return response
@@ -269,7 +291,7 @@ def post_collected_tweets(quoted_tweets: List[Tweet]) -> bool:
 def post_reply_to_user_tweet(tweet: Tweet) -> Status:
     """Post message and screen cap of the quoted tweet"""
     LOGGER.info(msg=f"Replying to '@{tweet.user}: tweet({tweet.id})'")
-    response: Status = twitter_api.PostUpdate(
+    response: Status = tweeter_api.PostUpdate(
         status=tweet.for_the_record_message,
         media=tweet.screen_capture_file_path_quoted_tweet,
         in_reply_to_status_id=tweet.id,
