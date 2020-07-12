@@ -14,6 +14,17 @@ APP_SECRET = config.get("default", "APP_SECRET")
 OAUTH_TOKEN = config.get("default", "OAUTH_TOKEN")
 OAUTH_TOKEN_SECRET = config.get("default", "OAUTH_TOKEN_SECRET")
 
+# Twitter API config for user that scans tweets
+READ_APP_KEY = config.get("default", "READ_APP_KEY")
+READ_APP_SECRET = config.get("default", "READ_APP_SECRET")
+READ_OAUTH_TOKEN = config.get("default", "READ_OAUTH_TOKEN")
+READ_OAUTH_TOKEN_SECRET = config.get("default", "READ_OAUTH_TOKEN_SECRET")
+# Twitter API config for user that replies with screenshot
+WRITE_APP_KEY = config.get("default", "WRITE_APP_KEY")
+WRITE_APP_SECRET = config.get("default", "WRITE_APP_SECRET")
+WRITE_OAUTH_TOKEN = config.get("default", "WRITE_OAUTH_TOKEN")
+WRITE_OAUTH_TOKEN_SECRET = config.get("default", "WRITE_OAUTH_TOKEN_SECRET")
+
 # Selenium config
 CHROME_DRIVER_PATH = config.get("default", "CHROME_DRIVER_PATH")
 
