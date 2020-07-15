@@ -2,6 +2,7 @@
 
 Tests for all the helper functions from twitter_helpers.py
 """
+from pathlib import Path
 from unittest.mock import patch
 
 from twitter import Status
@@ -189,14 +190,12 @@ def test_post_collected_tweets(mock_get, test_status):
     Notes:
        * Mock PostUpdate without making real call to Twitter API
     """
-    from os import path
-
     expected_num_of_ids = 4
-
-    status_id_file_name = path.join(
-        path.dirname(__file__), "../conf/list_of_status_ids_replied_to.txt"
+    status_id_file = Path(__file__).parent.joinpath(
+        "../conf/list_of_status_ids_replied_to.txt"
     )
-    list_of_status_ids_replied_to = list(file_reader(status_id_file_name))
+
+    list_of_status_ids_replied_to = list(file_reader(status_id_file))
     assert len(list_of_status_ids_replied_to) == expected_num_of_ids, (
         f"Expected number ({expected_num_of_ids}) of status ids replied to "
         f"did not match actual ({len(list_of_status_ids_replied_to)})"
@@ -204,13 +203,13 @@ def test_post_collected_tweets(mock_get, test_status):
     quoted_tweet = test_status("post_reply_response")
     mock_get.return_value = quoted_tweet
     response = post_collected_tweets(quoted_tweets=[Tweet(quoted_tweet)])
-    new_list_of_status_ids_replied_to = list(file_reader(status_id_file_name))
+    new_list_of_status_ids_replied_to = list(file_reader(status_id_file))
     assert (
         str(quoted_tweet.in_reply_to_status_id) == new_list_of_status_ids_replied_to[-1]
     ), "Expected status id to be last item in list"
     assert response
     # clean up by overwriting file with original list
-    with open(status_id_file_name, "w") as f:
+    with status_id_file.open(mode="w") as f:
         for line in list_of_status_ids_replied_to:
             f.write(line + "\n")
 

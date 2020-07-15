@@ -2,8 +2,10 @@ from typing import List, Optional
 
 from twitter import Status
 
-from config import TWITTER_API_USER, TWITTER_URL
-from _logger import LOGGER
+from _logger import get_module_logger
+
+LOGGER = get_module_logger(__name__)
+TWITTER_URL = "https://twitter.com"
 
 
 class Tweet:
@@ -31,17 +33,6 @@ class Tweet:
     @property
     def quoted_to_status_bool(self) -> bool:
         """Return True if tweet quotes another"""
-        # if self.raw_tweet.quoted_status_id:
-        #     LOGGER.info(
-        #         "At very least this is a retweet, "
-        #         "need to confirm if quoting a tweet too"
-        #     )
-        #     if (
-        #             self.raw_tweet.quoted_status_id_str
-        #             in [url.expanded_url for url in self.raw_tweet.urls][0]
-        #     ):
-        #         return True
-        # return False
         return False if not self.raw_tweet.quoted_status else True
 
     @property
@@ -90,12 +81,6 @@ class Tweet:
 
             LOGGER.debug(msg=message)
             return message
-
-        # return (
-        #     f"@{self.user} Cannot include text of quoted tweet because this account "
-        #     f"@{TWITTER_API_USER.get('screen_name')} has been blocked by the user of "
-        #     f"the quoted tweet."
-        # )
 
     @property
     def replied_to_status_bool(self) -> bool:

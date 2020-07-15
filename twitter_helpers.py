@@ -1,5 +1,4 @@
 import json
-from pathlib import Path
 from time import sleep
 from typing import List, Union, Optional
 
@@ -11,12 +10,12 @@ from config import (
     APP_KEY,
     APP_SECRET,
     CHECKED_STATUSES_DIR_PATH,
-    LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME,
+    LIST_OF_STATUS_IDS_REPLIED_TO_FILE,
     LIST_OF_STATUS_IDS_REPLIED_TO,
     OAUTH_TOKEN,
     OAUTH_TOKEN_SECRET,
-    TEST_JSON_FILE_NAME,
-    TEMP_JSON_FILE_NAME,
+    TEST_JSON_FILE,
+    TEMP_JSON_FILE,
     TWITTER_API_USER,
     READ_APP_KEY,
     READ_APP_SECRET,
@@ -232,7 +231,7 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
     Returns:
         A list of Tweet objects
     """
-    user_status_file_path = Path(CHECKED_STATUSES_DIR_PATH).joinpath(f"{user}.txt")
+    user_status_file_path = str(CHECKED_STATUSES_DIR_PATH.joinpath(f"{user}.txt"))
     last_status_id = check_for_last_status_id(file_name=user_status_file_path)
     user_tweets: List[Status] = get_recent_tweets_for_user(
         twitter_user=user, since_id=last_status_id
@@ -283,7 +282,9 @@ def post_collected_tweets(quoted_tweets: List[Tweet]) -> bool:
         else:
             add_status_id_to_file(
                 tweet_id=str(tweet_reply_id),
-                list_of_ids_replied_to_file_name=LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME,
+                list_of_ids_replied_to_file_name=str(
+                    LIST_OF_STATUS_IDS_REPLIED_TO_FILE
+                ),
             )
     return True
 
@@ -398,7 +399,7 @@ def save_tweet_test_data(file_name, status):
 
 
 def fetch_test_data(data_name):
-    json_file = fetch_test_data_file(file_name=TEST_JSON_FILE_NAME)
+    json_file = fetch_test_data_file(file=TEST_JSON_FILE)
 
     if type(json_file.get(data_name)) is list:
         return generate_mock_tweet(

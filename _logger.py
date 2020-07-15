@@ -1,10 +1,10 @@
 from logging.handlers import TimedRotatingFileHandler
+from pathlib import Path
 import logging
-import os
 
 
-MODULE_DIR_PATH = os.path.dirname(__file__)
-LOG_DIR_PATH = os.path.join(MODULE_DIR_PATH, "logs")
+MODULE_PATH = Path(__file__).parent
+LOG_DIR_PATH = MODULE_PATH.joinpath("logs")
 LOGGER_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 VERBOSE_LOGGER_FORMAT = "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
 
@@ -17,7 +17,7 @@ def get_module_logger(name):
     formatter = logging.Formatter(VERBOSE_LOGGER_FORMAT)
     # create file handler which logs even debug messages
     file_handler = TimedRotatingFileHandler(
-        filename=os.path.join(LOG_DIR_PATH, f"{name}.log"),
+        filename=LOG_DIR_PATH.joinpath(f"{name}.log"),
         when="midnight",
         interval=1,
         backupCount=7,
@@ -37,26 +37,4 @@ def get_module_logger(name):
     return logger
 
 
-LOGGER = logging.getLogger("twitter_chronicler")
-LOGGER.setLevel(logging.INFO)
-
-# create formatter and add it to the handlers
-logger_format = "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
-formatter = logging.Formatter(logger_format)
-
-# create file handler which logs even debug messages
-file_handler = TimedRotatingFileHandler(
-    filename=os.path.join(LOG_DIR_PATH, "chronicler.log"), when="midnight", interval=1
-)
-file_handler.suffix = "%Y-%m-%d"
-file_handler.setLevel(logging.DEBUG)
-file_handler.setFormatter(formatter)
-
-# create console handler with a higher log level
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.DEBUG)
-console_handler.setFormatter(formatter)
-
-# add the handlers to the logger
-LOGGER.addHandler(file_handler)
-LOGGER.addHandler(console_handler)
+LOGGER = get_module_logger("twitter_chronicler")

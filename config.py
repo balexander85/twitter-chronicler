@@ -1,12 +1,12 @@
 from configparser import ConfigParser
+from pathlib import Path, PosixPath
 from typing import List
-import os
 
-PROJECT_DIR_PATH = os.path.dirname(__file__)
+PROJECT_DIR_PATH = Path(__file__).parent
 
 
 config = ConfigParser()
-config.read(os.path.join(PROJECT_DIR_PATH, "conf", "config.ini"))
+config.read(PROJECT_DIR_PATH.joinpath("conf", "config.ini"))
 
 # Twitter API config
 APP_KEY = config.get("default", "APP_KEY")
@@ -29,18 +29,18 @@ WRITE_OAUTH_TOKEN_SECRET = config.get("default", "WRITE_OAUTH_TOKEN_SECRET")
 CHROME_DRIVER_PATH = config.get("default", "CHROME_DRIVER_PATH")
 
 # General config
-LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME: str = os.path.join(
-    PROJECT_DIR_PATH, "conf", "list_of_status_ids_replied_to.txt"
+LIST_OF_STATUS_IDS_REPLIED_TO_FILE: PosixPath = PROJECT_DIR_PATH.joinpath(
+    "conf", "list_of_status_ids_replied_to.txt"
 )
-LIST_OF_USERS_TO_FOLLOW_FILE_NAME: str = os.path.join(
-    PROJECT_DIR_PATH, "conf", "list_of_users_to_follow.txt"
-)
-
-CHECKED_STATUSES_DIR_PATH: str = os.path.join(
-    PROJECT_DIR_PATH, "conf", "statuses_checked"
+LIST_OF_USERS_TO_FOLLOW_FILE: PosixPath = PROJECT_DIR_PATH.joinpath(
+    "conf", "list_of_users_to_follow.txt"
 )
 
-with open(LIST_OF_USERS_TO_FOLLOW_FILE_NAME, "r") as follower_file:
+CHECKED_STATUSES_DIR_PATH: PosixPath = PROJECT_DIR_PATH.joinpath(
+    "conf", "statuses_checked"
+)
+
+with LIST_OF_USERS_TO_FOLLOW_FILE.open() as follower_file:
     followers = follower_file.readlines()
     LIST_OF_USERS_TO_FOLLOW: List[str] = list(
         map(
@@ -51,15 +51,17 @@ with open(LIST_OF_USERS_TO_FOLLOW_FILE_NAME, "r") as follower_file:
         )
     )
 
-with open(LIST_OF_STATUS_IDS_REPLIED_TO_FILE_NAME, "r") as f:
+with LIST_OF_STATUS_IDS_REPLIED_TO_FILE.open() as f:
     LIST_OF_STATUS_IDS_REPLIED_TO: List[str] = list(
         filter(None, map(lambda line: line.strip("\n"), f.readlines()))
     )
 
 # Test config
-TEST_JSON_FILE_NAME: str = os.path.join(PROJECT_DIR_PATH, "tests/test_data/status.json")
-TEMP_JSON_FILE_NAME: str = os.path.join(
-    PROJECT_DIR_PATH, "tests/test_data/temp_status.json"
+TEST_JSON_FILE: PosixPath = PROJECT_DIR_PATH.joinpath(
+    "tests", "test_data", "status.json"
+)
+TEMP_JSON_FILE: PosixPath = PROJECT_DIR_PATH.joinpath(
+    "tests", "test_data", "temp_status.json"
 )
 TWITTER_API_USER = {"screen_name": "FTBandFTR"}
 TWITTER_URL = "https://twitter.com"

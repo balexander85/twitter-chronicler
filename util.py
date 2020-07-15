@@ -1,21 +1,21 @@
 import json
-from pathlib import Path
+from pathlib import Path, PosixPath
 from typing import Iterator
 
 from _logger import get_module_logger
 
-LOGGER = get_module_logger(__file__)
+LOGGER = get_module_logger(__name__)
 
 
-def fetch_test_data_file(file_name: str):
-    with Path(file_name).open(mode="r") as f:
+def fetch_test_data_file(file: PosixPath):
+    with file.open() as f:
         json_file = json.load(f)
     return json_file
 
 
-def file_reader(file_name: str) -> Iterator[str]:
+def file_reader(file: PosixPath) -> Iterator[str]:
     """Yield entries from files"""
-    for row in Path(file_name).open(mode="r"):
+    for row in file.open():
         clean_row = row.strip("\n")
         yield clean_row
 

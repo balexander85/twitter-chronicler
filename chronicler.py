@@ -42,7 +42,7 @@ def run_new_chronicler():
 
     for user in LIST_OF_USERS_TO_FOLLOW:
         try:
-            lock_file_name = Path(CHECKED_STATUSES_DIR_PATH).joinpath(f"{user}.lock")
+            lock_file_name = CHECKED_STATUSES_DIR_PATH.joinpath(f"{user}.lock")
             LOGGER.info(f"Attempting to lock file {lock_file_name}")
             with FileLock(
                 lock_file=lock_file_name, timeout=SCRIPT_TIMEOUT,
