@@ -2,7 +2,6 @@ from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
 import logging
 
-
 MODULE_PATH = Path(__file__).parent
 LOG_DIR_PATH = MODULE_PATH.joinpath("logs")
 LOGGER_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
@@ -35,6 +34,3 @@ def get_module_logger(name):
     logger.addHandler(file_handler)
     logger.addHandler(console_handler)
     return logger
-
-
-LOGGER = get_module_logger("twitter_chronicler")

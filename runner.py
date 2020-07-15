@@ -3,8 +3,9 @@ import sys
 from filelock import FileLock, Timeout
 
 from chronicler import run_chronicler
-from _logger import LOGGER
+from _logger import get_module_logger
 
+LOGGER = get_module_logger(__name__)
 SCRIPT_TIMEOUT = 10
 
 

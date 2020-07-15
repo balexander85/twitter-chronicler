@@ -23,7 +23,7 @@ from config import (
     LIST_OF_USERS_TO_FOLLOW,
 )
 from filelock import FileLock, Timeout
-from _logger import LOGGER
+from _logger import get_module_logger
 from tweet_capture import TweetCapture
 from twitter_helpers import (
     add_screenshot_to_tweet,
@@ -34,6 +34,7 @@ from twitter_helpers import (
 )
 from wrapped_tweet import Tweet
 
+LOGGER = get_module_logger(__name__)
 SCRIPT_TIMEOUT = 5
 
 
