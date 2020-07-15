@@ -1,21 +1,13 @@
-import json
 from time import sleep
 from typing import List, Union, Optional
 
-from furl import furl
 from retry import retry
-from twitter import Api, Status, TwitterError, Url, User
+from twitter import Api, Status, TwitterError
 
 from config import (
-    APP_KEY,
-    APP_SECRET,
     CHECKED_STATUSES_DIR_PATH,
     LIST_OF_STATUS_IDS_REPLIED_TO_FILE,
     LIST_OF_STATUS_IDS_REPLIED_TO,
-    OAUTH_TOKEN,
-    OAUTH_TOKEN_SECRET,
-    TEST_JSON_FILE,
-    TEMP_JSON_FILE,
     TWITTER_API_USER,
     READ_APP_KEY,
     READ_APP_SECRET,
@@ -28,17 +20,10 @@ from config import (
 )
 from _logger import get_module_logger
 from wrapped_tweet import Tweet
-from util import add_status_id_to_file, add_status_id_to_file_new, fetch_test_data_file
+from util import add_line_to_file
 
 
 LOGGER = get_module_logger(__name__)
-
-twitter_api = Api(
-    consumer_key=APP_KEY,
-    consumer_secret=APP_SECRET,
-    access_token_key=OAUTH_TOKEN,
-    access_token_secret=OAUTH_TOKEN_SECRET,
-)
 
 tweet_scanner_api = Api(
     consumer_key=READ_APP_KEY,
@@ -82,72 +67,11 @@ def check_for_last_status_id(file_name: str) -> int:
         LOGGER.info(f"No status id file has been created {file_name}")
 
 
-def get_status(status_id: Union[int, str]) -> Status:
+def get_status(api_user, status_id: Union[int, str]) -> Status:
     """Get tweet from api and return Tweet object"""
-    LOGGER.info(f"twitter_api.GetStatus(status_id={status_id})")
-    response = twitter_api.GetStatus(status_id=status_id)
+    LOGGER.info(f"api_user.GetStatus(status_id={status_id})")
+    response = api_user.GetStatus(status_id=status_id)
     return response
-
-
-def get_status_from_url(url: str) -> Status:
-    """Get tweet from api and return Status object
-
-    Args:
-        url: url of the tweet
-
-    Examples:
-        * https://twitter.com/briebriejoy/status/1222711763248078849
-    """
-    LOGGER.info(f"Fetching tweet: {url}")
-    f_url = furl(url)
-    status_id = f_url.path.segments[-1]
-    response = get_status(status_id=status_id)
-    return response
-
-
-def get_tweet_from_url(url: str) -> Tweet:
-    """Get tweet from api and return Tweet object
-
-    Args:
-        url: url of the tweet
-
-    Examples:
-        * https://twitter.com/briebriejoy/status/1222711763248078849
-
-    """
-    response = get_status_from_url(url=url)
-    return Tweet(response)
-
-
-def get_all_users_tweets(twitter_user: str) -> List[Status]:
-    """Helper method to collect ALL of a user's tweets
-
-    Notes:
-        Endpoint Resource family Requests / window (user auth) Requests / window (app auth)
-        * GET statuses/user_timeline	statuses	900	1500
-    """
-    LOGGER.info(f"Getting tweets for user: {twitter_user}")
-    user_tweet_count = twitter_api.GetUser(screen_name=twitter_user).statuses_count
-
-    if int(user_tweet_count) > 3000:
-        raise Exception("Whatever the hourly rate limit would be raise error for now")
-
-    all_tweets = []
-
-    initial_tweets = twitter_api.GetUserTimeline(screen_name=twitter_user, count=200)
-
-    last_tweet_id = initial_tweets[-1].id
-    all_tweets.extend(initial_tweets)
-
-    for _ in range(int(user_tweet_count / 200)):
-        new_tweets = twitter_api.GetUserTimeline(
-            screen_name=twitter_user, max_id=last_tweet_id, count=200
-        )
-        all_tweets.extend(new_tweets)
-        last_tweet_id = new_tweets[-1].id
-
-    LOGGER.info(f"Found {len(all_tweets)} tweets for user {twitter_user}")
-    return all_tweets
 
 
 @retry(exceptions=TwitterRateLimitException, tries=4, delay=2)
@@ -196,34 +120,6 @@ def get_recent_tweets_for_user(
             )
 
 
-def find_deleted_tweets(twitter_user: str) -> List[dict]:
-    """Get list of tweets that were deleted"""
-    bad_ids = []
-    list_of_users_to_ignore = ["", ""]
-    tweets = get_all_users_tweets(twitter_user)
-    replied_to_statuses = [
-        t
-        for t in tweets
-        if t.replied_to_status_bool
-        and t.replied_to_user_screen_name not in list_of_users_to_ignore
-    ]
-    for t in replied_to_statuses:
-        try:
-            responded_to_tweet = Tweet(twitter_api.GetStatus(t.replied_to_status_id))
-            if responded_to_tweet.quoted_tweet_id:
-                quoted_tweet_status = Tweet(
-                    twitter_api.GetStatus(responded_to_tweet.quoted_tweet_id)
-                )
-                LOGGER.info(quoted_tweet_status)
-        except TwitterError as e:
-            LOGGER.error(f"{e}, {t.replied_to_user_screen_name}, {t.id}")
-            bad_ids.append(
-                {"user": t.replied_to_user_screen_name, "tweet_id": t.id, "error": e,}
-            )
-
-    return bad_ids
-
-
 def find_quoted_tweets(user: str) -> List[Tweet]:
     """Get list of tweets that were quoted by users from given list
 
@@ -247,9 +143,7 @@ def find_quoted_tweets(user: str) -> List[Tweet]:
             f"Found {len(user_tweets)} "
             f"{'tweets' if len(user_tweets) > 1 else 'tweet'} for {user}"
         )
-        add_status_id_to_file_new(
-            tweet_id=user_tweets[0].id_str, user_status_file=user_status_file_path
-        )
+        add_line_to_file(line=user_tweets[0].id_str, file_path=user_status_file_path)
     else:
         LOGGER.debug(f"No new tweets from {user} since {last_status_id}")
         return []
@@ -286,11 +180,9 @@ def post_collected_tweets(quoted_tweets: List[Tweet]) -> bool:
         if not tweet_reply_id:
             LOGGER.info(f"The tweet_reply_id was None.")
         else:
-            add_status_id_to_file(
-                tweet_id=str(tweet_reply_id),
-                list_of_ids_replied_to_file_name=str(
-                    LIST_OF_STATUS_IDS_REPLIED_TO_FILE
-                ),
+            add_line_to_file(
+                line=str(tweet_reply_id),
+                file_path=str(LIST_OF_STATUS_IDS_REPLIED_TO_FILE),
             )
     return True
 
@@ -350,7 +242,9 @@ def process_tweet(status: Status, excluded_ids: List[str] = None) -> Optional[Tw
                 f"been processed. Get response for the replied_to_status "
                 f"to verify if the two tweets are quoting same tweet."
             )
-            replied_to_tweet = Tweet(get_status(tweet.replied_to_status_id))
+            replied_to_tweet = Tweet(
+                get_status(tweet_scanner_api, tweet.replied_to_status_id)
+            )
             if replied_to_tweet.quoted_tweet_id == tweet.quoted_tweet_id:
                 LOGGER.info(
                     f"Skipping: Tweet({tweet.id}) from @{tweet.user} quoted "
@@ -377,85 +271,5 @@ def process_tweet(status: Status, excluded_ids: List[str] = None) -> Optional[Tw
         )
 
 
-def save_user_test_data(file_name, user_name, count):
-    """Make call with twitter api to get test data"""
-    tweets = twitter_api.GetUserTimeline(screen_name=user_name, count=count)
-    # maybe replace with map()
-    clean_tweets = [s.AsDict() for s in tweets]
-    with open(file_name, "w") as f:
-        for t in clean_tweets:
-            json.dump(t, f)
-
-
-def save_all_user_data(user_name: str):
-    """Make call with twitter api to get test data"""
-    tweets = get_all_users_tweets(twitter_user=user_name)
-    # maybe replace with map()
-    clean_tweets = [s.AsDict() for s in tweets]
-    with open(f"{user_name}_all_tweets.json", "w") as f:
-        for t in clean_tweets:
-            json.dump(t, f)
-
-
-def save_tweet_test_data(file_name, status):
-    """Make call with twitter api to get test data"""
-    tweet = twitter_api.GetStatus(status_id=status)
-    with open(file_name, "w") as f:
-        json.dump(tweet.AsDict(), f)
-
-
-def fetch_test_data(data_name):
-    json_file = fetch_test_data_file(file=TEST_JSON_FILE)
-
-    if type(json_file.get(data_name)) is list:
-        return generate_mock_tweet(
-            raw_status=[Status(**s) for s in json_file.get(data_name)]
-        )
-    else:
-        return generate_mock_tweet(raw_status=Status(**json_file.get(data_name)))
-
-
-def convert_dicts_in_status_to_obj(status: Status) -> Status:
-    """Update each attribute of status with Twitter object"""
-    keys_to_update = ["urls", "user", "user_mentions", "quoted_status"]
-    for key in keys_to_update:
-        if key == "urls":
-            status.urls = [Url(**url) for url in status.__getattribute__(key)]
-        elif key == "user":
-            status.user = User(**status.__getattribute__(key))
-        elif key == "user_mentions":
-            status.user_mentions = [
-                User(**user) for user in status.__getattribute__(key)
-            ]
-        elif key == "quoted_status":
-            status.quoted_status = (
-                convert_dicts_in_status_to_obj(
-                    status=Status(**status.__getattribute__(key))
-                )
-                if status.__getattribute__(key)
-                else None
-            )
-    return status
-
-
-def generate_mock_tweet(
-    raw_status: Union[Status, List[Status]]
-) -> Union[Status, List[Status]]:
-    """Return mocked tweet to be used in tests"""
-    if type(raw_status) == list:
-        updated_status = [
-            generate_mock_tweet(raw_status=status) for status in raw_status
-        ]
-    else:
-        updated_status = convert_dicts_in_status_to_obj(status=raw_status)
-
-    return updated_status
-
-
 if __name__ == "__main__":
-    # uncomment to create test data
-    # save_user_test_data(
-    #     file_name=TEMP_JSON_FILE_NAME, user_name="timheidecker", count=20
-    # )
-    # save_tweet_test_data(file_name=TEMP_JSON_FILE_NAME, status=1215708312249028609)
     LOGGER.info("End of file")

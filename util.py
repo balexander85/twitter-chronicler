@@ -20,28 +20,6 @@ def file_reader(file: PosixPath) -> Iterator[str]:
         yield clean_row
 
 
-def add_status_id_to_file(tweet_id: str, list_of_ids_replied_to_file_name: str):
-    """Save id of the replied to tweet
-
-    Save id to file so that tweet will not be replied to more than once.
-    """
-    DeprecationWarning(
-        "add_status_id_to_file has been deprecated, please use add_line_to_file"
-    )
-    add_line_to_file(line=tweet_id, file_path=list_of_ids_replied_to_file_name)
-
-
-def add_status_id_to_file_new(tweet_id: str, user_status_file: str):
-    """Save id of the replied to tweet
-
-    Save id to file so that tweet will not be replied to more than once.
-    """
-    DeprecationWarning(
-        "add_status_id_to_file_new has been deprecated, please use add_line_to_file"
-    )
-    add_line_to_file(line=tweet_id, file_path=user_status_file)
-
-
 def add_line_to_file(line: str, file_path: str):
     """Append line to file and add new line"""
     LOGGER.debug(msg=f"Adding {line} to {file_path}")

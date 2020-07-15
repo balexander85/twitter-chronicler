@@ -28,8 +28,6 @@ from tweet_capture import TweetCapture
 from twitter_helpers import (
     add_screenshot_to_tweet,
     find_quoted_tweets,
-    process_tweet,
-    get_tweet_from_url,
     post_collected_tweets,
 )
 from wrapped_tweet import Tweet
@@ -72,29 +70,6 @@ def run_chronicler():
         LOGGER.debug(f"ending collection for user: @{user}")
 
     LOGGER.info("End of script run")
-
-
-def run_chronicler_ad_hoc():
-    """Helper function to run chronicler for list of urls for possible redo's
-
-    Example of user_quoted_retweets_urls list:
-
-        ['https://twitter.com/_b_axe/status/1236662806163984385', '...']
-
-    """
-    LOGGER.info("Starting Ad-hoc script")
-    user_quoted_retweets_urls: List[str] = []
-    user_quoted_retweets: List[Tweet] = [
-        get_tweet_from_url(url) for url in user_quoted_retweets_urls
-    ]
-    processed_tweets = [
-        process_tweet(status=tweet.raw_tweet)
-        for tweet in user_quoted_retweets
-        if tweet.quoted_to_status_bool
-    ]
-    collect_and_post_tweets(processed_tweets)
-
-    LOGGER.info("End of Ad-hoc script run")
 
 
 def collect_and_post_tweets(tweets: List[Tweet]):
@@ -163,4 +138,4 @@ class Chronicler:
 
 
 if __name__ == "__main__":
-    run_chronicler_ad_hoc()
+    run_chronicler()
