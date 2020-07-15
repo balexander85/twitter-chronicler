@@ -34,3 +34,6 @@ def get_module_logger(name):
     logger.addHandler(file_handler)
     logger.addHandler(console_handler)
     return logger
+
+
+LOGGER = get_module_logger("default_chronicler_logger")
