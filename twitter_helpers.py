@@ -162,32 +162,38 @@ def get_recent_tweets_for_user(
         )
         return response
     except TwitterError as errors:
-        for error in errors.message:
-            error_code = error.get("code")
-            if error_code == 88:
-                LOGGER.error(
-                    f"'Rate limit exceeded': "
-                    f"unable to retrieve recent tweets for {twitter_user}. {error}"
-                )
-                sleep_time = 120
-                LOGGER.error(f"Sleeping for {sleep_time} seconds")
-                sleep(sleep_time)
-                raise TwitterRateLimitException
-            elif error_code == 136:
-                LOGGER.error(
-                    f"You have been blocked from viewing "
-                    f"this user's ({twitter_user}) profile. {error}"
-                )
-            elif error_code == 326:
-                LOGGER.critical(
-                    f"'This account is temporarily locked, please login': "
-                    f"unable to retrieve recent tweets for {twitter_user}. {error}"
-                )
-            else:
-                LOGGER.error(
-                    f"Something happened, unable to retrieve recent "
-                    f"tweets for {twitter_user}. {error}"
-                )
+        if type(errors) == list:
+            for error in errors.message:
+                error_code = error.get("code")
+                if error_code == 88:
+                    LOGGER.error(
+                        f"'Rate limit exceeded': "
+                        f"unable to retrieve recent tweets for {twitter_user}. {error}"
+                    )
+                    sleep_time = 120
+                    LOGGER.error(f"Sleeping for {sleep_time} seconds")
+                    sleep(sleep_time)
+                    raise TwitterRateLimitException
+                elif error_code == 136:
+                    LOGGER.error(
+                        f"You have been blocked from viewing "
+                        f"this user's ({twitter_user}) profile. {error}"
+                    )
+                elif error_code == 326:
+                    LOGGER.critical(
+                        f"'This account is temporarily locked, please login': "
+                        f"unable to retrieve recent tweets for {twitter_user}. {error}"
+                    )
+                else:
+                    LOGGER.error(
+                        f"Something happened, unable to retrieve recent "
+                        f"tweets for {twitter_user}. {error}"
+                    )
+        else:
+            LOGGER.error(
+                f"Something happened, unable to retrieve recent "
+                f"tweets for {twitter_user}. {errors}"
+            )
 
 
 def find_deleted_tweets(twitter_user: str) -> List[dict]:
