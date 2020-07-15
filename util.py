@@ -1,18 +1,21 @@
 import json
+from pathlib import Path
 from typing import Iterator
 
-from _logger import LOGGER
+from _logger import get_module_logger
+
+LOGGER = get_module_logger(__file__)
 
 
 def fetch_test_data_file(file_name: str):
-    with open(file_name, "r") as f:
+    with Path(file_name).open(mode="r") as f:
         json_file = json.load(f)
     return json_file
 
 
 def file_reader(file_name: str) -> Iterator[str]:
     """Yield entries from files"""
-    for row in open(file_name, "r"):
+    for row in Path(file_name).open(mode="r"):
         clean_row = row.strip("\n")
         yield clean_row
 
@@ -23,12 +26,9 @@ def add_status_id_to_file(tweet_id: str, list_of_ids_replied_to_file_name: str):
     Save id to file so that tweet will not be replied to more than once.
     """
     DeprecationWarning(
-        "add_status_id_to_file has been deprecated, "
-        "please use add_status_id_to_file_new"
+        "add_status_id_to_file has been deprecated, please use add_line_to_file"
     )
-    add_status_id_to_file_new(
-        tweet_id=tweet_id, user_status_file=list_of_ids_replied_to_file_name
-    )
+    add_line_to_file(line=tweet_id, file_path=list_of_ids_replied_to_file_name)
 
 
 def add_status_id_to_file_new(tweet_id: str, user_status_file: str):
@@ -36,6 +36,14 @@ def add_status_id_to_file_new(tweet_id: str, user_status_file: str):
 
     Save id to file so that tweet will not be replied to more than once.
     """
-    LOGGER.debug(msg=f"Adding {tweet_id} to {user_status_file}")
-    with open(user_status_file, "a+") as f:
-        f.write(tweet_id + "\n")
+    DeprecationWarning(
+        "add_status_id_to_file_new has been deprecated, please use add_line_to_file"
+    )
+    add_line_to_file(line=tweet_id, file_path=user_status_file)
+
+
+def add_line_to_file(line: str, file_path: str):
+    """Append line to file and add new line"""
+    LOGGER.debug(msg=f"Adding {line} to {file_path}")
+    with Path(file_path).open(mode="a+") as f:
+        f.write(line + "\n")
