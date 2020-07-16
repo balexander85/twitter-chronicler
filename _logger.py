@@ -11,7 +11,7 @@ VERBOSE_LOGGER_FORMAT = "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
 def get_module_logger(name):
     """Pass name of module and return logger instance"""
     logger = logging.getLogger(name=name)
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
     # create formatter and add it to the handlers
     formatter = logging.Formatter(VERBOSE_LOGGER_FORMAT)
     # create file handler which logs even debug messages
