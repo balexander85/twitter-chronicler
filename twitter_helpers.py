@@ -30,6 +30,7 @@ tweet_scanner_api = Api(
     consumer_secret=READ_APP_SECRET,
     access_token_key=READ_OAUTH_TOKEN,
     access_token_secret=READ_OAUTH_TOKEN_SECRET,
+    sleep_on_rate_limit=True,
 )
 
 tweeter_api = Api(
@@ -37,6 +38,7 @@ tweeter_api = Api(
     consumer_secret=WRITE_APP_SECRET,
     access_token_key=WRITE_OAUTH_TOKEN,
     access_token_secret=WRITE_OAUTH_TOKEN_SECRET,
+    sleep_on_rate_limit=True,
 )
 
 
